@@ -12,7 +12,7 @@
         email VARCHAR(50),
         telefono VARCHAR(50), 
         fecha_nac DATE NOT NULL, 
-        contraseña VARCHAR(50),
+        passwordUser VARCHAR(50),
         domicilio VARCHAR(50)
     )';
     
@@ -20,22 +20,22 @@ mysqli_query($conexion, $usuario) or die("Error al crear la tabla: " . mysqli_er
 
 // Función para verificar si un usuario ya existe
 function usuario_existe($conexion, $email, $telefono) {
-    $query = "SELECT * FROM usuarioManos WHERE email = '$email' OR telefono = '$telefono'";
+    $query = "SELECT * FROM usuarioManos WHERE email = '$email'";
     $result = mysqli_query($conexion, $query);
     return mysqli_num_rows($result) > 0;
 }
 
 // Datos de los usuarios a insertar
 $usuarios = [
-    ['nombreApellido' => 'Ana Pérez', 'email' => 'juan.perez@example.com', 'telefono' => '1234567890', 'fecha_nac' => '1985-06-15', 'contraseña' => 'password123', 'domicilio' => 'Calle Falsa 123'],
-    ['nombreApellido' => 'María López', 'email' => 'maria.lopez@example.com', 'telefono' => '0987654321', 'fecha_nac' => '1990-08-25', 'contraseña' => 'mypassword456', 'domicilio' => 'Avenida Siempre Viva 456']
+    ['nombreApellido' => 'Ana Pérez', 'email' => 'juan.perez@example.com', 'telefono' => '1234567890', 'fecha_nac' => '1985-06-15', 'passwordUser' => 'password123', 'domicilio' => 'Calle Falsa 123'],
+    ['nombreApellido' => 'María López', 'email' => 'maria.lopez@example.com', 'telefono' => '0987654321', 'fecha_nac' => '1990-08-25', 'passwordUser' => 'mypassword456', 'domicilio' => 'Avenida Siempre Viva 456']
 ];
 
 // Insertar usuarios si no existen
 foreach ($usuarios as $usuario) {
     if (!usuario_existe($conexion, $usuario['email'], $usuario['telefono'])) {
-        $query = "INSERT INTO usuarioManos (nombreApellido, email, telefono, fecha_nac, contraseña, domicilio) VALUES (
-            '{$usuario['nombreApellido']}', '{$usuario['email']}', '{$usuario['telefono']}', '{$usuario['fecha_nac']}', '{$usuario['contraseña']}', '{$usuario['domicilio']}'
+        $query = "INSERT INTO usuarioManos (nombreApellido, email, telefono, fecha_nac, passwordUser, domicilio) VALUES (
+            '{$usuario['nombreApellido']}', '{$usuario['email']}', '{$usuario['telefono']}', '{$usuario['fecha_nac']}', '{$usuario['passwordUser']}', '{$usuario['domicilio']}'
         )";
         mysqli_query($conexion, $query) or die("Error al insertar usuario: " . mysqli_error($conexion));
     } else {
