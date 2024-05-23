@@ -1,14 +1,14 @@
 const path = require('path');
 
 module.exports = ({ env }) => {
-  const client = env('DATABASE_CLIENT', 'sqlite');
+  const client = env('DATABASE_CLIENT', 'mysql2');  // Cambia a 'mysql2'
 
   const connections = {
     mysql: {
       connection: {
         connectionString: env('DATABASE_URL'),
         host: env('DATABASE_HOST', 'localhost'),
-        port: env.int('DATABASE_PORT', 3306),
+        port: env.int('DATABASE_PORT', 3307),  // Ajustar el puerto a 3307
         database: env('DATABASE_NAME', 'strapi'),
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD', 'strapi'),
@@ -29,7 +29,7 @@ module.exports = ({ env }) => {
     mysql2: {
       connection: {
         host: env('DATABASE_HOST', 'localhost'),
-        port: env.int('DATABASE_PORT', 3306),
+        port: env.int('DATABASE_PORT', 3307),  // Ajustar el puerto a 3307
         database: env('DATABASE_NAME', 'strapi'),
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD', 'strapi'),

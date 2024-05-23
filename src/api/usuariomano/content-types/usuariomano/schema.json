@@ -4,7 +4,7 @@
   "info": {
     "singularName": "usuariomano",
     "pluralName": "usuariomanos",
-    "displayName": "usuariomano",
+    "displayName": "usuariomanos",
     "description": ""
   },
   "options": {
@@ -34,14 +34,15 @@
       "type": "string"
     },
     "imagenEmpresa": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     }
   }
 }
