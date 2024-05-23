@@ -1,0 +1,68 @@
+/* CSS para mi cuenta ya está RESPONSIVE */
+
+.MiCuentaParte1 {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px;
+    max-width: 1202px; /* Limita el ancho máximo en pantallas grandes */
+    margin: 0 auto; /* Centra el contenedor en pantallas grandes */
+}
+
+.MiCuentaTitulo1 {
+    font-family: var(--font-family);
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+}
+
+.MiCuentaTexto1 {
+    font-family: var(--font-family1);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.MiCuentaFormulario {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px 0;
+    gap: 27px;
+    align-items: stretch;
+}
+
+.rellenarMicuenta {
+    display: flex;
+    padding: 8px;
+    color: var(--color-gris);
+    width: 100%;
+}
+
+.submitMiCuentaParte1 {
+    font-family: var(--font-family);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: black;
+    color: white;
+    line-height: normal;
+    height: 45px;
+}
+
+/* Media query para dispositivos móviles */
+@media only screen and (max-width: 600px) {
+    .MiCuentaTitulo1 {
+        font-size: 32px;
+    }
+    .MiCuentaTexto1 {
+        font-size: 16px;
+    }
+    .submitMiCuentaParte1 {
+        font-size: 16px;
+    }
+}

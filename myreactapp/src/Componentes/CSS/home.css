@@ -1,0 +1,451 @@
+.parte1Home {
+  background-image: url('../img/parte1.png');
+  background-size: cover;
+  background-position: center;
+  height: 582px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.texto {
+  text-align: center;
+  color: #000;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7); /* Fondo semitransparente para mejorar la legibilidad */
+  border-radius: 10px;
+  animation: fadeIn 1s ease-in-out; /* Animación de aparición */
+}
+
+.p1 {
+  font-size: 42px;
+  margin: 0;
+}
+
+.p2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+/* Media queries para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .p1 {
+      font-size: 32px;
+  }
+  .p2 {
+      font-size: 24px;
+  }
+
+  .parte1Home {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .p1 {
+      font-size: 24px;
+  }
+  .p2 {
+      font-size: 18px;
+  }
+  
+  .parte1Home {
+    height: 300px;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* parte2 */
+.parte2Home {
+  display: flex;
+  flex-direction: column; /* Elementos en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  text-align: center; /* Centra el texto horizontalmente */
+  padding: 20px; /* Añadimos padding */
+}
+
+.parte2Home .centrado {
+  margin-bottom: 20px; /* Espacio entre los párrafos */
+  font-size: 32px;
+}
+
+.parte2Home .centrado2 {
+  margin-bottom: 20px; /* Espacio entre los párrafos */
+  font-size: 22px;
+  max-width: 600px; /* Limitamos el ancho para mejor legibilidad */
+}
+
+.parte2Home .imagenes {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias filas */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  gap: 20px; /* Espacio entre las imágenes */
+}
+
+.parte2Home .imagenes > div {
+  text-align: center; /* Centra el texto debajo de cada imagen */
+  margin: 20px; /* Espacio alrededor de las imágenes */
+  transition: transform 0.3s ease-in-out; /* Añadimos una transición para la animación */
+}
+
+.parte2Home .imagenes > div:hover {
+  transform: scale(1.05); /* Escala la imagen y el texto al pasar el ratón */
+}
+
+.parte2Home .imagenes .img {
+  width: 100%; /* Ancho completo del contenedor */
+  max-width: 350px; /* Ancho máximo de las imágenes */
+  height: auto; /* Altura automática */
+  border-radius: 10px; /* Bordes redondeados */
+  transition: transform 0.3s ease-in-out; /* Añadimos una transición para la animación */
+}
+
+.p3 {
+  font-size: 18px; /* Reducimos el tamaño del texto */
+  margin-top: 10px; /* Añadimos margen superior */
+}
+
+/* Media queries para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .parte2Home .centrado {
+    font-size: 28px; /* Reducimos el tamaño del texto */
+  }
+  .parte2Home .centrado2 {
+    font-size: 20px; /* Reducimos el tamaño del texto */
+  }
+  .parte2Home .imagenes > div {
+    margin: 10px; /* Reducimos el espacio alrededor de las imágenes */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .parte2Home .centrado {
+    font-size: 24px; /* Reducimos el tamaño del texto */
+  }
+  .parte2Home .centrado2 {
+    font-size: 18px; /* Reducimos el tamaño del texto */
+  }
+  .parte2Home .imagenes {
+    flex-direction: column; /* Disposición en columna para pantallas pequeñas */
+  }
+  .parte2Home .imagenes > div {
+    margin: 10px 0; /* Reducimos el margen */
+  }
+}
+
+
+
+  /* parte 3 */
+  .parte3Home {
+    display: flex;
+    justify-content: space-between; /* Ajustar para distribuir el espacio entre los elementos */
+    margin-top: 50px; /* Reducir el margen superior */
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan */
+    gap: 10px; /* Reducir el espacio entre los elementos */
+  }
+  
+  .izquierdaHome, .derechaHome {
+    width: 48%; /* Ancho ajustado de cada columna */
+    text-align: center; /* Alinea el texto al centro */
+    padding: 20px; /* Padding ajustado */
+    transition: transform 0.3s ease-in-out; /* Transición para la animación */
+  }
+  
+  .izquierdaHome:hover, .derechaHome:hover {
+    transform: scale(1.05); /* Escala la columna al pasar el ratón */
+  }
+  
+  .izquierdaHome p, .derechaHome p {
+    margin-bottom: 10px; /* Reducir el margen inferior */
+    font-size: 24px; /* Aumentar el tamaño del texto */
+  }
+  
+  .izquierdaHome .p4, .derechaHome .p4, .derechaHome .p4A {
+    font-size: 34px; /* Aumentar el tamaño del texto */
+    margin-bottom: 10px; /* Reducir el margen inferior */
+  }
+  
+  .img {
+    width: 100%;
+    max-width: 400px; /* Aumentar el ancho máximo de las imágenes */
+    height: auto;
+    border-radius: 10px; /* Bordes redondeados */
+    transition: transform 0.3s ease-in-out; /* Transición para la animación */
+  }
+  
+  .img:hover {
+    transform: scale(1.1); /* Escala la imagen al pasar el ratón */
+  }
+  
+  /* Media queries para pantallas más pequeñas */
+  @media screen and (max-width: 768px) {
+    .izquierdaHome, .derechaHome {
+      width: 100%; /* Ancho completo en pantallas pequeñas */
+      margin-bottom: 20px; /* Espacio entre las columnas */
+    }
+    .parte3Home {
+      flex-direction: column; /* Disposición en columna para pantallas pequeñas */
+      align-items: center; /* Centra los elementos horizontalmente */
+    }
+  
+    .izquierdaHome p, .derechaHome p {
+      font-size: 22px; /* Ajuste del tamaño del texto */
+    }
+  
+    .izquierdaHome .p4, .derechaHome .p4, .derechaHome .p4A {
+      font-size: 30px; /* Ajuste del tamaño del texto */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .izquierdaHome p, .derechaHome p {
+      font-size: 20px; /* Ajuste del tamaño del texto */
+    }
+  
+    .izquierdaHome .p4, .derechaHome .p4, .derechaHome .p4A {
+      font-size: 26px; /* Ajuste del tamaño del texto */
+    }
+  
+    .img {
+      max-width: 100%; /* Ancho completo en pantallas pequeñas */
+    }
+  }
+  
+  
+   /* parte 4 */
+
+   .parte4Home {
+    text-align: center; /* Centra el texto en la sección */
+    margin: 20px 0; /* Añade margen vertical a la sección */
+  }
+  
+  .parte4Home p {
+    margin: 10px 0; /* Añade margen vertical a los párrafos dentro de parte4Home */
+    font-size: 32px;
+  }
+  
+  .parte4Home .g {
+    font-size: 64px;
+  }
+  
+  .productosHome {
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+    gap: 30px; /* Añade espacio horizontal entre los elementos */
+  }
+  
+  .productosHome div {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos internos en columnas */
+    align-items: center; /* Centra los elementos internos horizontalmente */
+    width: 300px; /* Ajusta el ancho de cada producto */
+    transition: transform 0.3s ease-in-out; /* Añadimos una transición para la animación */
+  }
+  
+  .productosHome div:hover {
+    transform: scale(1.05); /* Escala el producto al pasar el ratón */
+  }
+  
+  .productosHome .img {
+    width: 100%; /* Asegura que las imágenes ocupen todo el ancho del contenedor de producto */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    max-width: 300px; /* Tamaño máximo de las imágenes */
+    border-radius: 10px; /* Bordes redondeados */
+    transition: transform 0.3s ease-in-out; /* Añadimos una transición para la animación */
+  }
+  
+  .productosHome .img:hover {
+    transform: scale(1.1); /* Escala la imagen al pasar el ratón */
+  }
+  
+  .productosHome p {
+    margin: 5px 0; /* Añade margen vertical a los párrafos dentro de productos */
+    font-size: 22px;
+  }
+  
+  .productosHome .precio {
+    font-size: 16px;
+  }
+  
+  .buttonHome {
+    margin-top: 20px; /* Añade un margen superior al botón */
+    padding: 10px 20px; /* Ajusta el relleno del botón */
+    font-size: 22px; /* Aumenta el tamaño de la fuente del botón */
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out; /* Añadimos una transición para el color de fondo */
+  }
+  
+  .buttonHome a {
+    text-decoration: none; /* Quita el subrayado del enlace */
+    color: inherit; /* Mantiene el color del texto */
+  }
+  
+  .buttonHome:hover {
+    background-color: #444; /* Cambia el color de fondo al pasar el ratón */
+  }
+  
+  /* Media queries para pantallas más pequeñas */
+  @media screen and (max-width: 768px) {
+    .productosHome {
+      gap: 20px; /* Reduce el espacio entre los productos */
+    }
+  
+    .productosHome div {
+      width: 45%; /* Ajusta el ancho de los productos */
+    }
+  
+    .parte4Home p {
+      font-size: 28px; /* Reduce el tamaño del texto */
+    }
+  
+    .parte4Home .g {
+      font-size: 48px; /* Reduce el tamaño del texto */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .productosHome div {
+      width: 100%; /* Ancho completo en pantallas pequeñas */
+    }
+  
+    .parte4Home p {
+      font-size: 24px; /* Reduce el tamaño del texto */
+    }
+  
+    .parte4Home .g {
+      font-size: 36px; /* Reduce el tamaño del texto */
+    }
+  
+    .productosHome .img {
+      max-width: 100%; /* Ancho completo en pantallas pequeñas */
+    }
+  }
+  
+
+  /* parte 5 renombradoa features */
+  .featuresHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    margin: 40px 0;
+    padding: 0 20px; /* Añade padding para los márgenes laterales */
+  }
+  
+  .featuresHome p {
+    max-width: 800px;
+  }
+  
+  .featureHomeContainer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+    gap: 40px; /* Ajusta el espacio entre los elementos */
+    width: 100%;
+  }
+  
+  .featureHome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
+    padding: 20px;
+    transition: transform 0.3s ease-in-out; /* Añadimos una transición para la animación */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  
+  .featureHome:hover {
+    transform: scale(1.05); /* Escala el elemento al pasar el ratón */
+  }
+  
+  .featureHome .img {
+    max-width: 100px;
+    transition: transform 0.3s ease-in-out; /* Añadimos una transición para la animación */
+  }
+  
+  .featureHome .img:hover {
+    transform: scale(1.1); /* Escala la imagen al pasar el ratón */
+  }
+  
+  .featureHome h2 {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .featureHome p {
+    font-size: 14px;
+  }
+  
+  /* Media queries para pantallas más pequeñas */
+  @media screen and (max-width: 768px) {
+    .featuresHome p {
+      font-size: 16px; /* Reduce el tamaño del texto */
+    }
+  
+    .featureHomeContainer {
+      gap: 20px; /* Reduce el espacio entre los elementos */
+    }
+  
+    .featureHome {
+      max-width: 150px;
+    }
+  
+    .featureHome .img {
+      max-width: 80px;
+    }
+  
+    .featureHome h2 {
+      font-size: 16px; /* Reduce el tamaño del texto */
+    }
+  
+    .featureHome p {
+      font-size: 12px; /* Reduce el tamaño del texto */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .featuresHome p {
+      font-size: 14px; /* Reduce el tamaño del texto */
+    }
+  
+    .featureHomeContainer {
+      flex-direction: column; /* Disposición en columna para pantallas muy pequeñas */
+      align-items: center; /* Centra los elementos horizontalmente */
+    }
+  
+    .featureHome {
+      max-width: 100%;
+    }
+  
+    .featureHome .img {
+      max-width: 60px;
+    }
+  
+    .featureHome h2 {
+      font-size: 14px; /* Reduce el tamaño del texto */
+    }
+  
+    .featureHome p {
+      font-size: 12px; /* Reduce el tamaño del texto */
+    }
+  }
+  

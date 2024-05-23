@@ -1,0 +1,170 @@
+/* Estilos generales */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.legal {
+  width: 100%;
+  /* min-height: 100vh; */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.breadcrumb p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.link {
+  color: #000;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para diferenciar contentSobre */
+.contentSobre.diferenciado {
+  background-color: #f9f9f9;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  max-width: 900px; /* Aumentar el ancho máximo */
+  animation: fadeInSlide 1s ease-in-out;
+  margin-bottom: 40px; /* Reducir el margen inferior */
+}
+
+.contentSobre h1 {
+  font-size: 54px; /* Incrementar el tamaño de la fuente */
+  margin-bottom: 20px;
+}
+
+.contentSobre p {
+  font-size: 22px; /* Incrementar el tamaño de la fuente */
+  line-height: 1.6;
+  margin-bottom: 20px; /* Reducir el margen inferior */
+}
+
+.contenedor {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px; /* Reducir el margen superior */
+  animation: fadeInSlide 1.5s ease-in-out;
+}
+
+.texto1, .texto2, .texto3 {
+  text-align: center;
+}
+
+.texto1 h1, .texto2 h1, .texto3 h1 {
+  font-size: 48px; /* Incrementar el tamaño de la fuente */
+}
+
+.texto1 p, .texto2 p, .texto3 p {
+  font-size: 22px; /* Incrementar el tamaño de la fuente */
+}
+
+.bloque1, .bloque2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px 0; /* Reducir el margen superior e inferior */
+  animation: fadeInSlide 2s ease-in-out;
+}
+
+.bloque1 p, .bloque2 p {
+  font-size: 22px; /* Incrementar el tamaño de la fuente */
+  line-height: 1.6;
+  max-width: 600px; /* Reducir el ancho máximo del párrafo */
+}
+
+.bloque1 .img, .bloque2 .img {
+  max-width: 400px; /* Incrementar el tamaño máximo de la imagen */
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* Media queries para pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .contentSobre h1 {
+    font-size: 40px;
+  }
+
+  .contentSobre p {
+    font-size: 20px;
+  }
+
+  .contenedor {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .texto1 h1, .texto2 h1, .texto3 h1 {
+    font-size: 36px;
+  }
+
+  .texto1 p, .texto2 p, .texto3 p {
+    font-size: 18px;
+  }
+
+  .bloque1, .bloque2 {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bloque1 .img, .bloque2 .img {
+    margin: 20px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contentSobre h1 {
+    font-size: 28px;
+  }
+
+  .contentSobre p {
+    font-size: 16px;
+  }
+
+  .texto1 h1, .texto2 h1, .texto3 h1 {
+    font-size: 24px;
+  }
+
+  .texto1 p, .texto2 p, .texto3 p {
+    font-size: 14px;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.legal {
+  animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

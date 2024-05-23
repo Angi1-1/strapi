@@ -1,0 +1,130 @@
+/* CSS para registrarse */
+.RegistrarseTexto1 {
+    font-family: var(--font-family1);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+p{
+    margin: 0;
+}
+.RegistrarseFormulario {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    align-items: center;
+}
+.ContenidosRegistrarse{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+.derechaRegistrarse {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 45%;
+}
+.RegistrarseTexto2 {
+    font-family: var(--font-family);
+    font-size: 32px;
+    color: black;
+}
+
+.RegistrarseTitulo1{
+    font-family: var(--font-family);
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+}
+.RegistrarseParte1 hr {
+    height: 1px;
+    background-color: black;
+    width: 100%;
+}
+
+.rellenarRegistrarse {
+    display: flex;
+    padding: 8px;
+    color: var(--color-gris);
+}
+.submitRegistrarseParte1{
+    font-family: var(--font-family);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: black;
+    color: white;
+    line-height: normal;
+}
+
+.RegistrarseParte1 {
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 94px;
+}
+.checkboxRegistrarseTrajeta{
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.submitRegistrarseParte1{
+    font-family: var(--font-family);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: black;
+    color: white;
+    line-height: normal;
+    width:45%;
+    height: 45px;
+
+}
+
+/* Estilos para pantallas de tamaño tablet */
+@media (max-width: 768px) {
+    .RegistrarseFormulario,
+    .ContenidosRegistrarse,
+    .derechaRegistrarse {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .derechaRegistrarse {
+        width: 100%;
+    }
+
+    .submitRegistrarseParte1 {
+        width: 100%;
+    }
+}
+
+/* Estilos para pantallas de tamaño móvil */
+@media (max-width: 480px) {
+    .RegistrarseTitulo1 {
+        font-size: 32px;
+    }
+
+    .RegistrarseTexto1,
+    .RegistrarseTexto2 {
+        font-size: 16px;
+    }
+
+    .RegistrarseParte1 {
+        padding: 16px 20px;
+    }
+}

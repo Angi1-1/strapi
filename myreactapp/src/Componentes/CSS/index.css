@@ -1,0 +1,68 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* Color de fondo general */
+  }
+  /* Estilos de la barra de navegación */
+  .navbar {
+    background-color: #333; /* Color de fondo */
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  /* Estilos de las secciones */
+  .section {
+    padding: 20px;
+    border: 1px solid #ccc; /* Borde de las secciones */
+  }
+  /* Sección 1 */
+  .section-1 {
+    background-color: #aaa; /* Color de fondo */
+    display: flex;
+    justify-content: space-between;
+  }
+  .section-1 img {
+    width: 50%;
+  }
+  .section-1-text {
+    width: 45%;
+  }
+  /* Sección 2 */
+  .section-2 {
+    background-color: #ccc; /* Color de fondo */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+  }
+  .section-2 img {
+    grid-row: 1 / span 3;
+    width: 100%;
+  }
+  /* Sección 3 */
+  .section-3 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+  }
+  .section-3 img {
+    width: 100%;
+  }
+  /* Sección 4 */
+  .section-4 {
+    background-color: #aaa; /* Color de fondo */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+  .section-4 img {
+    width: 100%;
+  }
+  /* Estilos del pie de página */
+  .footer {
+    background-color: #333; /* Color de fondo */
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }

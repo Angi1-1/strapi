@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f6ebdd;
+    padding: 20px; 
+    padding-bottom: 0px;
+    padding-top: 0px;
+    position: relative; 
+}
+
+.logo img {
+    height: 100px; 
+}
+
+.buscar {
+    flex: 1; 
+    margin-left: -60px; 
+}
+
+/* Estilos para el campo de búsqueda en pantallas grandes */
+.search-bar {
+    padding: 8px; /* Reducimos el espacio dentro del campo de búsqueda */
+    border: none;
+    border-radius: 5px;
+    width: 200px; /* Reducimos el ancho del campo de búsqueda en pantallas grandes */
+    transition: width 0.3s ease-in-out;
+}
+
+/* Estilos para el campo de búsqueda cuando está activo */
+.search-bar.active {
+    width: 250px; /* Ajustamos el ancho cuando el campo está activo */
+}
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    background-color: #AABBB2; /* Color de fondo */
+    border: none;
+    color: black; /* Color del texto */
+    padding: 10px 20px; /* Espacio dentro del botón */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px; /* Espacio entre los botones */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button a{
+    text-decoration: none;
+    color: #000;
+}
+
+.button:hover {
+    background-color: #D4E8DE; /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de hamburguesa */
+.hamburger-menu {
+    display: none; /* Por defecto, ocultar el botón en pantallas grandes */
+    cursor: pointer;
+    padding: 10px; /* Agregamos un espacio alrededor del icono */
+    position: absolute;
+    top: 50%;
+    right: 20px; /* Posicionamos a la derecha */
+    transform: translateY(-50%); /* Centramos verticalmente */
+}
+
+.hamburger-menu img {
+    width: 30px; /* Ajustamos el tamaño del icono */
+}
+
+/* Estilos para el menú de navegación en tamaño móvil */
+.mobile-menu {
+    display: none; /* Por defecto, ocultar el menú en pantallas grandes */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    padding: 20px; /* Espaciado interno del menú */
+    border-radius: 5px; /* Agregamos bordes redondeados */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Agregamos una sombra */
+    position: absolute; /* Posicionamiento absoluto */
+    top: 100%; /* Posicionamos debajo del header */
+    right: 0; /* Posicionamos a la derecha */
+    width: 100%; /* Ocupa todo el ancho */
+    transform: translateY(0); /* Para corregir la posición */
+    z-index: 999; /* Asegurarnos de que esté en la parte superior */
+}
+
+/* Mostrar el menú de navegación cuando está activo */
+.mobile-menu.active {
+    display: flex;
+}
+
+/* Media query para tabletas */
+@media screen and (max-width: 1024px) {
+    .button {
+        padding: 8px 16px; /* Reducimos un poco el padding en tabletas */
+        font-size: 14px; /* Reducimos el tamaño de la fuente en tabletas */
+    }
+}
+
+/* Media query para tamaños de pantalla más pequeños */
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: row; /* Mantener el diseño del encabezado en línea en tamaños móviles */
+        justify-content: space-between; /* Distribuir los elementos horizontalmente */
+        align-items: center; /* Alinear los elementos verticalmente al centro */
+    }
+
+    .buttons {
+        display: none; /* Ocultar los botones en tamaño móvil cuando el menú está activo */
+    }
+
+    .hamburger-menu {
+        display: block; /* Mostrar el botón de hamburguesa en tamaños de pantalla más pequeños */
+        margin-top: 10px; /* Añadir espacio entre el botón y el logotipo */
+        margin-right: 20px; /* Añadir espacio entre el botón y el resto del encabezado */
+    }
+    .search-bar {
+        width: 50%; /* El campo de búsqueda ocupa todo el ancho en tamaños más pequeños */
+        max-width: 300px; /* Establecemos un ancho máximo para evitar que ocupe toda la pantalla */
+    }
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-top: 160px;
+    margin-left: 10px;
+}
+
+.dropdown-item {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    color: black;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}

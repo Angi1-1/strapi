@@ -1,43 +1,95 @@
 <?php
-    //Crear las tablas de usuario, pedidos,producto, admin, provedor, mi wishlist
+// Crear las tablas de usuario, pedidos, producto, admin, proveedor, mi wishlist
 
-    //Establecer las conexiones
-    include 'baseConexion.php';
-    $conexion = getConexion();
+// Establecer las conexiones
+include 'baseConexion.php';
+$conexion = getConexion();
 
-    //Crear la tabla de usuario 
-    $usuario = 'CREATE TABLE IF NOT EXISTS usuarioManos (
-        id_usuario int AUTO_INCREMENT PRIMARY KEY, 
-        nombreApellido VARCHAR(50), 
-        email VARCHAR(50),
-        telefono VARCHAR(50), 
-        fecha_nac DATE NOT NULL, 
-        passwordUser VARCHAR(50),
-        domicilio VARCHAR(50)
-    )';
-    
+// Crear la tabla de usuario 
+$usuario = 'CREATE TABLE `usuarioManos` (
+    `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `nombre_apellido` varchar(255) DEFAULT NULL,
+    `email` varchar(255) DEFAULT NULL,
+    `telefono` varchar(255) DEFAULT NULL,
+    `fecha_nac` date DEFAULT NULL,
+    `domicilio` longtext DEFAULT NULL,
+    `created_at` datetime(6) DEFAULT NULL,
+    `updated_at` datetime(6) DEFAULT NULL,
+    `published_at` datetime(6) DEFAULT NULL,
+    `created_by_id` int(10) UNSIGNED DEFAULT NULL,
+    `updated_by_id` int(10) UNSIGNED DEFAULT NULL,
+    `password_user` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+)';
+
 mysqli_query($conexion, $usuario) or die("Error al crear la tabla: " . mysqli_error($conexion));
 
 // Función para verificar si un usuario ya existe
 function usuario_existe($conexion, $email, $telefono) {
-    $query = "SELECT * FROM usuarioManos WHERE email = '$email'";
-    $result = mysqli_query($conexion, $query);
+    $query = "SELECT * FROM usuarioManos WHERE email = ? OR telefono = ?";
+    $stmt = mysqli_prepare($conexion, $query);
+    mysqli_stmt_bind_param($stmt, 'ss', $email, $telefono);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
     return mysqli_num_rows($result) > 0;
 }
 
 // Datos de los usuarios a insertar
-$usuarios = [
-    ['nombreApellido' => 'Ana Pérez', 'email' => 'juan.perez@example.com', 'telefono' => '1234567890', 'fecha_nac' => '1985-06-15', 'passwordUser' => 'password123', 'domicilio' => 'Calle Falsa 123'],
-    ['nombreApellido' => 'María López', 'email' => 'maria.lopez@example.com', 'telefono' => '0987654321', 'fecha_nac' => '1990-08-25', 'passwordUser' => 'mypassword456', 'domicilio' => 'Avenida Siempre Viva 456']
-];
-
+$usuarios = array(
+    array(
+        'nombre_apellido' => 'Admin',
+        'email' => 'manoscreadoras@gmail.com',
+        'telefono' => '000000000',
+        'fecha_nac' => '2024-05-07',
+        'domicilio' => 'SDSDSD',
+        'created_at' => '2024-05-21 16:57:43.537000',
+        'updated_at' => '2024-05-21 16:57:46.123000',
+        'published_at' => '2024-05-21 16:57:46.120000',
+        'created_by_id' => '1',
+        'updated_by_id' => '1',
+        'password_user' => '$2a$10$qe5Fy574srAkUiKBETLYs.C0Nv3AZ5ff4GOAmYG4P2dPf3nBVxyZO'
+    ),
+    array(
+        'nombre_apellido' => 'Amelia',
+        'email' => 'amelia@gmail.com',
+        'telefono' => '604200000',
+        'fecha_nac' => '2024-05-20',
+        'domicilio' => 'calle tajo 2',
+        'created_at' => NULL,
+        'updated_at' => NULL,
+        'published_at' => NULL,
+        'created_by_id' => NULL,
+        'updated_by_id' => NULL,
+        'password_user' => '1234'
+    ),
+    array(
+        'nombre_apellido' => 'Madrid Arte',
+        'email' => 'madrid@gmail.com',
+        'telefono' => '900000000',
+        'fecha_nac' => '2024-05-20',
+        'domicilio' => 'calle tajo 3',
+        'created_at' => NULL,
+        'updated_at' => NULL,
+        'published_at' => NULL,
+        'created_by_id' => NULL,
+        'updated_by_id' => NULL,
+        'password_user' => '1234'
+    )
+);
 // Insertar usuarios si no existen
 foreach ($usuarios as $usuario) {
     if (!usuario_existe($conexion, $usuario['email'], $usuario['telefono'])) {
-        $query = "INSERT INTO usuarioManos (nombreApellido, email, telefono, fecha_nac, passwordUser, domicilio) VALUES (
-            '{$usuario['nombreApellido']}', '{$usuario['email']}', '{$usuario['telefono']}', '{$usuario['fecha_nac']}', '{$usuario['passwordUser']}', '{$usuario['domicilio']}'
-        )";
-        mysqli_query($conexion, $query) or die("Error al insertar usuario: " . mysqli_error($conexion));
+        $query = "INSERT INTO usuarioManos (nombre_apellido, email, telefono, fecha_nac, password_user, domicilio) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conexion, $query);
+        mysqli_stmt_bind_param($stmt, 'ssssss', 
+            $usuario['nombre_apellido'], 
+            $usuario['email'], 
+            $usuario['telefono'], 
+            $usuario['fecha_nac'], 
+            $usuario['password_user'], 
+            $usuario['domicilio']
+        );
+        mysqli_stmt_execute($stmt) or die("Error al insertar usuario: " . mysqli_error($conexion));
     } else {
         echo "El usuario con email {$usuario['email']} o teléfono {$usuario['telefono']} ya existe.<br>";
     }

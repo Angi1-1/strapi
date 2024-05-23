@@ -1,0 +1,142 @@
+.addNewUser {
+    width: 927px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 16px;
+    padding: 28px 0px;
+}
+.tituloEditProyecto {
+    font-family: var(--font-family);
+    font-size: 64px;
+}
+.texto1EditProyecto {
+    font-family: var(--font-family);
+    font-size: 32px;
+}
+.formularioEditrProyecto {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: stretch;
+    gap: 12px;
+    padding: 42px 64px;
+
+}
+
+p{
+    margin: 0px;
+}
+.inputTextoEditProyecto{
+height: 38px;
+padding: 0px;
+width: 348px;
+font-family: var(--font-family1);
+font-size: 22px;
+border-radius: 8px;
+}
+
+.name{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.Nombre {
+    display: flex;
+    flex-direction: column;
+}
+
+.elegirEditProyecto{
+    height: 40px;
+    width: 350px;
+    background-color: black;
+    border-radius: 8px;
+    font-size: 22px;
+    color: white;
+    font-family: var(--font-family1);
+}
+.descripciones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 22px;
+    font-family: var(--font-family);
+}
+.textareaEditarProyecto {
+    font-size: 22px;
+    border-radius: 8px;
+    font-family: var(--font-family1);
+}
+.addImagenProyecto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+.btnAddImg {
+    width: 300px;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+    height: 40px;
+    font-size: 22px;
+    font-family: var(--font-family);
+}
+
+.btnSubmitEditProyecto {
+    width: 350px;
+    height: 45px;
+    background-color: #F0997A ;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 32px;
+    color: white;
+    border: none;
+}
+
+.btnSubmitEditProyecto:hover {
+    border: 1px solid black;
+    
+}
+
+.btnCancelarEditProyecto {
+    width: 350px;
+    height: 45px;
+    background-color: transparent ;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 32px;
+    color: black;
+    border: 1px solid black;
+}
+
+.btnCancelarEditProyecto:hover {
+    color: white;
+    border: none;
+    background-color: black;
+}
+
+.divBtnEditProduct{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.ButtonPerdidosProvedores {
+    border: none;
+    background-color: transparent;
+ }
+ 
+ 
+  .ButtonPerdidosProvedores .img1:hover{
+     filter: invert(52%) sepia(31%) saturate(748%) hue-rotate(71deg) brightness(95%) contrast(94%);
+  }
+ 
+  .ButtonPerdidosProvedores .img2:hover{
+    filter: invert(30%) sepia(24%) saturate(5360%) hue-rotate(334deg) brightness(73%) contrast(95%);
+ }
+ 

@@ -379,7 +379,8 @@ export interface ApiUsuariomanoUsuariomano extends Schema.CollectionType {
     telefono: Attribute.String;
     fecha_nac: Attribute.Date;
     domicilio: Attribute.Text;
-    passwordUser: Attribute.Password;
+    acesso: Attribute.Integer;
+    passwordUser: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

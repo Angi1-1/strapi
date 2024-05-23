@@ -1,0 +1,45 @@
+.contenidoMiWishlist {
+    display: flex;
+    flex-wrap: wrap; /* Para que los elementos se envuelvan en dispositivos más pequeños */
+    gap: 20px;
+    justify-content: space-between; /* Distribuir uniformemente los elementos */
+    width: 100%;
+  }
+  
+  .cosasMiWishlist {
+    flex: 0 1 calc(33.33% - 20px); /* Calculamos el ancho de cada elemento para mostrar 3 en una fila */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center; /* Centramos el contenido */
+  }
+  
+  .corazonMiWishlixt {
+    width: 45px;
+    height: 44px;
+    margin-bottom: 10px;
+  }
+  
+  .MiWishlistTexto1 {
+    font-family: var(--font-family1);
+    font-size: 22px;
+    margin: 10px 0;
+  }
+  
+  .MiWishlistTexto2Precio {
+    font-family: var(--font-family1);
+    font-size: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    .cosasMiWishlist {
+      flex: 0 1 calc(50% - 20px); /* Para mostrar 2 elementos en una fila en dispositivos más pequeños */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cosasMiWishlist {
+      flex: 0 1 calc(100% - 20px); /* Para mostrar 1 elemento en una fila en dispositivos muy pequeños */
+    }
+  }
+  

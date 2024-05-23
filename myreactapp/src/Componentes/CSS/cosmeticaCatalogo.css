@@ -1,0 +1,169 @@
+* {
+    font-family: "Tinos", serif;
+
+}
+
+/* Estilos para la cerámica */
+.ceramic-plate {
+    position: relative;
+    background-image: url('../../Icon/cosmeticos.png');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el texto superior en ceramic-plate */
+.upper-text {
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0);
+    /* Fondo transparente */
+    padding: 5px 10px;
+    /* Ajustado para reducir el espacio */
+    border-radius: 5px;
+}
+
+/* Estilos para el texto inferior en ceramic-plate */
+.lower-text {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 75px;
+    /* Ajustado para dispositivos más pequeños */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0);
+    /* Fondo transparente */
+    padding: 5px 10px;
+    /* Ajustado para reducir el espacio */
+    border-radius: 5px;
+}
+/* Estilos para dispositivos más pequeños */
+@media (max-width: 576px) {
+
+    .upper-text,
+    .lower-text {
+        font-size: 18px;
+        /* Reducción del tamaño de fuente */
+    }
+
+    .upper-text {
+        top: 5px;
+        /* Ajuste en la posición superior */
+    }
+
+    .lower-text {
+        bottom: 15px;
+        /* Ajuste en la posición inferior */
+    }
+}
+
+/* Estilos para el filtro */
+.filter-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos para los elementos del catálogo */
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    width: calc(25% - 100px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    display: none; /* Ocultar inicialmente todos los productos */
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+}
+
+.product h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.product p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Estilos para el botón */
+.view-all-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.view-all-button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Estilos para el icono de corazón */
+.favorite-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.favorite-icon:hover {
+    color: red;
+}
+
+/* Estilos para dispositivos más pequeños */
+@media (max-width: 992px) {
+    .product {
+        width: calc(33.33% - 20px);
+    }
+}
+
+/* Estilos para dispositivos más pequeños */
+@media (max-width: 768px) {
+    .product {
+        width: calc(50% - 20px);
+    }
+}
+
+/* Estilos para dispositivos más pequeños */
+@media (max-width: 576px) {
+    .product {
+        width: calc(100% - 20px);
+    }
+}

@@ -1,0 +1,18 @@
+.ButtonPerdidosProvedores {
+   border: none;
+   background-color: transparent;
+}
+
+
+ .ButtonPerdidosProvedores .img1:hover{
+    filter: invert(52%) sepia(31%) saturate(748%) hue-rotate(71deg) brightness(95%) contrast(94%);
+ }
+
+ .ButtonPerdidosProvedores .img2:hover{
+   filter: invert(30%) sepia(24%) saturate(5360%) hue-rotate(334deg) brightness(73%) contrast(95%);
+}
+
+
+p {
+   margin: 0px;
+}

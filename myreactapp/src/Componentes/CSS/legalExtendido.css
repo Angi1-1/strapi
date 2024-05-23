@@ -1,0 +1,81 @@
+/* Estilos para el contenedor principal */
+.legal {
+    padding: 0; /* Elimina el relleno predeterminado */
+    margin: 0; /* Elimina el margen predeterminado */
+    background-color: #F6F1EB;
+}
+
+/* Estilos para el banner */
+.banner {
+    background-color: #AABBB2; 
+    padding: 20px; 
+    margin: 0; 
+    text-align: center; 
+    height: 50%;
+    width: 98%;
+}
+
+/* Estilos para el título del banner */
+.banner h1 {
+    margin-top: 0; /* Elimina el margen superior del título */
+    font-size: 64px;
+}
+.banner p {
+    font-size: 32px;
+}
+
+.privacidad,
+.cookies {
+    background-color: black; /* Fondo negro */
+    display: flex; /* Mostrar elementos en fila */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: space-between; /* Espaciado entre elementos */
+    padding: 10px 20px; /* Espaciado interno */
+    width: 80%; /* Ancho del contenedor */
+    margin: auto; /* Centrar horizontalmente y agregar margen vertical */
+}
+
+.privacidad p,
+.cookies p {
+    color: white; /* Color del texto */
+    margin: 0; /* Eliminar margen por defecto */
+    order: 1; /* Cambia el orden, p primero */
+    font-size: 32px;
+}
+
+.privacidad img,
+.cookies img {
+    width: 20px; /* Ancho de la imagen */
+    height: 20px; /* Altura de la imagen */
+    margin-left: 10px; /* Espaciado a la izquierda */
+    order: 2; /* Cambia el orden, imagen segundo */
+}
+
+.privacidad {
+    margin-top: 50px;
+}
+
+.cookies {
+    margin-top: 50px;
+}
+
+.contenido,
+.contenido2 {
+    background-color: transparent; /* Fondo transparente */
+    display: flex; /* Mostrar elementos en fila */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: space-between; /* Espaciado entre elementos */
+    padding: 10px 20px; /* Espaciado interno */
+    width: 80%; /* Ancho del contenedor */
+    margin: auto; /* Centrar horizontalmente y agregar margen vertical */
+    border: 1px solid gray; /* Borde gris */
+    margin-bottom: 50px;
+}
+
+.contenido p,
+.contenido2 p {
+    color: black; /* Color del texto negro */
+    margin: 0; /* Eliminar margen por defecto */
+    order: 1; /* Cambia el orden, p primero */
+    font-size: 16px;
+}

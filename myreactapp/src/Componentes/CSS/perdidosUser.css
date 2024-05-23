@@ -1,0 +1,117 @@
+/* Estilos generales */
+.derechaPerdidosUser {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+
+.containerPerdidosUser {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  margin: auto;
+}
+
+.cardPerdidosUser {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-family);
+  width: calc(33.33% - -75px); /* Ajuste para 3 tarjetas por fila */
+  box-sizing: border-box;
+}
+
+.card-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-label {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.help-button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 35%;
+  text-align: center;
+  font-family: var(--font-family);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 45px;
+  margin: 10px;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 1024px) {
+  .cardPerdidosUser {
+    width: calc(50% - 20px); /* Ajuste para 2 tarjetas por fila */
+  }
+
+  .card-label {
+    font-size: 20px;
+  }
+
+  .help-button {
+    width: 50%;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardPerdidosUser {
+    width: calc(100% - 20px); /* Ajuste para 1 tarjeta por fila */
+  }
+
+  .card-label {
+    font-size: 18px;
+  }
+
+  .help-button {
+    width: 60%;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-label {
+    font-size: 16px;
+  }
+
+  .help-button {
+    width: 70%;
+    font-size: 16px;
+    padding: 8px;
+  }
+}
+
+/* Estilos para enlaces */
+.link2 {
+  color: inherit; /* Hereda el color del elemento padre */
+  text-decoration: none; /* Elimina subrayado y otros decorados */
+}
+
+/* Hover - cuando el ratón está sobre el enlace */
+.link2:hover {
+  color: #79857f; /* Cambia el color a gris */
+  text-decoration: none; /* Asegura que no haya decorado */
+}
+
+/* Clicked - estilo del enlace activo */
+.link2:active {
+  color: #6a7c73; /* Cambia el color a gris oscuro */
+  text-decoration: none; /* Asegura que no haya decorado */
+}

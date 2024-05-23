@@ -1,0 +1,83 @@
+.absolutePopupDelete{
+    position: fixed;
+    top: auto;
+    z-index: 100;
+    position: fixed; /* Establece la posición como fija */
+    top: 50%; /* Posiciona el elemento a la mitad de la altura del viewport */
+    left: 50%; /* Posiciona el elemento a la mitad de la anchura del viewport */
+    transform: translate(-50%, -50%);
+   
+}
+.popup-confirmationDelete{
+    position: relative;
+    padding: 44px 64px 37px 64px;
+
+    border-radius: 16px;
+    box-shadow: inset 0px 0px 0px 3px #D43333;
+    background: white;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.deleteLogoCircleDelete{
+    width: 85px;
+    height: 85px;
+    position: absolute;
+    top: -45px;
+}
+.popup-confirmationDelete .tituloDelete {
+    font-size: 32px;
+    font-weight: 500;
+    font-family: var(--font-family);
+    color: black;
+}
+.btnCancelDeleteDelete{
+    padding: 8px 32px;
+    box-shadow: inset 0 0 0 1px black;
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 22px;
+    border: none;
+    transition: all 300ms ease;
+    background-color: transparent;
+    cursor: pointer;
+    width: 137.33px;
+}
+.btnDeleteUserDelete{
+    padding: 8px 32px;
+    box-shadow: inset 0 0 0 1px #F0997A;
+    border-radius: 8px; 
+    font-size: 22px;
+    background: #D43333 ;
+    color: white;
+    font-family: var(--font-family);
+    border: none;
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.divBtnConfirmationDelete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+
+.btnDeleteUserDelete:hover{
+   
+    box-shadow: inset 0 0 0 1px black;
+}
+.btnCancelDeleteDelete:hover{
+ 
+    box-shadow: inset 0 0 0 2px black;
+}
+
+.popup-confirmationDelete .textoDelete {
+    font-size: 22px;
+    font-family: var(--font-family1);
+    font-weight: 500; 
+}
+

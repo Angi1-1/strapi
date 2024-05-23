@@ -1,0 +1,234 @@
+/* Estilos para el contenedor principal */
+.containerPago {
+    margin-top: 20px;
+    font-family: "Tinos", serif;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para la sección izquierda */
+.group {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.group:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.group h1 {
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.group textarea {
+    width: 97%;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    background-color: #756969;
+    transition: all 0.3s ease;
+}
+
+.group textarea:focus {
+    background-color: #9a9a9a;
+}
+
+.group button {
+    background: linear-gradient(to right, #000, #333536);
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.group button:hover {
+    background: linear-gradient(to right, #333536, #000);
+}
+
+.group p{
+    margin-bottom: 5px;
+    padding: 2px;
+}
+
+/* Estilos para la sección de resumen */
+.resumen {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 500px;
+    margin-top: -105px;
+    transition: all 0.3s ease;
+}
+
+.resumen:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.resumen p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    padding: 2px;
+}
+
+.resumen hr {
+    border-top: 1px solid #ced4da;
+}
+
+/* Estilos para la sección de correo electrónico */
+.correo-electronico {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.correo-electronico:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Otros estilos */
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row > * {
+    flex: 1;
+}
+
+.form-group {
+    max-width: 899px;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.form-group:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Alinea los elementos hacia la derecha */
+.form-group, .izquierda, .col-md-6 {
+    margin-left: 70px;
+}
+
+.group{
+    background-color: #ffffff;
+    width: 900px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.group:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.form-control::placeholder{
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus::placeholder {
+    color: #9a9a9a;
+}
+
+.groupPago {
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.groupPago:hover {
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
+}
+
+.groupPago input {
+    width: 170%;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+    transition: all 0.3s ease;
+}
+
+.groupPago input:focus {
+    border-color: #333536;
+}
+
+.direccionPago {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Ajusta el espacio entre elementos según necesites */
+}
+
+.direccionInput{
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.direccionInput:focus {
+    border-color: #333536;
+}
+
+.btnPago{
+    width: 10%;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.btnPago:hover {
+    width: 15%;
+}
+
+/* Para tablet */
+@media only screen and (max-width: 768px) {
+    .containerPago, .group, .resumen, .correo-electronico, .form-group {
+        width: 100%;
+        max-width: none;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .groupPago input, .direccionInput {
+        width: 100%;
+    }
+
+    .btnPago {
+        width: 100%;
+    }
+
+    .form-group, .izquierda, .col-md-6 {
+        margin-left: 0;
+    }
+}
+
+/* Para móvil */
+@media only screen and (max-width: 480px) {
+    .containerPago, .group, .resumen, .correo-electronico, .form-group {
+        width: 100%;
+        max-width: none;
+        margin-top: 20px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .groupPago input, .direccionInput {
+        width: 100%;
+    }
+
+    .btnPago {
+        width: 100%;
+    }
+
+    .form-group, .izquierda, .col-md-6 {
+        margin-left: 0;
+    }
+}

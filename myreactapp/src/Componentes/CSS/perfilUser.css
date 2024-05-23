@@ -1,0 +1,237 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family1);
+}
+
+/* El css de perfil User  */
+
+.perfilUserParte1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px 20px 32px 96px;
+    gap: 60px;
+}
+
+.perfilUserTexto1{
+    font-family: var(--font-family1);
+    font-size: 37px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.perfilUserTexto2 {
+    font-family: var(--font-family1);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+}
+
+.derechaPerfilUser{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    /* width: 540px; */
+}
+
+.izquierdaPerfilUser {
+    display: flex;
+    flex-direction: column;
+    padding: 64px 0 0 0;
+}
+
+.perfilUserTitulo {
+    font-family: var(--font-family);
+    font-size: 64px;
+    width: 100%;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.perfilUserTexto3 {
+    font-family: var(--font-family);
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.nombrePerfilUser {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+
+.nombrePerfilUser2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.perfilUserTexto4 {
+    font-family: var(--font-family1);
+    font-size: 22px;
+}
+
+.perfilUserInput {
+    background-color: transparent;
+    padding: 4px;
+    font-family: var(--font-family1);
+    font-size: 22px;
+}
+
+.submitPerfilUsuario {
+    font-family: var(--font-family);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    background-color: black;
+    color: white;
+    line-height: normal;
+    width: 100%;
+    height: 40px;
+}
+
+.cambioPerfilUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+.derechaPerfilUser2 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.texto5PerfilUser {
+    font-family: var(--font-family1);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .perfilUserParte1 {
+        flex-direction: column;
+        padding: 16px;
+        gap: 32px;
+    }
+
+    .derechaPerfilUser, .derechaPerfilUser2 {
+        width: 100%;
+    }
+
+    .cambioPerfilUser {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .izquierdaPerfilUser {
+        padding: 32px 0;
+        width: 100%;
+    }
+
+    .perfilUserTitulo {
+        font-size: 48px;
+    }
+
+    .perfilUserTexto1 {
+        font-size: 36px;
+    }
+
+    .perfilUserTexto2 {
+        font-size: 28px;
+    }
+
+    .perfilUserTexto3 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .perfilUserParte1 {
+        padding: 8px;
+        gap: 16px;
+    }
+
+    .izquierdaPerfilUser {
+        padding: 16px 0;
+    }
+
+    .perfilUserTitulo {
+        font-size: 36px;
+    }
+
+    .perfilUserTexto1 {
+        font-size: 28px;
+    }
+
+    .perfilUserTexto2 {
+        font-size: 24px;
+    }
+
+    .perfilUserTexto3 {
+        font-size: 24px;
+    }
+
+    .perfilUserTexto4, .perfilUserInput {
+        font-size: 18px;
+    }
+
+    .submitPerfilUsuario {
+        font-size: 18px;
+    }
+
+    .texto5PerfilUser {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .perfilUserParte1 {
+        padding: 4px;
+    }
+
+    .perfilUserTitulo {
+        font-size: 24px;
+    }
+
+    .perfilUserTexto1 {
+        font-size: 20px;
+    }
+
+    .perfilUserTexto2 {
+        font-size: 18px;
+    }
+
+    .perfilUserTexto3 {
+        font-size: 18px;
+    }
+
+    .perfilUserTexto4, .perfilUserInput {
+        font-size: 16px;
+    }
+
+    .submitPerfilUsuario {
+        font-size: 16px;
+        height: 36px;
+    }
+
+    .texto5PerfilUser {
+        font-size: 12px;
+    }
+}

@@ -27,8 +27,11 @@
     "domicilio": {
       "type": "text"
     },
+    "acesso": {
+      "type": "integer"
+    },
     "passwordUser": {
-      "type": "password"
+      "type": "string"
     }
   }
 }

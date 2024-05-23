@@ -1,0 +1,15 @@
+
+:root{
+    --font-family: "Tinos";
+    --font-family1: "Gideon Roman";
+    --color-bg: #000000;
+    --color-white: #ffffff;
+    --color-footer: #756969;
+    --color-gris: rgba(170, 165, 165, 1);
+    --color-red: #D43333;
+    --color-backgroundColor: #F6F1EC
+}
+
+body {
+    background-color: var(--color-backgroundColor);
+}

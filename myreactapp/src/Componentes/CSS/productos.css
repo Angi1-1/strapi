@@ -1,0 +1,223 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.containerProductos {
+    margin: 0 auto;
+    background-color: #F6F1EC;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+/* 
+.product {
+    flex-basis: calc(50% - 40px); /* Ajustar el ancho de los productos 
+    margin-bottom: 20px;
+} */
+
+.product img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.product-info {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    width: 685px;;
+}
+
+.product-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+}
+.price {
+    font-weight: bold;
+    color: #333;
+    margin:5px;
+    font-size: 1rem;
+}
+.price2 {
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: #333;
+    margin:5px;
+}
+.product-details {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+}
+
+.product-details.active {
+    display: block;
+}
+
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    
+}
+
+.related-products {
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.related-product {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    margin-bottom: 20px;
+    width: calc(50% - 20px);
+    border-radius: 8px;
+    margin:10px;
+}
+
+.related-product img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.add-to-cart,
+.add-to-favorites {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s; /* Agregar transición */
+}
+
+.add-to-cart {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.add-to-favorites {
+    background-color: transparent;
+    border: 2px solid #333;
+    color: #333;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.add-to-favorites:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.feature {
+    flex-basis: calc(33.33% - 20px); /* Ajustar el ancho de las características */
+    text-align: center;
+}
+
+.feature img {
+    width: auto;
+}
+
+.feature h2 {
+    font-size: medium;
+}
+
+.feature p {
+    font-size: small;
+}
+.container hr{
+    width: 1248.002px;
+height: 1px;
+background: #000;
+}
+.explora {
+    color: #000;
+    font-family: Inter;
+    font-size: 32px;
+    font-weight: 400;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+.button-container button {
+    width: calc(33.33% - 20px); /* Ajustar el ancho de los botones */
+    background-color: #333;
+    border: none;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-container button:hover {
+    background-color: #605959;
+}
+
+
+@media (max-width: 1024px) {
+    .product {
+        flex-basis: calc(50% - 30px); /* Ajustar el ancho de los productos */
+    }
+}
+
+@media (max-width: 768px) {
+    .product {
+        flex-basis: calc(50% - 20px); /* Ajustar el ancho de los productos */
+    }
+
+    .button-container button {
+        width: calc(50% - 20px); /* Ajustar el ancho de los botones */
+    }
+}
+
+@media (max-width: 576px) {
+    .product {
+        flex-basis: calc(100% - 20px); /* Ajustar el ancho de los productos */
+    }
+
+    .button-container button {
+        width: calc(100% - 20px); /* Ajustar el ancho de los botones */
+    }
+}

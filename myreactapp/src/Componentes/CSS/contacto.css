@@ -1,0 +1,108 @@
+/* Estilos para el contenedor principal */
+.legal {
+  padding: 0;
+  margin: 0;
+  background-color: #F6F1EB;
+}
+
+/* Estilos para el banner */
+.banner {
+  background-color: #AABBB2;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+  height: 50%;
+  width: 100%;
+}
+
+/* Estilos para el título del banner */
+.tituloBanner {
+  margin-top: 0;
+  font-size: 2.5rem;
+}
+
+.contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.izquierdo {
+  flex: 1;
+  padding: 20px;
+  padding-left: 73px;
+}
+
+.izquierdo .textoFormulario {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputForm,
+.textareaForm {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 1rem; /* Reducir el padding */
+  font-size: 1rem; /* Ajustar el tamaño del texto */
+}
+
+
+.textareaForm {
+  height: 100px;
+}
+
+.botonContacto {
+  width: 100%;
+  padding: 0.5rem;
+  background: #000;
+  color: azure;
+  box-shadow: 2px 2px 4px 0px rgba(51, 62, 99, 0.75);
+  border: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.botonContacto:hover {
+  background-color: #333;
+  cursor: pointer;
+}
+
+.botonContacto:active {
+  transform: translateY(2px);
+}
+
+.derecha {
+  flex: 1;
+  padding: 20px;
+}
+
+.infoEmpresa {
+  font-size: 1.5rem;
+}
+
+.nombreEmpresa {
+  font-size: 2.5rem;
+}
+
+.direccionEmpresa,
+.telefonoEmpresa {
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .formulario {
+    max-width: 90%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .contenedor {
+    justify-content: space-between;
+  }
+}

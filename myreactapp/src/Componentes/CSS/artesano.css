@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.breadcrumb {
+  margin-top: 20px;
+  padding-left: 50px;
+  padding-bottom: 30px;
+}
+
+.breadcrumb .link {
+  color: inherit; /* Hereda el color del elemento padre */
+  text-decoration: none; /* Elimina subrayado y otros decorados */
+}
+
+/* Hover - cuando el ratón está sobre el enlace */
+.breadcrumb .link:hover {
+  color: #79857f; /* Cambia el color a negro */
+  text-decoration: none; /* Asegura que no haya decorado */
+}
+
+/* Clicked - estilo del enlace activo */
+.breadcrumb .link:active {
+  color: #6a7c73; /* Cambia el color a negro */
+  text-decoration: none; /* Asegura que no haya decorado */
+}
+
+.container {
+    font-family: Arial, sans-serif;
+  }
+  
+  .arriba, .content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .left-section, .right-section {
+    width: 50%;
+  }
+  
+  .left-section {
+    text-align: right;
+  }
+  
+  .right-section {
+    text-align: left;
+  }
+  
+  .left-section img, .right-section img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .left-section , .palabras {
+    max-width: 80%; /* Ajusta este valor según tus necesidades */
+    overflow-wrap: break-word;
+  }
+  
