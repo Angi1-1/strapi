@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './CSS/registrarse.css';
 import Header from './header';
 import Footer from './footer';
-
+import bcrypt from 'bcryptjs';
 const Registrarse = () => {
     // Estados para manejar los valores de los inputs
     const [email, setEmail] = useState('');
@@ -17,28 +17,32 @@ const Registrarse = () => {
     const [aceptoTerminos, setAceptoTerminos] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-
-    const todoUser = async (email) => {
+    const navigate = useNavigate(); // Hook para redirigir
+    const [emailValid, setEmailValid] = useState(true);
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+    };
+    const userIfExit = async (email) => {
+        console.log("correo user", email)
         try {
-            const response = await fetch(`http://localhost:1337/api/usuariomanos`, {
+            const response = await fetch(`http://localhost:1337/api/usuariomanos?filters[email][$eq]=${email}`, {
                 method: 'GET'
             });
             if (response.ok) {
-                const usuario = await response.json();
-                console.log("Usuario registrado", usuario);
-                setSuccess('Usuario registrado con éxito');
-                setError('');
+                const data = await response.json();
+                return data.data.length > 0;
             } else {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Error al registrar usuario');
+                throw new Error(errorData.message || 'Error al buscar usuario');
             }
         } catch (error) {
             console.error("Fetch error:", error);
-            setError(error.message);
-            setSuccess('');
+            return false;
         }
     }
-    const registriApi = async (nombreApellido, email, telefono, fechaNacimiento, ubicacion, ciudad, codigoPostal, password) => {
+
+    const registriApi = async (nombreApellido, email, telefono, fechaNacimiento, ubicacion, ciudad, codigoPostal, hashedPassword) => {
         const body = {
             data: {
                 nombreApellido: nombreApellido,
@@ -46,7 +50,7 @@ const Registrarse = () => {
                 telefono: telefono,
                 fecha_nac: fechaNacimiento,
                 domicilio: `${ubicacion}, ${ciudad}, ${codigoPostal}`,
-                passwordUser: password,
+                passwordUser: hashedPassword,
                 acesso: 3
             }
         };
@@ -64,6 +68,7 @@ const Registrarse = () => {
                 console.log("Usuario registrado", usuario);
                 setSuccess('Usuario registrado con éxito');
                 setError('');
+                navigate('/')
             } else {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Error al registrar usuario');
@@ -75,18 +80,34 @@ const Registrarse = () => {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setSuccess('');
+        setError('');
+        
         // Validación del formulario
         if (!email || !password || !nombreApellido || !telefono || !fechaNacimiento || !ubicacion || !ciudad || !codigoPostal || !aceptoTerminos) {
             setError('Por favor, complete todos los campos y acepte los términos.');
-            setSuccess('');
             return;
         }
         if (password.length < 6) {
             setError('La contraseña debe tener al menos 6 caracteres.');
-            setSuccess('');
             return;
+        }
+        if (!validateEmail(email)) {
+            setEmailValid(false);
+            setError('Por favor, introduce un correo electrónico válido.');
+            return;
+        } else {
+            setEmailValid(true);
+        }
+        const userExists = await userIfExit(email);
+
+        if (userExists) {
+            setError("Correo ya existe");
+        } else {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            registriApi(nombreApellido, email, telefono, fechaNacimiento, ubicacion, ciudad, codigoPostal, hashedPassword);
         }
 
         console.log("Email:", email);
@@ -98,8 +119,6 @@ const Registrarse = () => {
         console.log("Ciudad:", ciudad);
         console.log("Código Postal:", codigoPostal);
         console.log("Acepto Términos:", aceptoTerminos);
-
-        registriApi(nombreApellido, email, telefono, fechaNacimiento, ubicacion, ciudad, codigoPostal, password);
     }
 
     return (
@@ -192,10 +211,10 @@ const Registrarse = () => {
                             onChange={(e) => setAceptoTerminos(e.target.checked)}
                         />
                         Acepto los Condiciones Generales de Venta y doy mi consentimiento al tratamiento de mis datos, de conformidad con la Política de Confidencialidad de Manos Creadoras.
-                    </label>
+                    </label>  
+                    {error && <div className='MiCuentaError'>{error}</div>}
+                    {success && <div className='MiCuentaError' style={{ color: 'green' }}>{success}</div>}
                     <button className="submitRegistrarseParte1" type="submit">Entrar</button>
-                    {error && <div style={{ color: 'red' }}>{error}</div>}
-                    {success && <div style={{ color: 'green' }}>{success}</div>}
                 </form>
             </div>
             <Footer />

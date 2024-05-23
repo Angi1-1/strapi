@@ -1,7 +1,7 @@
 import BackDrop from "./BackDrop";
 import React from "react";
 import "./CSS/editProduct.css"
-const EditProduct = (prop) => {
+const AddArtesano = (prop) => {
  return (
     <>
 <BackDrop>
@@ -14,22 +14,17 @@ const EditProduct = (prop) => {
                 <input className="inputTextoEditProyecto" type="text" />
             </div>
             <div className="Nombre">
-                <label className="texto1EditProyecto">Categoria</label>
-                <select className="elegirEditProyecto">
-                    <option value={0}>Seleciona el categoria</option>
-                    <option value={1}>Joyeria</option>
-                    <option value={2}>Hogar</option>
-                    <option value={3}>Comestico</option>
-                </select>
+                <label className="texto1EditProyecto">Email de Empresa</label>
+                <input className="inputTextoEditProyecto" type="text" />
             </div>
         </div>
         <div className="name">
             <div className="Nombre">
-                <label className="texto1EditProyecto">Precio de Venta</label>
+                <label className="texto1EditProyecto">Telefono</label>
                 <input className="inputTextoEditProyecto" type="text" />
             </div>
             <div className="Nombre">
-                <label className="texto1EditProyecto">Stock</label>
+                <label className="texto1EditProyecto">Contraseña</label>
                 <input className="inputTextoEditProyecto" type="text" />
             </div>
         </div>
@@ -37,13 +32,9 @@ const EditProduct = (prop) => {
                 <label className="texto1EditProyecto">Descripciones</label>
                 <textarea className="textareaEditarProyecto" rows="3" cols="50" placeholder="Describe sobre el producto"></textarea>
         </div>
-        <div className="descripciones">
-                <label className="texto1EditProyecto">Talla y Adjuste</label>
-                <textarea className="textareaEditarProyecto" rows="3" cols="30" placeholder="Describe sobre el producto"></textarea>
-        </div>
         <div className="addImagenProyecto">
                 <label className="texto1EditProyecto">Añadir Imagen</label>
-                <button className="btnAddImg">Añadir</button> 
+                <input type="file"  />
         </div>
         <div className="divBtnEditProduct">
                       <button className="btnSubmitEditProyecto" type="submit">Guardar</button>
@@ -56,4 +47,4 @@ const EditProduct = (prop) => {
 );
 }
 
-export default EditProduct;
+export default AddArtesano;

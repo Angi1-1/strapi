@@ -1,20 +1,21 @@
 .addNewUser {
-    width: 927px;
+    width: 700px;
     background-color: white;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     border-radius: 16px;
+    border: 3px solid #F0997A;
     padding: 28px 0px;
 }
 .tituloEditProyecto {
     font-family: var(--font-family);
-    font-size: 64px;
+    font-size: 40px;
 }
 .texto1EditProyecto {
     font-family: var(--font-family);
-    font-size: 32px;
+    font-size: 18px;
 }
 .formularioEditrProyecto {
     display: flex;
@@ -22,7 +23,8 @@
     align-content: center;
     align-items: stretch;
     gap: 12px;
-    padding: 42px 64px;
+    width: 100%;
+    padding: 26px 64px;
 
 }
 
@@ -30,12 +32,12 @@ p{
     margin: 0px;
 }
 .inputTextoEditProyecto{
-height: 38px;
-padding: 0px;
-width: 348px;
+height: 35px;
+padding: 10px;
+width: 260px;
 font-family: var(--font-family1);
-font-size: 22px;
-border-radius: 8px;
+font-size: 18px;
+border-radius: 8px ;
 }
 
 .name{
@@ -53,7 +55,7 @@ border-radius: 8px;
 
 .elegirEditProyecto{
     height: 40px;
-    width: 350px;
+    width: 260px;
     background-color: black;
     border-radius: 8px;
     font-size: 22px;
@@ -68,9 +70,10 @@ border-radius: 8px;
     font-family: var(--font-family);
 }
 .textareaEditarProyecto {
-    font-size: 22px;
+    font-size: 16px;
     border-radius: 8px;
     font-family: var(--font-family1);
+    padding-left: 10px;
 }
 .addImagenProyecto {
     display: flex;
@@ -79,22 +82,22 @@ border-radius: 8px;
     gap: 12px;
 }
 .btnAddImg {
-    width: 300px;
+    width: 150px;
     border-radius: 8px;
     background-color: black;
     color: white;
-    height: 40px;
-    font-size: 22px;
+    height: 35px;
+    font-size: 18px;
     font-family: var(--font-family);
 }
 
 .btnSubmitEditProyecto {
-    width: 350px;
-    height: 45px;
+    width: 260px;
+    height: 40px;
     background-color: #F0997A ;
     border-radius: 8px;
     font-family: var(--font-family);
-    font-size: 32px;
+    font-size: 22px;
     color: white;
     border: none;
 }
@@ -105,12 +108,12 @@ border-radius: 8px;
 }
 
 .btnCancelarEditProyecto {
-    width: 350px;
-    height: 45px;
+    width: 260px;
+    height: 40px;
     background-color: transparent ;
     border-radius: 8px;
     font-family: var(--font-family);
-    font-size: 32px;
+    font-size: 22px;
     color: black;
     border: 1px solid black;
 }

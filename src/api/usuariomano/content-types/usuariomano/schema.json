@@ -32,6 +32,16 @@
     },
     "passwordUser": {
       "type": "string"
+    },
+    "imagenEmpresa": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

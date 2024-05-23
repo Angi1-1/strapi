@@ -7,10 +7,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 const PerfilAdmin = () => {
-  const [userData] = useState({
-    userName: "UserName",
-  });
-
+  
   return (
     <>
       <Header />
@@ -43,7 +40,7 @@ const PerfilAdmin = () => {
           <label className="perfilUserTexto3">Tus Datos</label>
           <div className="nombrePerfilUser">
             <label className="perfilUserTexto4">Nombre:</label>
-            <label className="perfilUserTexto4">{userData.userName}</label>
+            <label className="perfilUserTexto4">{localStorage.getItem('username')}</label>
           </div>
         </div>
       </div>

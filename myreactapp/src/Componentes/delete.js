@@ -6,7 +6,7 @@ import deleteImage from "../Icon/delete.png"
 
 
 
-function Delete({ onDeleteConfirm, onCancel }) {
+function Delete({ onDeleteConfirm, onCancel, messager }) {
     
     const handleSubmit = () => {
     console.log("Formulario enviado")
@@ -17,8 +17,8 @@ function Delete({ onDeleteConfirm, onCancel }) {
             <div className="absolutePopupDelete">
                 <form className="popup-confirmationDelete" onSubmit={handleSubmit}>
                     <img className="deleteLogoCircleDelete" src={deleteImage}></img>
-                  <p className="tituloDelete">Cancelar Pedido</p>
-                  <p className="textoDelete">¿Quieres cancelar el pedido?</p>
+                  <p className="tituloDelete">Cancelar {messager}</p>
+                  <p className="textoDelete">¿Quieres cancelar el {messager}?</p>
                   <div className="divBtnConfirmationDelete">
                       <button className="btnCancelDeleteDelete" type="submit">Volver</button>
                       <button className="btnDeleteUserDelete" onClick={onCancel}>Cancelar</button>

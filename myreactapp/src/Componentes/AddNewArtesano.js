@@ -2,47 +2,55 @@ import "./CSS/misperdidosProvedores.css";
 import "./CSS/perdidosUser.css"; // Adjust the path as necessary
 import "./CSS/perfilUser.css"; // Adjust the path as necessary
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import deleteIcon from "../Icon/delete.svg";
 import enviar from "../Icon/enviar.svg";
-import EditarArtesano from "./editProduct";
-import AddArtesano from "./editProduct";
+import EditarArtesano from "./editArtesano";
+import AddArtesano from "./addArtesano";
 import { Link } from "react-router-dom";
 import Delete from "./delete";
 import Header from "./header";
 import Footer from "./footer";
+
 const AddNewArtesano = () => {
   const editar = useState("Editar Artesano");
   const add = useState("Añadir Artesano");
   const [showEnviar, setShowEnviar] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [showAddNewArtesano, setShowAddNewArtesano] = useState(false);
-  const [pedidosData] = useState([
-    {
-      id_Artesano: "1",
-      nombre: "Antonio",
-      telefono: "600000000",
-      email: "antonio@gmail.com",
-    },
-    {
-      id_Artesano: "2",
-      nombre: "Ana",
-      telefono: "600000000",
-      email: "ana@gmail.com",
-    },
-    {
-      id_Artesano: "2",
-      nombre: "Ana",
-      telefono: "600000000",
-      email: "ana@gmail.com",
-    }
-  ]);
+  const [artesanos, setArtesanos] = useState([]);
+  const [selectedArtesano, setSelectedArtesano] = useState(null);
 
-  const handleSend = () => {
+  // Buscar Artesanos
+  useEffect(() => {
+    artesanoList();
+  }, []);
+
+  const artesanoList = async () => {
+    try {
+      const response = await fetch(`http://localhost:1337/api/usuariomanos?filters[acesso]=2`, {
+        method: 'GET'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos de artesanos", data);
+        setArtesanos(data.data);
+      } else {
+        console.log("Error al obtener los datos de artesanos");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+
+  const handleSend = (artesano) => {
+    setSelectedArtesano(artesano.attributes);
     setShowEnviar(true);
   };
 
-  const handleDelete = () => {
+  const handleDelete = (artesano) => {
+    setSelectedArtesano(artesano.attributes);
     setShowDelete(true);
   };
 
@@ -81,52 +89,64 @@ const AddNewArtesano = () => {
           <label className="perfilUserTitulo">Artesanos</label>
           <div className="table-containerPerdidosUser">
           <div className="containerPerdidosUser">
-              {pedidosData.map((pedido, index) => (
+              {artesanos.map((artesano, index) => (
                 <div className="cardPerdidosUser" key={index}>
                   <div className="card-item">
                     <span className="card-label">Id de Artesanos:</span>
-                    <span>{pedido.id_Artesano}</span>
+                    <span>{artesano.id}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Nombre:</span>
-                    <span>{pedido.nombre}</span>
+                    <span>{artesano.attributes.nombreApellido}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Telefono:</span>
-                    <span>{pedido.telefono} </span>
+                    <span>{artesano.attributes.telefono}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Email:</span>
-                    <span>{pedido.email}</span>
+                    <span>{artesano.attributes.email}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Estado:</span>
-                    <button
+                    <div className="botonesAddNewArtesano">
+                      <button
                         className="ButtonPerdidosProvedores"
-                        onClick={handleSend}
+                        onClick={() => handleSend(artesano)}
                       >
-                        <img className="img1" src={enviar}></img>
+                        <img className="img1" src={enviar} alt="Enviar"/>
                       </button>
                       <button
                         className="ButtonPerdidosProvedores"
-                        onClick={handleDelete}
+                        onClick={() => handleDelete(artesano)}
                       >
-                        <img className="img2" src={deleteIcon}></img>
+                        <img className="img2" src={deleteIcon} alt="Eliminar"/>
                       </button>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
-            <button className="help-button" onClick={handleChange}>
-              Añadir Artesano
-            </button>
           </div>
+          <button className="help-button" onClick={handleChange}>
+            Añadir Artesano
+          </button>
         </div>
       </div>
-      {showEnviar && (
-        <EditarArtesano onCancel={() => setShowEnviar(false)} value={editar} />
+      {showEnviar && selectedArtesano && (
+        <EditarArtesano
+          onCancel={() => setShowEnviar(false)}
+          artesano={selectedArtesano}
+          value={editar}
+        />
       )}
-      {showDelete && <Delete onCancel={() => setShowDelete(false)} />}
+      {showDelete && selectedArtesano && (
+        <Delete
+          onCancel={() => setShowDelete(false)}
+          artesano={selectedArtesano}
+          messager={"Artesano"}
+        />
+      )}
       {showAddNewArtesano && (
         <AddArtesano
           onCancel={() => setShowAddNewArtesano(false)}

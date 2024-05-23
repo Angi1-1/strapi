@@ -6,7 +6,10 @@
   width: 100%;
   padding: 20px;
 }
-
+.botonesAddNewArtesano{
+  display: flex;
+  gap: 10px;
+}
 /* Estilos para el contenedor de productos */
 .product-container {
   display: flex;
@@ -59,15 +62,16 @@
   padding: 10px;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 350px;
   text-align: center;
   font-family: var(--font-family);
   font-size: 22px;
   font-weight: 400;
   line-height: normal;
+  margin: 0px;
 }
 .table-containerPerdidosUser{
-  width: 400px;
+  width: 100%;
 }
 /* Media Query para pantallas más grandes */
 @media screen and (min-width: 768px) {

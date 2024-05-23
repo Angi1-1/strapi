@@ -381,6 +381,7 @@ export interface ApiUsuariomanoUsuariomano extends Schema.CollectionType {
     domicilio: Attribute.Text;
     acesso: Attribute.Integer;
     passwordUser: Attribute.String;
+    imagenEmpresa: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
