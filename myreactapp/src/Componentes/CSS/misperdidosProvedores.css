@@ -31,6 +31,18 @@
 .product-item:hover {
   transform: translateY(-5px); /* Levanta ligeramente el producto al hacer hover */
 }
+.cardPerdidosUser {
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-family);
+  width: calc(25% - -75px);
+  box-sizing: border-box;
+}
 
 /* Estilos para la imagen del producto */
 .product-item img {
@@ -90,7 +102,24 @@
     max-width: calc(50% - 20px);
   }
 }
-
+.perfilUserParte1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0px 20px 32px 96px;
+    gap: 60px;
+    height: 100%;
+}
+.containerPerdidosUser {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  margin: auto;
+  font-family: var(--font-family);
+  font-size: 18px;
+}
 /* Animación al agregar nuevo producto */
 @keyframes fadeIn {
   from {

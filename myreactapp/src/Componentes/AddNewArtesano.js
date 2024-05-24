@@ -1,8 +1,7 @@
-import "./CSS/misperdidosProvedores.css";
-import "./CSS/perdidosUser.css"; // Adjust the path as necessary
-import "./CSS/perfilUser.css"; // Adjust the path as necessary
-
 import React, { useState, useEffect } from "react";
+import "./CSS/misperdidosProvedores.css";
+import "./CSS/perdidosUser.css";
+import "./CSS/perfilUser.css";
 import deleteIcon from "../Icon/delete.svg";
 import enviar from "../Icon/enviar.svg";
 import EditarArtesano from "./editArtesano";
@@ -13,15 +12,13 @@ import Header from "./header";
 import Footer from "./footer";
 
 const AddNewArtesano = () => {
-  const editar = useState("Editar Artesano");
-  const add = useState("Añadir Artesano");
   const [showEnviar, setShowEnviar] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [showAddNewArtesano, setShowAddNewArtesano] = useState(false);
   const [artesanos, setArtesanos] = useState([]);
   const [selectedArtesano, setSelectedArtesano] = useState(null);
+  const [artesanoId, setArtesanoId] = useState('');
 
-  // Buscar Artesanos
   useEffect(() => {
     artesanoList();
   }, []);
@@ -44,18 +41,42 @@ const AddNewArtesano = () => {
     }
   };
 
+  const deleteArtesano = async () => {
+    try {
+      const response = await fetch(`http://localhost:1337/api/usuariomanos/${artesanoId}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        console.log("Artesano eliminado");
+        handleOnload();
+        setShowDelete(false);
+      } else {
+        console.log("Error al eliminar el artesano");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+
   const handleSend = (artesano) => {
     setSelectedArtesano(artesano.attributes);
+    setArtesanoId(artesano.id);
     setShowEnviar(true);
   };
 
   const handleDelete = (artesano) => {
     setSelectedArtesano(artesano.attributes);
+    setArtesanoId(artesano.id);
     setShowDelete(true);
   };
 
   const handleChange = () => {
     setShowAddNewArtesano(true);
+  };
+
+  const handleOnload = () => {
+    artesanoList();
   };
 
   return (
@@ -84,11 +105,10 @@ const AddNewArtesano = () => {
             Cerrar Sesión
           </Link>
         </div>
-              
         <div className="derechaPerdidosUser">
           <label className="perfilUserTitulo">Artesanos</label>
           <div className="table-containerPerdidosUser">
-          <div className="containerPerdidosUser">
+            <div className="containerPerdidosUser">
               {artesanos.map((artesano, index) => (
                 <div className="cardPerdidosUser" key={index}>
                   <div className="card-item">
@@ -137,20 +157,21 @@ const AddNewArtesano = () => {
         <EditarArtesano
           onCancel={() => setShowEnviar(false)}
           artesano={selectedArtesano}
-          value={editar}
+          artesanoId={artesanoId}
+          onload={handleOnload}
         />
       )}
       {showDelete && selectedArtesano && (
         <Delete
           onCancel={() => setShowDelete(false)}
-          artesano={selectedArtesano}
           messager={"Artesano"}
+          onDeleteConfirm={deleteArtesano}
         />
       )}
       {showAddNewArtesano && (
         <AddArtesano
           onCancel={() => setShowAddNewArtesano(false)}
-          value={add}
+          onload={handleOnload}
         />
       )}
       <Footer />

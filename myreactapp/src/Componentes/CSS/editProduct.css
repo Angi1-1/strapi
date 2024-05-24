@@ -143,3 +143,6 @@ border-radius: 8px ;
     filter: invert(30%) sepia(24%) saturate(5360%) hue-rotate(334deg) brightness(73%) contrast(95%);
  }
  
+ .error {
+    color: red;
+ }
