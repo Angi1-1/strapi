@@ -1,13 +1,17 @@
-// El perfil de admin
-
-import React, { useState } from "react";
+import React from "react";
 import "./CSS/perfilUser.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
 
 const PerfilAdmin = () => {
-  
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <>
       <Header />
@@ -22,7 +26,7 @@ const PerfilAdmin = () => {
           </Link>
         </p>
       </div>
-      <div className="perfilUserParte1">
+      <div className="perfilUserParte1" style={{ height: '60vh' }}>
         <div className="izquierdaPerfilUser">
           <Link to="/perfilAdmin" className="perfilUserTexto1 link2">
             Mi Cuenta
@@ -30,9 +34,9 @@ const PerfilAdmin = () => {
           <Link to="/addnewArtesano" className="perfilUserTexto2 link2">
             Artesano
           </Link>
-          <Link to="/" className="perfilUserTexto2 link2">
+          <label onClick={handleLogout} className="perfilUserTexto2 link2">
             Cerrar Sesión
-          </Link>
+          </label>
         </div>
 
         <div className="derechaPerfilUser">

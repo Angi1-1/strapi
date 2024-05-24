@@ -16,6 +16,7 @@ const MiCuenta = () => {
         onLogin(email, password);
     };
 
+    console.log(localStorage.getItem('user_id'))
     const onLogin = async (email, password) => {
         setError('');
         console.log("User", email);

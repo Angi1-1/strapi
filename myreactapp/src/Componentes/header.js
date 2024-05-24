@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CSS/header.css'; // Importa tus estilos CSS
 import Logo from '../Icon/logo_sinfondo.png';
@@ -8,7 +8,8 @@ const Header = ({ cartItemCount, setCartItemCount }) => {
     const [searchValue, setSearchValue] = useState('');
     const [showMobileMenu, setShowMobileMenu] = useState(false); // Estado para controlar la visibilidad del menú en dispositivos móviles
     const [showProductsMenu, setShowProductsMenu] = useState(false); // Estado para controlar la visibilidad del menú desplegable de productos
-
+    const [registrado, setRegistrado] = useState('');
+    const [link, setLink] = useState('');
     
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
@@ -22,6 +23,26 @@ const Header = ({ cartItemCount, setCartItemCount }) => {
     const toggleProductsMenu = () => {
         setShowProductsMenu(!showProductsMenu);
     };
+
+    useEffect(() => {
+        if (localStorage.getItem('username') === null || localStorage.getItem('username') === '') {
+            setRegistrado('Log In');
+            setLink('/')
+        } else {
+            console.log("Nombre de usuario",localStorage.getItem('username') )
+            setRegistrado(localStorage.getItem('username'));
+            if(localStorage.getItem('acesso') == 1) {
+                setLink('/perfilAdmin')
+            }
+            else if (localStorage.getItem('acesso') == 2) {
+                setLink('/perfilArtesanos')
+            }
+            else {
+                setLink('/perfilUser');
+            }
+        }
+
+    }, []);
 
     return (
         <header className="header">
@@ -53,7 +74,7 @@ const Header = ({ cartItemCount, setCartItemCount }) => {
                 <Link to='/carrito'>Mi Cesta</Link> {cartItemCount > 0 && <span>({cartItemCount})</span>}
                 </button>
                 <button className="button"><Link to='/artesano'>Artesanos</Link></button>
-                <button className="button"><Link to='/'>Log In</Link></button>
+                <button className="button"><Link to={link}>{registrado}</Link></button>
             </div>
             {/* Botón de hamburguesa para dispositivos móviles */}
             <div className="hamburger-menu" onClick={toggleMobileMenu}>
@@ -75,7 +96,7 @@ const Header = ({ cartItemCount, setCartItemCount }) => {
                     Mi Cesta {cartItemCount > 0 && <span>({cartItemCount})</span>}
                 </button>
                 <button className="button">Creadores</button>
-                <button className="button"><Link to='/'>Log In</Link></button>
+                <button className="button"><Link to={link}>{registrado}</Link></button>
             </div>
         </header>
     );
