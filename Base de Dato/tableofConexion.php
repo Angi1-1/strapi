@@ -19,7 +19,8 @@ $usuario = 'CREATE TABLE `usuarioManos` (
     `created_by_id` int(10) UNSIGNED DEFAULT NULL,
     `updated_by_id` int(10) UNSIGNED DEFAULT NULL,
     `password_user` varchar(255) DEFAULT NULL,
-    `acesso` int(1) DEFAULT NULL,  -- Nueva columna
+    `acesso` int(1) DEFAULT NULL,
+    `descripcion` varchar(500) DEFAULT NULL,
     PRIMARY KEY (`id`)
 )';
 
@@ -39,7 +40,7 @@ function usuario_existe($conexion, $email, $telefono) {
 $usuarios = array(
     array(
         'nombre_apellido' => 'Admin',
-        'email' => 'manoscreadoras@gmail.com',
+        'email' => 'admin@gmail.com',
         'telefono' => '000000000',
         'fecha_nac' => '2024-05-07',
         'domicilio' => 'SDSDSD',
@@ -49,7 +50,8 @@ $usuarios = array(
         'created_by_id' => '1',
         'updated_by_id' => '1',
         'password_user' => '1234',
-        'acesso' => 1 // Nivel de acceso
+        'acesso' => 1, // Nivel de acceso
+        'descripcion' => NULL // Descripción
     ),
     array(
         'nombre_apellido' => 'Amelia',
@@ -63,7 +65,8 @@ $usuarios = array(
         'created_by_id' => NULL,
         'updated_by_id' => NULL,
         'password_user' => '1234',
-        'acesso' => 3 // Nivel de acceso
+        'acesso' => 3, // Nivel de acceso
+        'descripcion' => NULL // Descripción
     ),
     array(
         'nombre_apellido' => 'Madrid Arte',
@@ -77,7 +80,8 @@ $usuarios = array(
         'created_by_id' => NULL,
         'updated_by_id' => NULL,
         'password_user' => '1234',
-        'acesso' => 2 // Nivel de acceso
+        'acesso' => 2, // Nivel de acceso
+        'descripcion' => 'Proveedor de arte' // Descripción
     )
 );
 
@@ -85,22 +89,24 @@ $usuarios = array(
 foreach ($usuarios as $usuario) {
     if (!usuario_existe($conexion, $usuario['email'], $usuario['telefono'])) {
         $hashed_password = password_hash($usuario['password_user'], PASSWORD_BCRYPT);
-        $query = "INSERT INTO usuarioManos (nombre_apellido, email, telefono, fecha_nac, password_user, domicilio, acesso) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO usuarioManos (nombre_apellido, email, telefono, fecha_nac, password_user, domicilio, acesso, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conexion, $query);
-        mysqli_stmt_bind_param($stmt, 'ssssssi', 
+        mysqli_stmt_bind_param($stmt, 'ssssssis', 
             $usuario['nombre_apellido'], 
             $usuario['email'], 
             $usuario['telefono'], 
             $usuario['fecha_nac'], 
             $hashed_password, 
             $usuario['domicilio'],
-            $usuario['acesso'] // Nivel de acceso
+            $usuario['acesso'], // Nivel de acceso
+            $usuario['descripcion'] // Descripción
         );
         mysqli_stmt_execute($stmt) or die("Error al insertar usuario: " . mysqli_error($conexion));
     } else {
         echo "El usuario con email {$usuario['email']} o teléfono {$usuario['telefono']} ya existe.<br>";
     }
 }
+
 
 
     // //Crear la tabla de admin/artesanos

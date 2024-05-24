@@ -11,6 +11,7 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
   const [domicilio, setDomicilio] = useState(artesano.domicilio);
   const [imagen, setImagen] = useState(null);
   const [errors, setErrors] = useState({});
+  const [descripcion, setDescripcion] = useState(artesano.descripcion || '');
   const handleFileChange = (e) => {
     setImagen(e.target.files[0]);
   };
@@ -39,7 +40,11 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
     }
 
     if (!domicilio) {
-      newErrors.domicilio = "La descripción no puede estar vacía";
+      newErrors.domicilio = "El domicilio no puede estar vacío";
+    }
+
+    if (!descripcion) {
+      newErrors.descripcion = "La descripción no puede estar vacía";
     }
 
     if (password && password.length < 6) {
@@ -59,8 +64,8 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
         email,
         telefono,
         domicilio,
+        descripcion,
         passwordUser: hashedPassword,
-        imagenEmpresa: imagen,
         acesso: 2,
       },
     };
@@ -147,14 +152,24 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
                 {errors.password && <p className="error">{errors.password}</p>}
               </div>
             </div>
+            <div className="Nombre">
+              <label className="texto1EditProyecto">Domicilio</label>
+              <input style={{ width: '100%' }}
+                className="inputTextoEditProyecto"
+                type="text"
+                value={domicilio}
+                onChange={(e) => setDomicilio(e.target.value)}
+              />
+              {errors.domicilio && <p className="error">{errors.domicilio}</p>}
+            </div>
             <div className="descripciones">
               <label className="texto1EditProyecto">Descripciones</label>
               <textarea
                 className="textareaEditarProyecto"
                 rows="5"
                 cols="50"
-                value={domicilio}
-                onChange={(e) => setDomicilio(e.target.value)}
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
               ></textarea>
               {errors.domicilio && <p className="error">{errors.domicilio}</p>}
             </div>

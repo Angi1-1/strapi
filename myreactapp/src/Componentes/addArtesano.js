@@ -11,10 +11,12 @@ const EditarArtesano = ({ onCancel, onload }) => {
   const [domicilio, setDomicilio] = useState("");
   const [imagen, setImagen] = useState(null);
   const [errors, setErrors] = useState({});
+  const [descripcion, setDescripcion] = useState('');
 
   const handleFileChange = (e) => {
     setImagen(e.target.files[0]);
   };
+
   const validateForm = () => {
     const newErrors = {};
     const nombreApellidoRegex = /^[A-Za-z\s]+$/;
@@ -39,7 +41,11 @@ const EditarArtesano = ({ onCancel, onload }) => {
     }
 
     if (!domicilio) {
-      newErrors.domicilio = "La descripción no puede estar vacía";
+      newErrors.domicilio = "El domicilio no puede estar vacío";
+    }
+
+    if (!descripcion) {
+      newErrors.descripcion = "La descripción no puede estar vacía";
     }
 
     if (password && password.length < 6) {
@@ -49,8 +55,9 @@ const EditarArtesano = ({ onCancel, onload }) => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
   const enviaApis = async () => {
-    const hashedPassword = await bcrypt.hash(password, 10) 
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const body = {
       data: {
@@ -58,6 +65,7 @@ const EditarArtesano = ({ onCancel, onload }) => {
         email,
         telefono,
         domicilio,
+        descripcion,
         passwordUser: hashedPassword,
         acesso: 2,
       },
@@ -143,16 +151,26 @@ const EditarArtesano = ({ onCancel, onload }) => {
                 {errors.password && <p className="error">{errors.password}</p>}
               </div>
             </div>
+            <div className="Nombre">
+              <label className="texto1EditProyecto">Domicilio</label>
+              <input style={{ width: '100%' }}
+                className="inputTextoEditProyecto"
+                type="text"
+                value={domicilio}
+                onChange={(e) => setDomicilio(e.target.value)}
+              />
+              {errors.domicilio && <p className="error">{errors.domicilio}</p>}
+            </div>
             <div className="descripciones">
               <label className="texto1EditProyecto">Descripciones</label>
               <textarea
                 className="textareaEditarProyecto"
                 rows="5"
                 cols="50"
-                value={domicilio}
-                onChange={(e) => setDomicilio(e.target.value)}
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
               ></textarea>
-              {errors.domicilio && <p className="error">{errors.domicilio}</p>}
+              {errors.descripcion && <p className="error">{errors.descripcion}</p>}
             </div>
             <div className="addImagenProyecto">
               <label className="texto1EditProyecto">Añadir Imagen</label>
