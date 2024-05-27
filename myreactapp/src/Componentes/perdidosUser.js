@@ -1,26 +1,48 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./CSS/perdidosUser.css"; // Adjust the path as necessary
 import "./CSS/perfilUser.css"; // Adjust the path as necessary
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
 const PerdidosUser = () => {
-  const [pedidosData] = useState([
-    {
-      numPedido: "1",
-      FechaCompra: "18/04/2024",
-      gasto: "10",
-      Tick: "PDF",
-      Estado: "Enviado",
-    },
-    {
-      numPedido: "2",
-      FechaCompra: "18/04/2024",
-      gasto: "99",
-      Tick: "PDF",
-      Estado: "Cancelada",
-    },
-  ]);
+  const navigate = useNavigate();
+  const [pedidos, setPedidos] = useState([]);
+  const [detailsVisible, setDetailsVisible] = useState({});
+  const [pedido, setPedido] = useState(null);
+  const [pedidoId, setPedidoId] = useState(null);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+  useEffect(() => {
+    pedidoList();
+  }, []);
+  const pedidoList = async () => {
+    try {
+      const response = await fetch(`http://localhost:1337/api/pedidos/?filters[idUsuario]=${localStorage.getItem('user_id')}`, {
+        method: 'GET'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos de pedidos", data);
+        setPedidos(data.data);
+      } else {
+        console.log("Error al obtener los datos de pedidos");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+
+ 
+  const toggleDetails = (id) => {
+    setDetailsVisible((prevDetailsVisible) => ({
+      ...prevDetailsVisible,
+      [id]: !prevDetailsVisible[id]
+    }));
+  };
   return (
     <>
       <Header />
@@ -31,11 +53,11 @@ const PerdidosUser = () => {
           </Link>{" "}
           /{" "}
           <Link to="/perdidosUser" className="link">
-            Pedidos del usuario
+            Mis Pedidos
           </Link>{" "}
         </p>
       </div>
-      <div className="perfilUserParte1">
+      <div className="perfilPedidosParte1">
         <div className="izquierdaPerfilUser">
           <Link to="/perfilUser" className="perfilUserTexto2 link2">
             Mi Cuenta
@@ -46,43 +68,47 @@ const PerdidosUser = () => {
           <Link to="/miWishlist" className="perfilUserTexto2 link2">
             Mi Wishlist
           </Link>
-          <Link to="/" className="perfilUserTexto2 link2">
+          <button onClick={handleLogout} className="perfilUserTexto2 link2" style={{marginLeft:'-5px'}}>
             Cerrar Sesión
-          </Link>
+          </button>
         </div>
 
         <div className="derechaPerdidosUser">
           <label className="perfilUserTitulo">Mis Pedidos</label>
           <div className="table-containerPerdidosUser">
             <div className="containerPerdidosUser">
-              {pedidosData.map((pedido, index) => (
+              {pedidos.map((pedido, index) => (
                 <div className="cardPerdidosUser" key={index}>
                   <div className="card-item">
                     <span className="card-label">Número de Pedido:</span>
-                    <span>{pedido.numPedido}</span>
+                    <span>{pedido.id}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Fecha de Compra:</span>
-                    <span>{pedido.FechaCompra}</span>
+                    <span>{pedido.attributes.fechaPedidos}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Gastos:</span>
-                    <span>{pedido.gasto} €</span>
+                    <span>{pedido.attributes.gasto} €</span>
                   </div>
-                  <div className="card-item">
-                    <span className="card-label">Tick de Compra:</span>
-                    <span>{pedido.Tick}</span>
+                  <button className="card-item" onClick={() => toggleDetails(pedido.id)}>
+                    <span className="card-label ">Detalles del Producto</span> {detailsVisible[pedido.id] ? "▲" : "▼"}
+                  </button>
+                  <div className={`product-details general-details ${detailsVisible[pedido.id] ? "active" : ""}`}>
+                    <p className="GideonRomanGrafiaJoyeria" style={{fontSize:'16px'}}>{pedido.attributes.ProductosComprados}</p>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Estado:</span>
-                    <span>{pedido.Estado}</span>
+                    <span className={pedido.attributes.estado ? "true" : "false"}>
+                      {pedido.attributes.estado ? "Enviado" : "Proceso"}
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
-
-            <button className="help-button">AYUDA</button>
-          </div>
+          </div> <button className="help-button" style={{width:'none'}}>
+            <Link className="link" style={{color:'white'}} to={'/contacto'}>Ayuda</Link>
+          </button>
         </div>
       </div>
       <Footer />

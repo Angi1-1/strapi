@@ -362,44 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiUsuariomanoUsuariomano extends Schema.CollectionType {
-  collectionName: 'usuariomanos';
-  info: {
-    singularName: 'usuariomano';
-    pluralName: 'usuariomanos';
-    displayName: 'usuariomanos';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nombreApellido: Attribute.String;
-    email: Attribute.Email;
-    telefono: Attribute.String;
-    fecha_nac: Attribute.Date;
-    domicilio: Attribute.Text;
-    acesso: Attribute.Integer;
-    passwordUser: Attribute.String;
-    descripcion: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::usuariomano.usuariomano',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::usuariomano.usuariomano',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -826,6 +788,160 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiMiwishlistMiwishlist extends Schema.CollectionType {
+  collectionName: 'miwishlists';
+  info: {
+    singularName: 'miwishlist';
+    pluralName: 'miwishlists';
+    displayName: 'miwishlists';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombreProducto: Attribute.Text;
+    ruta: Attribute.String;
+    precioProducto: Attribute.Integer;
+    idProducto: Attribute.Integer;
+    idUsuario: Attribute.Integer;
+    tipo: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::miwishlist.miwishlist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::miwishlist.miwishlist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPedidoPedido extends Schema.CollectionType {
+  collectionName: 'pedidos';
+  info: {
+    singularName: 'pedido';
+    pluralName: 'pedidos';
+    displayName: 'pedido';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    fechaPedidos: Attribute.Date;
+    idUsuario: Attribute.Integer;
+    idArtesano: Attribute.Integer;
+    domicilio: Attribute.Text;
+    gasto: Attribute.Integer;
+    ProductosComprados: Attribute.Text;
+    estado: Attribute.Boolean;
+    formaPago: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::pedido.pedido',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::pedido.pedido',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductoProducto extends Schema.CollectionType {
+  collectionName: 'productos';
+  info: {
+    singularName: 'producto';
+    pluralName: 'productos';
+    displayName: 'producto';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String;
+    nombreArtesano: Attribute.String;
+    idArtesano: Attribute.Integer;
+    subtitulo: Attribute.String;
+    detalles: Attribute.Text;
+    tallas: Attribute.Text;
+    ruta: Attribute.String;
+    stock: Attribute.String;
+    precio: Attribute.Decimal;
+    tipo: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::producto.producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiUsuariomanoUsuariomano extends Schema.CollectionType {
+  collectionName: 'usuariomanos';
+  info: {
+    singularName: 'usuariomano';
+    pluralName: 'usuariomanos';
+    displayName: 'usuariomanos';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombreApellido: Attribute.String;
+    email: Attribute.Email;
+    telefono: Attribute.String;
+    fecha_nac: Attribute.Date;
+    domicilio: Attribute.Text;
+    acesso: Attribute.Integer;
+    passwordUser: Attribute.String;
+    descripcion: Attribute.String;
+    logo: Attribute.String;
+    imagen: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::usuariomano.usuariomano',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::usuariomano.usuariomano',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -836,7 +952,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::usuariomano.usuariomano': ApiUsuariomanoUsuariomano;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -845,6 +960,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::miwishlist.miwishlist': ApiMiwishlistMiwishlist;
+      'api::pedido.pedido': ApiPedidoPedido;
+      'api::producto.producto': ApiProductoProducto;
+      'api::usuariomano.usuariomano': ApiUsuariomanoUsuariomano;
     }
   }
 }

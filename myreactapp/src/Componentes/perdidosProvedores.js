@@ -1,39 +1,127 @@
-import React, { useState } from "react";
-import "./CSS/perdidosUser.css"; // Adjust the path as necessary
-import "./CSS/perfilUser.css"; // Adjust the path as necessary
+import React, { useState, useEffect } from "react";
+import "./CSS/perdidosUser.css";
+import "./CSS/perfilUser.css";
 import "./CSS/perdidosProvedores.css";
 import deleteIcon from "../Icon/delete.svg";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import enviar from "../Icon/enviar.svg";
 import Send from "./send";
 import Delete from "./delete";
 import Header from "./header";
 import Footer from "./footer";
+
 const PerdidosProvedores = () => {
   const [showEnviar, setShowEnviar] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [pedidosData] = useState([
-    {
-      numPedido: "1",
-      FechaCompra: "18/04/2024",
-      gasto: "10",
-      Tick: "PDF",
-    },
-    {
-      numPedido: "2",
-      FechaCompra: "18/04/2024",
-      gasto: "99",
-      Tick: "PDF",
-    },
-    
-  ]);
+  const navigate = useNavigate();
+  const [pedidos, setPedidos] = useState([]);
+  const [detailsVisible, setDetailsVisible] = useState({});
+  const [pedido, setPedido] = useState(null);
+  const [pedidoId, setPedidoId] = useState(null);
 
-  const handleSend = () => {
-    setShowEnviar(true);
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+  useEffect(() => {
+    pedidoList();
+  }, []);
+
+  const pedidoList = async () => {
+    try {
+      const response = await fetch(`http://localhost:1337/api/pedidos/?filters[idArtesano]=${localStorage.getItem('user_id')}`, {
+        method: 'GET'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos de pedidos", data);
+        setPedidos(data.data);
+      } else {
+        console.log("Error al obtener los datos de pedidos");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
   };
 
-  const handleDelete = () => {
+  const handleSend = (pedido) => {
+    setShowEnviar(true);
+    setPedido(pedido.attributes);
+    setPedidoId(pedido.id);
+  };
+
+  const handleDelete = (pedido) => {
     setShowDelete(true);
+    setPedido(pedido.attributes);
+    setPedidoId(pedido.id);
+  };
+
+  const toggleDetails = (id) => {
+    setDetailsVisible((prevDetailsVisible) => ({
+      ...prevDetailsVisible,
+      [id]: !prevDetailsVisible[id]
+    }));
+  };
+
+  const confirmPedido = async () => {
+    const body = JSON.stringify({
+      data: {
+        estado: true
+      }
+    });
+
+    try {
+      const response = await fetch(`http://localhost:1337/api/pedidos/${pedidoId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: body
+      });
+
+      if (response.ok) {
+        console.log("Pedido Confirmado");
+        handleOnload();
+        setShowEnviar(false);
+      } else {
+        console.log("Error al confirmar el pedido");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+
+  const cancelPedidos = async () => {
+    const body = JSON.stringify({
+      data: {
+        estado: false
+      }
+    });
+
+    try {
+      const response = await fetch(`http://localhost:1337/api/pedidos/${pedidoId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: body
+      });
+
+      if (response.ok) {
+        console.log("Pedido Cancelado");
+        handleOnload();
+        setShowDelete(false);
+      } else {
+        console.log("Error al cancelar el pedido");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+
+  const handleOnload = () => {
+    pedidoList();
   };
 
   return (
@@ -45,16 +133,12 @@ const PerdidosProvedores = () => {
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/perfilArtesanos" className="link">
-            Perfil del artesano
-          </Link>{" "}
-          /{" "}
-          <Link to="/perdidosProvedores" className="link">
-            Pedidos de los proveedores
+          <Link to="/perdidosProvedores/" className="link">
+            Mis Pedidos
           </Link>
         </p>
       </div>
-      <div className="perfilUserParte1">
+      <div className="perfilPedidosParte1">
         <div className="izquierdaPerfilUser">
           <Link to="/perfilArtesanos" className="perfilUserTexto2 link2">
             Mi Cuenta
@@ -65,60 +149,68 @@ const PerdidosProvedores = () => {
           <Link to="/misPerdidosProvedores" className="perfilUserTexto2 link2">
             Mi Producto
           </Link>
-          <Link to="/" className="perfilUserTexto2 link2">
+          <button onClick={handleLogout} className="perfilUserTexto2 link2" style={{marginLeft:'-5px'}}>
             Cerrar Sesión
-          </Link>
+          </button>
         </div>
 
         <div className="derechaPerdidosUser">
           <label className="perfilUserTitulo">Mis Pedidos</label>
           <div className="table-containerPerdidosUser">
-          <div className="containerPerdidosUser">
-              {pedidosData.map((pedido, index) => (
+            <div className="containerPerdidosUser">
+              {pedidos.map((pedido, index) => (
                 <div className="cardPerdidosUser" key={index}>
                   <div className="card-item">
                     <span className="card-label">Número de Pedido:</span>
-                    <span>{pedido.numPedido}</span>
+                    <span>{pedido.id}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Fecha de Compra:</span>
-                    <span>{pedido.FechaCompra}</span>
+                    <span>{pedido.attributes.fechaPedidos}</span>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Gastos:</span>
-                    <span>{pedido.gasto} €</span>
+                    <span>{pedido.attributes.gasto} €</span>
                   </div>
-                  <div className="card-item">
-                    <span className="card-label">Tick de Compra:</span>
-                    <span>{pedido.Tick}</span>
+                  <button className="card-item" onClick={() => toggleDetails(pedido.id)}>
+                    <span className="card-label ">Detalles del Producto</span> {detailsVisible[pedido.id] ? "▲" : "▼"}
+                  </button>
+                  <div className={`product-details general-details ${detailsVisible[pedido.id] ? "active" : ""}`}>
+                    <p className="GideonRomanGrafiaJoyeria" style={{fontSize:'16px'}}>{pedido.attributes.ProductosComprados}</p>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Estado:</span>
+                    <span className={pedido.attributes.estado ? "true" : "false"}>
+                      {pedido.attributes.estado ? "Enviado" : "Cancelado"}
+                    </span>
+                  </div>
+
+                  <div className="botonesPedidosArtesano">
                     <button
-                        className="ButtonPerdidosProvedores"
-                        onClick={handleSend}
-                      >
-                        <img className="img1" src={enviar}></img>
-                      </button>
-                      <button
-                        className="ButtonPerdidosProvedores"
-                        onClick={handleDelete}
-                      >
-                        <img className="img2" src={deleteIcon}></img>
-                      </button>
+                      className="ButtonPerdidosProvedores"
+                      onClick={() => handleSend(pedido)}
+                    >
+                      <img className="img1" src={enviar} alt="Enviar"/>
+                    </button>
+                    <button
+                      className="ButtonPerdidosProvedores"
+                      onClick={() => handleDelete(pedido)}
+                    >
+                      <img className="img2" src={deleteIcon} alt="Eliminar"/>
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
-            
-                      
-
-            <button className="help-button">AYUDA</button>
-          </div>
+          </div> 
+          <button className="help-button" style={{width:'none'}}>
+            <Link className="link" style={{color:'white'}} to={'/contacto'}>Ayuda</Link>
+           
+          </button>
         </div>
       </div>
-      {showEnviar && <Send onCancel={() => setShowEnviar(false)} />}
-      {showDelete && <Delete onCancel={() => setShowDelete(false)} />}
+      {showEnviar && <Send onCancel={() => setShowEnviar(false)} pedido={pedido} onConfirm={confirmPedido} />}
+      {showDelete && <Delete onCancel={() => setShowDelete(false)} pedido={pedido} onDeleteConfirm={cancelPedidos} messager={"Pedido"} />}
       <Footer />
     </>
   );

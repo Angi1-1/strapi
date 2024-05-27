@@ -22,6 +22,8 @@ body {
 
 .link {
   color: #000;
+  font-size: 22px;
+  font-family: var(--font-family1);
   text-decoration: none;
 }
 

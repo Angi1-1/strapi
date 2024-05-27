@@ -8,7 +8,7 @@
         /* Estilos para la cerámica */
         .ceramic-plate {
             position: relative;
-            background-image: url('../../Icon/cosmeticos.png');
+            background-image: url('../img/cosmeticos.png');
             background-size: cover;
             background-position: center;
             height: 300px;

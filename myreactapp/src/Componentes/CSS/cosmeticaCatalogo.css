@@ -26,7 +26,8 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0);
-    /* Fondo transparente */
+    /* Fondo transparente*/
+    font-size: 64px;
     padding: 5px 10px;
     /* Ajustado para reducir el espacio */
     border-radius: 5px;

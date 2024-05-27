@@ -3,7 +3,7 @@ import BackDrop from "./BackDrop";
 import "./CSS/delete.css";
 import deleteImage from "../Icon/delete.png";
 
-function Delete({ onDeleteConfirm, onCancel, messager }) {
+function Delete({ onDeleteConfirm, onCancel, messager, pedido }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     onDeleteConfirm();
@@ -14,7 +14,7 @@ function Delete({ onDeleteConfirm, onCancel, messager }) {
       <div className="absolutePopupDelete">
         <form className="popup-confirmationDelete" onSubmit={handleSubmit}>
           <img className="deleteLogoCircleDelete" src={deleteImage} alt="Eliminar" />
-          <p className="tituloDelete">Cancelar {messager}</p>
+          <p className="tituloDelete">Cancelar el {messager}</p>
           <p className="textoDelete">¿Quieres cancelar el {messager}?</p>
           <div className="divBtnConfirmationDelete">
             <button
@@ -39,4 +39,3 @@ function Delete({ onDeleteConfirm, onCancel, messager }) {
 }
 
 export default Delete;
-

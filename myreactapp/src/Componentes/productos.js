@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./CSS/productos.css";
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
 import imagen4 from "./img/image4.png";
 import imagen3 from "./img/image3.png";
 import imagen2 from "./img/image2.png";
+import "./CSS/productos.css";
 
 function ProductDetails() {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
   const [detailsVisible, setDetailsVisible] = useState(false);
   const [sizeAdjustmentVisible, setSizeAdjustmentVisible] = useState(false);
   const [deliveryReturnVisible, setDeliveryReturnVisible] = useState(false);
@@ -15,54 +17,32 @@ function ProductDetails() {
   const [wishlist, setWishlist] = useState([]);
   const [cartItemCount, setCartItemCount] = useState(0);
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:1337/api/productos/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setProduct(data.data.attributes);
+        } else {
+          console.log("Error al obtener los datos del producto");
+        }
+      } catch (error) {
+        console.error('Error en la petición:', error);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (!product) {
+    return <div>Cargando...</div>;
+  }
+
   const addToCart = (product) => {
     setCart([...cart, product]);
     setCartItemCount((prevCount) => prevCount + 1);
-
-    console.log(cartItemCount);
   };
-
-  const [mainProduct, setMainProduct] = useState({
-    name: "COLLAR DE PERLA",
-    image: "Group 1.png",
-    price: "€500",
-    details: ["+Material: Oro Amarillo", "+Hecho en España", "+Perla 1 gramo"],
-  });
-
-  const relatedProducts = [
-    {
-      id: "pendiente-perla1",
-      name: "PENDIENTE PERLA",
-      image: "foto (1).png",
-      price: "€30",
-      details: ["+Material: Plata", "+Hecho en Italia", "+Perla 0.5 gramo"],
-    },
-    {
-      id: "pendiente-perla2",
-      name: "PENDIENTE PERLA",
-      image: "foto.png",
-      price: "€59",
-      details: [
-        "+Material: Oro Blanco",
-        "+Hecho en Francia",
-        "+Perla 0.7 gramo",
-      ],
-    },
-    {
-      id: "collar-de-plata",
-      name: "COLLAR DE PLATA",
-      image: "producto1.png",
-      price: "€120",
-      details: ["+Material: Plata", "+Hecho en España", "+Perla 2 gramos"],
-    },
-    {
-      id: "collar-de-plata-2",
-      name: "COLLAR DE PLATA",
-      image: "producto1 (1).png",
-      price: "€120",
-      details: ["+Material: Plata", "+Hecho en España", "+Perla 2 gramos"],
-    },
-  ];
 
   const toggleDetails = () => {
     setDetailsVisible(!detailsVisible);
@@ -77,113 +57,56 @@ function ProductDetails() {
   };
 
   const showRelatedProductDetails = (product) => {
-    setMainProduct({
-      name: product.name,
-      image: product.image,
-      price: product.price,
-      details: product.details,
-    });
+    setProduct(product);
   };
 
   const addToWishlist = (product) => {
     setWishlist([...wishlist, product]);
   };
+
   return (
     <div className="containerProductos">
-      <Header
-        cartItemCount={cartItemCount}
-        setCartItemCount={setCartItemCount}
-      />
+      <Header cartItemCount={cartItemCount} setCartItemCount={setCartItemCount} />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
-            Home
-          </Link>{" "}
-          /{" "}
-          <Link to="/productos" className="link">
-            Productos
-          </Link>
+          <Link to="/home" className="link">Home</Link> / <Link to="/productos" className="link">Productos</Link>
         </p>
       </div>
-      <div className="productos" id={mainProduct.id}>
-        <img src={mainProduct.image} alt={mainProduct.name} />
+      <div className="productos" id={product.id}>
+        <img src={product.ruta} alt={product.nombre} />
         <div className="product-info">
-          <h1>{mainProduct.name}</h1>
-          <div className="price">Madrid Arte</div>
+          <h1>{product.nombre}</h1>
+          <div className="price">{product.nombreArtesano}</div>
           <div className="price2">Perla natural</div>
-          <p className="product-price">{mainProduct.price}</p>
+          <p className="product-price">{product.precio}</p>
           <div className="price2">incl. IVA, excl. gastos de envío</div>
           <div className="product-actions">
-            <button
-              className="add-to-cart"
-              onClick={() => addToCart(mainProduct)}
-            >
-              Añadir al Carrito
-            </button>
-            <button
-              className="add-to-favorites"
-              onClick={() => addToWishlist(mainProduct)}
-            >
-              ❤️ Agregar a Favoritos
-            </button>
+            <button className="add-to-cart" onClick={() => addToCart(product)}>Añadir al Carrito</button>
+            <button className="add-to-favorites" onClick={() => addToWishlist(product)}>❤️ Agregar a Favoritos</button>
             <div className="button-container">
-              <button className="toggle-details" onClick={toggleDetails}>
-                <span>Detalles del Producto</span> {detailsVisible ? "▲" : "▼"}
-              </button>
-              <button
-                className="toggle-talla-ajuste"
-                onClick={toggleSizeAdjustment}
-              >
-                <span>Talla y Ajuste</span> {sizeAdjustmentVisible ? "▲" : "▼"}
-              </button>
-              <button
-                className="toggle-entrega-devolucion"
-                onClick={toggleDeliveryReturn}
-              >
-                <span>Entrega y Devolución</span>{" "}
-                {deliveryReturnVisible ? "▲" : "▼"}
-              </button>
+              <button className="toggle-details" onClick={toggleDetails}><span>Detalles del Producto</span> {detailsVisible ? "▲" : "▼"}</button>
+              <button className="toggle-talla-ajuste" onClick={toggleSizeAdjustment}><span>Talla y Ajuste</span> {sizeAdjustmentVisible ? "▲" : "▼"}</button>
+              <button className="toggle-entrega-devolucion" onClick={toggleDeliveryReturn}><span>Entrega y Devolución</span> {deliveryReturnVisible ? "▲" : "▼"}</button>
             </div>
           </div>
-          <div
-            className={`product-details general-details ${
-              detailsVisible ? "active" : ""
-            }`}
-          >
-            {mainProduct.details.map((detail, index) => (
-              <p key={index}>{detail}</p>
-            ))}
+          <div className={`product-details general-details ${detailsVisible ? "active" : ""}`}>
+            <p>{product.detalles}</p>
           </div>
-
-          <div
-            className={`talla-ajuste-details product-details ${
-              sizeAdjustmentVisible ? "active" : ""
-            }`}
-          >
+          <div className={`talla-ajuste-details product-details ${sizeAdjustmentVisible ? "active" : ""}`}>
             <h2>Talla y Ajuste</h2>
-            <p>Ajuste regular</p>
+            <p>{product.tallas}</p>
           </div>
-          <div
-            className={`entrega-devolucion-details product-details ${
-              deliveryReturnVisible ? "active" : ""
-            }`}
-          >
+          <div className={`entrega-devolucion-details product-details ${deliveryReturnVisible ? "active" : ""}`}>
             <h2>Entrega y Devolución</h2>
             <p>Envío estándar gratuito. Política de devolución de 30 días.</p>
           </div>
         </div>
       </div>
       <hr />
-
       <div className="explora">EXPLORE OTRAS OPCIONES</div>
-
       <div className="related-products">
-        {relatedProducts.map((product) => (
-          <div
-            className="related-product"
-            key={product.id}
-            onClick={() => showRelatedProductDetails(product)}
-          >
+        {product.map((product) => (
+          <div className="related-product" key={product.id} onClick={() => showRelatedProductDetails(product)}>
             <img src={product.image} alt={product.name} />
             <p>{product.name}</p>
             <p className="related-product-price">{product.price}</p>

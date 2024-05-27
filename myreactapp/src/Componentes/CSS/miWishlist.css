@@ -7,17 +7,9 @@
   }
   
   .cosasMiWishlist {
-    flex: 0 1 calc(33.33% - 20px); /* Calculamos el ancho de cada elemento para mostrar 3 en una fila */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    /* flex: 0 1 calc(33.33% - 20px); Calculamos el ancho de cada elemento para mostrar 3 en una fila */
+    border: none;
     text-align: center; /* Centramos el contenido */
-  }
-  
-  .corazonMiWishlixt {
-    width: 45px;
-    height: 44px;
-    margin-bottom: 10px;
   }
   
   .MiWishlistTexto1 {
@@ -30,7 +22,15 @@
     font-family: var(--font-family1);
     font-size: 16px;
   }
-  
+  .corazonMiWishlist {
+    width: 35px;
+  }
+  .corazonBotonWishlist{
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    text-align: right;
+  }
   @media (max-width: 768px) {
     .cosasMiWishlist {
       flex: 0 1 calc(50% - 20px); /* Para mostrar 2 elementos en una fila en dispositivos más pequeños */

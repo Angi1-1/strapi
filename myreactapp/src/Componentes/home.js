@@ -17,7 +17,7 @@ import imagen9 from "./img/image 1.png";
 import imagen10 from "./img/pendientes.png";
 
 import pendientes from "./img/rojo.png";
-import collar from "./img/collar.png";
+
 import champu from "./img/champu.png";
 import plato from "./img/plato.png";
 
@@ -88,7 +88,7 @@ function Home() {
       <p className="precio">€ 20</p>
     </div>
     <div>
-      <img src={collar} alt="COLLAR DE PERLA" className="img"/>
+      <img src="collar.png" alt="COLLAR DE PERLA" className="img"/>
       <p>COLLAR DE PERLA</p>
       <p className="precio">€ 70</p>
     </div>

@@ -35,6 +35,12 @@
     },
     "descripcion": {
       "type": "string"
+    },
+    "logo": {
+      "type": "string"
+    },
+    "imagen": {
+      "type": "string"
     }
   }
 }

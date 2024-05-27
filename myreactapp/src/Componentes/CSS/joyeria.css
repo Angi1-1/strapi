@@ -1,16 +1,71 @@
-* {
-
-    font-family: "Tinos", serif;
-
+p{
+    margin: 0px;
 }
-
 /* Estilos para la cerámica */
-.ceramic-plate {
+.joyeria {
     position: relative;
-    background-image: url('../../Icon/joyeria.png');
+    background-image: url('../img/joyeria.png');
     background-size: cover;
     background-position: center;
-    height: 300px;
+    height: 536px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.comestico {
+    position: relative;
+    background-image: url('../img/cosmeticos.png');
+    background-size: cover;
+    background-position: center;
+    height: 536px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.artesanoInfo {
+    height: 536px;
+    display: flex;
+    flex-direction: row;
+    padding:0px 64px;
+    justify-content: space-between;
+    gap: 88px;
+}
+
+.tipografiaArteInfo{
+    color: #000;
+    font-family: var(--font-family1);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.infoDrecha {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    gap: 12px;
+    height: 100%;
+    flex-direction: column;
+}
+
+.infoIzquierda{
+    width: 50%;
+    height: 100%;
+}
+.hogar {
+    position: relative;
+    background-image: url('../img/hogar.png');
+    background-size: cover;
+    background-position: center;
+    height: 536px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,11 +75,12 @@
 }
 
 /* Estilos para el texto superior en ceramic-plate */
-.upper-text {
-    font-weight: bold;
+.upper-textJoyeria {
     color: white;
     position: absolute;
+    font-family: var(--font-family);
     left: 50%;
+    font-size: 64px;
     transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0);
     /* Fondo transparente */
@@ -33,11 +89,32 @@
     border-radius: 5px;
 }
 
+.letraCardJoyeria{
+    color: #000;
+    text-align: center;
+    font-family: var(--font-family1);
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.precioCardJoyeria {
+    color: #000;
+    text-align: center;
+    font-family: var(--font-family);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #777;
+}
+
 /* Estilos para el texto inferior en ceramic-plate */
-.lower-text {
+.lower-textJoyeria {
     color: white;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 32px;
+    font-family: var(--font-family);
+
     position: absolute;
     bottom: 75px;
     /* Ajustado para dispositivos más pequeños */
@@ -86,37 +163,61 @@
 }
 
 /* Estilos para los elementos del catálogo */
-.catalog {
+.catalogJoyeria {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
-    padding: 20px;
+    padding: 64px;
 }
 
-.product {
-    width: calc(25% - 100px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+.corazonJoyeria{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    background-color: transparent;
+    border: none;
+}
+
+.productJoyeria {
+    width: calc(28% - 100px);
     position: relative;
     text-align: center;
     display: none; /* Ocultar inicialmente todos los productos */
 }
 
-.product img {
+.nombrePreciJoyeria{
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.verMasJoyeria{
+    display: flex;
+    padding: 16px 32px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+    border: 1px solid #000;
+    background: #000;
+}
+
+.verMasJoyeria p {
+    color: white;
+    font-size: 22px;
+    font-family: var(--font-family);
+}
+.productJoyeria img {
     max-width: 100%;
     height: auto;
 }
 
-.product h3 {
+.productJoyeria h3 {
     font-size: 18px;
     margin: 10px 0;
 }
 
-.product p {
-    font-size: 14px;
-    color: #777;
-}
 
 /* Estilos para el botón */
 .view-all-button {
@@ -150,21 +251,27 @@
 
 /* Estilos para dispositivos más pequeños */
 @media (max-width: 992px) {
-    .product {
+    .productJoyeria {
         width: calc(33.33% - 20px);
     }
 }
 
 /* Estilos para dispositivos más pequeños */
 @media (max-width: 768px) {
-    .product {
+    .productJoyeria {
         width: calc(50% - 20px);
+    }
+    .upper-textJoyeria{
+        font-size: 32px;
+    }
+    .lower-textJoyeria {
+        font-size: 22px;
     }
 }
 
 /* Estilos para dispositivos más pequeños */
 @media (max-width: 576px) {
-    .product {
+    .productJoyeria {
         width: calc(100% - 20px);
     }
 }

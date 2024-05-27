@@ -6,7 +6,7 @@
 /* Estilos para la cerámica */
 .ceramic-plate {
     position: relative;
-    background-image: url('../../Icon/hogar.png');
+    background-image: url('../img/hogar.png');
     background-size: cover;
     background-position: center;
     height: 300px;
@@ -120,7 +120,7 @@
 /* Estilos para el botón */
 .view-all-button {
     text-align: center;
-    margin-top: 20px;
+    margin: 32px;
 }
 
 .view-all-button a {

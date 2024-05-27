@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pedidos",
+  "info": {
+    "singularName": "pedido",
+    "pluralName": "pedidos",
+    "displayName": "pedido",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fechaPedidos": {
+      "type": "date"
+    },
+    "idUsuario": {
+      "type": "integer"
+    },
+    "idArtesano": {
+      "type": "integer"
+    },
+    "domicilio": {
+      "type": "text"
+    },
+    "gasto": {
+      "type": "integer"
+    },
+    "ProductosComprados": {
+      "type": "text"
+    },
+    "estado": {
+      "type": "boolean"
+    },
+    "formaPago": {
+      "type": "integer"
+    }
+  }
+}

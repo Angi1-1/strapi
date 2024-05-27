@@ -32,11 +32,14 @@
 .card-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; 
+  background-color: transparent;
+  border: none;
 }
 
 .card-label {
   font-weight: bold;
+ font-family: var(--font-family);
   font-size: 18px;
 }
 
@@ -91,6 +94,7 @@
 @media (max-width: 480px) {
   .card-label {
     font-size: 16px;
+    
   }
 
   .help-button {
@@ -104,6 +108,7 @@
 .link2 {
   color: inherit; /* Hereda el color del elemento padre */
   text-decoration: none; /* Elimina subrayado y otros decorados */
+  cursor: pointer;
 }
 
 /* Hover - cuando el ratón está sobre el enlace */

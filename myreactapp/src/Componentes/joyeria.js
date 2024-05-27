@@ -1,69 +1,163 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from './header';
 import Footer from './footer';
-import "./CSS/joyeria.css"
-
-// Definición de la lista de productos
-const productos = [
-  { nombre: "Producto 1", precio: 10, imagen: "ruta-del-producto-1.jpg" },
-  { nombre: "Producto 2", precio: 20, imagen: "ruta-del-producto-2.jpg" },
-  { nombre: "Producto 3", precio: 20, imagen: "ruta-del-producto-3.jpg" },
-  { nombre: "Producto 4", precio: 20, imagen: "ruta-del-producto-4.jpg" },
-  { nombre: "Producto 5", precio: 20, imagen: "ruta-del-producto-5.jpg" },
-  { nombre: "Producto 6", precio: 20, imagen: "ruta-del-producto-6.jpg" },
-  { nombre: "Producto 7", precio: 20, imagen: "ruta-del-producto-7.jpg" },
-  { nombre: "Producto 8", precio: 20, imagen: "ruta-del-producto-8.jpg" },
-  { nombre: "Producto 9", precio: 20, imagen: "ruta-del-producto-9.jpg" },
-  { nombre: "Producto 10", precio: 20, imagen: "ruta-del-producto-10.jpg" },
-  { nombre: "Producto 11", precio: 20, imagen: "ruta-del-producto-11.jpg" },
-  { nombre: "Producto 12", precio: 20, imagen: "ruta-del-producto-12.jpg" },
-  { nombre: "Producto 2", precio: 20, imagen: "ruta-del-producto-2.jpg" },
-  // Agrega más productos aquí
-];
-
-function CatalogoDeProductos() {
-  // Estado para controlar si se muestran todos los productos
+import "./CSS/joyeria.css";
+import head from "./img/heartProducto.svg"
+import headRojo from "./img/corazonRojo.svg";
+function CatalogoDeJoyeria() {
   const [mostrarTodos, setMostrarTodos] = useState(false);
+  const [listProduct, setListProduct] = useState([]);
+  const navigate = useNavigate();
+  const [wishlist, setWishlist] = useState({});
+  useEffect(() => {
+    listProductosJoyeria();
+    loadWishlist();
+  }, []);
 
-  // Función para alternar entre mostrar y ocultar todos los productos
+  const listProductosJoyeria = async () => {
+    try {
+      const response = await fetch(`http://localhost:1337/api/productos?filters[tipo]=1`, {
+        method: 'GET'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos de productos", data);
+        setListProduct(data.data);
+      } else {
+        console.log("Error al obtener los datos de productos");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+  const loadWishlist = async () => {
+    try {
+      const userId = localStorage.getItem('user_id');
+      const response = await fetch(`http://localhost:1337/api/miwishlists?filters[id_usuario]=${userId}`, {
+        method: 'GET'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos de wishlist", data);
+        const wishlistData = data.data.reduce((acc, item) => {
+          acc[item.attributes.idProducto] = item.id;  // Store the wishlist item ID
+          return acc;
+        }, {});
+        setWishlist(wishlistData);
+      } else {
+        console.log("Error al obtener los datos de la wishlist");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
+
   const alternarMostrarTodos = () => {
     setMostrarTodos(!mostrarTodos);
   };
 
+  const ShowDataProduct = (id) => {
+    console.log("Has seleccionado", id);
+    navigate(`/producto/${id}`);
+  };
+
+const añadirWishList = async (producto) => {
+    const userId = parseInt(localStorage.getItem('user_id'), 10);
+    const productId = producto.id;
+    const wishlistItemId = wishlist[productId];
+
+    try {
+      if (wishlistItemId) {
+        // Eliminar de la wishlist
+        console.log("Eliminar Wishlist")
+        const response = await fetch(`http://localhost:1337/api/miwishlists/${wishlistItemId}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          setWishlist(prevWishlist => {
+            const newWishlist = { ...prevWishlist };
+            delete newWishlist[productId];
+            return newWishlist;
+          });
+        } else {
+          console.log("Error al eliminar el producto de la wishlist");
+        }
+      } else {
+        // Agregar a la wishlist
+        const body = {
+          data: {
+            "nombreProducto": producto.attributes.nombre,
+            "precioProducto": producto.attributes.precio,
+            "idUsuario": userId,
+            "idProducto": productId,
+            "ruta": producto.attributes.ruta,
+            "tipo": producto.attributes.tipo
+          }
+        };
+        console.log("Añadir Wishlist", body)
+        const response = await fetch('http://localhost:1337/api/miwishlists/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Añadir Wishlist", data)
+          setWishlist(prevWishlist => ({
+            ...prevWishlist,
+            [productId]: data.data.id  // Save the new wishlist item ID
+          }));
+        } else {
+          console.log("Error al agregar el producto a la wishlist");
+        }
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  };
   return (
     <div className="container">
-      <Header/>
-      <div className="breadcrumb">
-            <p><Link to="/home" className="link">Home</Link> / <Link to="/joyeria" className="link">Joyería</Link> </p>
-        </div>
-      {/* Contenido de la cerámica */}
-      <div className="ceramic-plate">
-        <h1 className="plate-text upper-text">DISEÑOS PENSADOS PARA TI</h1>
-        <p className="plate-text lower-text">MANOS CREADORAS COLECCIÓN 2024</p>
+      <Header />
+     
+      <div className="joyeria">
+        <p className="upper-textJoyeria">¿ TE FALTA ALGO ?</p>
+        <p className="lower-textJoyeria">MANOS CREADORAS COLECCIÓN 2024</p>
       </div>
-      {/* Contenido del catálogo */}
-      <div className="catalog">
-        {/* Mapeo de productos */}
-        {productos.map((producto, index) => (
-          <div key={index} className="product" style={{ display: (mostrarTodos || index < 12) ? 'block' : 'none' }}>
-            <div className="favorite-icon">
-              <i className="far fa-heart"></i>
-            </div>
-            <img src={producto.imagen} alt={producto.nombre} />
-            <h3>{producto.nombre}</h3>
-            <p>Precio: €{producto.precio}</p>
+      <div className="breadcrumb">
+        <p><Link to="/home" className="link">Home</Link> / <Link to="/joyeria/" className="link">Joyería</Link> </p>
+      </div>
+      <div className="catalogJoyeria">
+        {listProduct.map((producto, index) => (
+          <div key={index} className="productJoyeria" style={{ display: (mostrarTodos || index < 12) ? 'block' : 'none' }}>
+           <button className='corazonJoyeria' onClick={() => añadirWishList(producto)}>
+              {wishlist[producto.id] ? (
+                <img src={headRojo} style={{ width: '35px', height: '35px' }} alt="heart icon" />
+              ) : (
+                <img src={head} style={{ width: '35px', height: '35px' }} alt="heart icon" />
+              )}
+            </button>
+            <div className='nombrePreciJoyeria' onClick={() => ShowDataProduct(producto.id)}> 
+            <img src={producto.attributes.ruta} alt={producto.attributes.nombre} style={{width:'100%', height:'250px'}} />
+            <label className='letraCardJoyeria'>{producto.attributes.nombre}</label>
+            <p className='precioCardJoyeria'>Precio: €{producto.attributes.precio}</p></div>
           </div>
         ))}
-      </div>
-      {/* Botones de ver todo y ver menos */}
+      </div> 
+      
       <div className="view-all-button">
-        <button onClick={alternarMostrarTodos} id="viewMoreButton" style={{ display: mostrarTodos ? 'none' : 'inline-block' }}>VER MÁS</button>
-        <button onClick={alternarMostrarTodos} id="viewLessButton" style={{ display: mostrarTodos ? 'inline-block' : 'none' }}>VER MENOS</button>
+        <button onClick={alternarMostrarTodos} id="viewMoreButton" style={{ display: mostrarTodos ? 'none' : 'inline-block' }} className='verMasJoyeria'><p>VER MÁS</p></button>
+        <button onClick={alternarMostrarTodos} id="viewLessButton" style={{ display: mostrarTodos ? 'inline-block' : 'none' }} className='verMasJoyeria'><p>VER MENOS</p></button>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
-export default CatalogoDeProductos;
+export default CatalogoDeJoyeria;

@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "productos",
+  "info": {
+    "singularName": "producto",
+    "pluralName": "productos",
+    "displayName": "producto",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "nombreArtesano": {
+      "type": "string"
+    },
+    "idArtesano": {
+      "type": "integer"
+    },
+    "subtitulo": {
+      "type": "string"
+    },
+    "detalles": {
+      "type": "text"
+    },
+    "tallas": {
+      "type": "text"
+    },
+    "ruta": {
+      "type": "string"
+    },
+    "stock": {
+      "type": "string"
+    },
+    "precio": {
+      "type": "decimal"
+    },
+    "tipo": {
+      "type": "integer"
+    }
+  }
+}

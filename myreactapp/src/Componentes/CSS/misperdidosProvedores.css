@@ -10,6 +10,20 @@
   display: flex;
   gap: 10px;
 }
+.perfilArtesanoProductoParte1{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px 20px 32px 96px;
+  gap: 60px;
+  height: 100%;
+}
+.botonesPedidosArtesano{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 /* Estilos para el contenedor de productos */
 .product-container {
   display: flex;
@@ -27,7 +41,18 @@
   max-width: 300px;
   transition: transform 0.3s ease; /* Transición suave al hacer hover */
 }
+.product-itemProducto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  transition: transform 0.3s ease; /* Transición suave al hacer hover */
+}
 
+.product-itemProducto:hover {
+  transform: translateY(-5px); 
+}
 .product-item:hover {
   transform: translateY(-5px); /* Levanta ligeramente el producto al hacer hover */
 }
@@ -58,13 +83,22 @@
 }
 
 .product-item-details label {
-  font-weight: bold;
+  color: #000;
+  text-align: center;
+  font-family: var(--font-family1);
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
 }
 
 /* Estilos para los botones de acción */
 .product-item-actions {
   display: flex;
   gap: 10px;
+  width: 100%;
+  justify-content: center;
 }
 
 /* Estilos para el botón de ayuda */
@@ -86,7 +120,7 @@
   width: 100%;
 }
 /* Media Query para pantallas más grandes */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   /* Ajustes para los contenedores en pantallas más grandes */
   .derechaPerdidosUser {
     align-items: flex-start;
@@ -101,6 +135,10 @@
     flex: 0 0 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
+  .perfilArtesanoProductoParte1{
+    flex-direction: column;
+  
+  }
 }
 .perfilUserParte1 {
     display: flex;
@@ -111,6 +149,8 @@
     gap: 60px;
     height: 100%;
 }
+
+
 .containerPerdidosUser {
   display: flex;
   flex-wrap: wrap;

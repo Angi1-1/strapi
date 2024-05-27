@@ -12,7 +12,7 @@ import AddNewArtesano from './Componentes/AddNewArtesano'
 import HogarCatalogo from './Componentes/hogar';
 import JoyeriaCatalogo from './Componentes/joyeria';
 import CosmeticosCatalogo from './Componentes/cosmetico';
-import Productos from './Componentes/productos';
+import ProductDetails from './Componentes/productDetails'; // Asegúrate de importar el componente correcto
 import Contacto from './Componentes/contacto';
 import Envio from './Componentes/envio';
 import Faqs from './Componentes/faqs';
@@ -22,44 +22,40 @@ import Nosotros from './Componentes/sobreNosotros';
 import Carrito from './Componentes/carrito';
 import Artesano from './Componentes/artesano';
 import Home from "./Componentes/home";
+import GustarProvedor from "./Componentes/gustarProvedor"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Importar BrowserRouter desde 'react-router-dom'
 
-
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
   return (
-      <>
-        <BrowserRouter>
-            <Routes>
-            <Route path='/' element={<MiCuenta/>}/>
-            <Route path="/registrarse" element={<Registrarse />}/>
-            <Route path="/perfilUser" element={<PerfilUser />}/>
-            <Route path='/perfilAdmin' element={<PerfilAdmin />}/>
-            <Route path='/perdidosUser' element={<PerdidosUser />}/>
-            <Route path='/miWishlist' element={<MiWishlist />}/>
-            <Route path='/misPerdidosProvedores' element={<MisPerdidosProvedores />}/>
-            <Route path='/perfilArtesanos' element={<PerfilArtesanos />}/>
-            <Route path='/perdidosProvedores' element={<PerdidosProvedores />}/>
-            <Route path='/addnewArtesano' element={<AddNewArtesano />}/>
-            <Route path="/cosmetico" element={<CosmeticosCatalogo />}/>
-            <Route path="/hogar" element={<HogarCatalogo />}/>
-            <Route path="/joyeria" element={<JoyeriaCatalogo />}/>
-            <Route path="/productos" element={<Productos />}/>
-            <Route path="/contacto" element={<Contacto />}/>
-            <Route path="/envio" element={<Envio />}/>
-            <Route path="/faqs" element={<Faqs />}/>
-            <Route path="/legal" element={<Legal />}/>
-            <Route path="/pago" element={<Pago />}/>
-            <Route path="/sobreNosotros" element={<Nosotros />}/>
-            <Route path="/carrito" element={<Carrito />}/>
-            <Route path="/artesano" element={<Artesano />}/>
-            <Route path="/home" element={<Home />}/>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<MiCuenta/>}/>
+        <Route path="/registrarse" element={<Registrarse />}/>
+        <Route path="/perfilUser" element={<PerfilUser />}/>
+        <Route path='/perfilAdmin' element={<PerfilAdmin />}/>
+        <Route path='/perdidosUser' element={<PerdidosUser />}/>
+        <Route path='/miWishlist' element={<MiWishlist />}/>
+        <Route path='/misPerdidosProvedores' element={<MisPerdidosProvedores />}/>
+        <Route path='/perfilArtesanos' element={<PerfilArtesanos />}/>
+        <Route path='/perdidosProvedores/' element={<PerdidosProvedores />}/>
+        <Route path='/addnewArtesano' element={<AddNewArtesano />}/>
+        <Route path="/cosmetico/" element={<CosmeticosCatalogo />}/>
+        <Route path="/hogar" element={<HogarCatalogo />}/>
+        <Route path="/joyeria/" element={<JoyeriaCatalogo />}/>
+        <Route path="/producto/:id" element={<ProductDetails />}/> {/* Ruta corregida */}
+        <Route path="/contacto" element={<Contacto />}/>
+        <Route path="/envio" element={<Envio />}/>
+        <Route path="/faqs" element={<Faqs />}/>
+        <Route path="/legal" element={<Legal />}/>
+        <Route path="/pago" element={<Pago />}/>
+        <Route path="/sobreNosotros" element={<Nosotros />}/>
+        <Route path="/carrito" element={<Carrito />}/>
+        <Route path="/artesano" element={<Artesano />}/>
+        <Route path="/home" element={<Home />}/>
+        <Route path="/artesanoInfo/:id" element={<GustarProvedor />}/>
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
-            </Routes>
-            
-        </BrowserRouter>
-        </>
-    )
-  };
-
-  
-  export default App;
+export default App;

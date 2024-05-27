@@ -1,8 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CSS/header.css'; // Importa tus estilos CSS
-import Logo from '../Icon/logo_sinfondo.png';
-import HamburgerIcon from '../Icon/hamburger.png'; // Importa el icono de hamburguesa
+import Logo from '../Icon/heart.png';
+import HamburgerIcon from '../Icon/enviar.svg'; // Importa el icono de hamburguesa
 
 const Header = ({ cartItemCount, setCartItemCount }) => {
     const [searchValue, setSearchValue] = useState('');
@@ -65,9 +65,9 @@ const Header = ({ cartItemCount, setCartItemCount }) => {
                 </button>
                 {showProductsMenu && (
                     <div className="dropdown-menu">
-                        <Link to='/joyeria' className="dropdown-item">Joyería</Link>
-                        <Link to='/hogar' className="dropdown-item">Hogar</Link>
-                        <Link to='/cosmetico' className="dropdown-item">Cosmética</Link>
+                        <Link to='/joyeria/' className="dropdown-item">Joyería</Link>
+                        <Link to='/hogar/' className="dropdown-item">Hogar</Link>
+                        <Link to='/cosmetico/' className="dropdown-item">Cosmética</Link>
                     </div>
                 )}
                 <button className="button">
