@@ -4,8 +4,8 @@ import './CSS/registrarse.css';
 import Header from './header';
 import Footer from './footer';
 import bcrypt from 'bcryptjs';
+
 const Registrarse = () => {
-    // Estados para manejar los valores de los inputs
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [nombreApellido, setNombreApellido] = useState('');
@@ -17,16 +17,18 @@ const Registrarse = () => {
     const [aceptoTerminos, setAceptoTerminos] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const navigate = useNavigate(); // Hook para redirigir
+    const navigate = useNavigate();
     const [emailValid, setEmailValid] = useState(true);
+    const [errors, setErrors] = useState({});
+
     const validateEmail = (email) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(String(email).toLowerCase());
     };
+
     const userIfExit = async (email) => {
-        console.log("correo user", email)
         try {
-            const response = await fetch(`http://localhost:1337/api/usuariomanos?filters[email][$eq]=${email}`, {
+            const response = await fetch(`http://localhost:1337/api/usuariomanos?filters[email]=${email}`, {
                 method: 'GET'
             });
             if (response.ok) {
@@ -40,7 +42,7 @@ const Registrarse = () => {
             console.error("Fetch error:", error);
             return false;
         }
-    }
+    };
 
     const registriApi = async (nombreApellido, email, telefono, fechaNacimiento, ubicacion, ciudad, codigoPostal, hashedPassword) => {
         const body = {
@@ -54,7 +56,6 @@ const Registrarse = () => {
                 acesso: 3
             }
         };
-        console.log("El body de registro", body)
         try {
             const response = await fetch(`http://localhost:1337/api/usuariomanos`, {
                 method: 'POST',
@@ -65,10 +66,9 @@ const Registrarse = () => {
             });
             if (response.ok) {
                 const usuario = await response.json();
-                console.log("Usuario registrado", usuario);
                 setSuccess('Usuario registrado con éxito');
                 setError('');
-                navigate('/')
+                navigate('/');
             } else {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Error al registrar usuario');
@@ -78,48 +78,54 @@ const Registrarse = () => {
             setError(error.message);
             setSuccess('');
         }
-    }
+    };
+
+    const validateFields = () => {
+        const newErrors = {};
+
+        if (!email || !password || !nombreApellido || !telefono || !fechaNacimiento || !ubicacion || !ciudad || !codigoPostal || !aceptoTerminos) {
+            newErrors.general = 'Por favor, complete todos los campos y acepte los términos.';
+        }
+        if (password.length < 6) {
+            newErrors.password = 'La contraseña debe tener al menos 6 caracteres.';
+        }
+        if (!validateEmail(email)) {
+            newErrors.email = 'Por favor, introduce un correo electrónico válido.';
+        }
+        if (!/^\d{9}$/.test(telefono)) {
+            newErrors.telefono = 'El teléfono debe tener exactamente 9 dígitos y solo contener números.';
+        }
+
+        const today = new Date();
+        const birthDate = new Date(fechaNacimiento);
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        if (age < 18) {
+            newErrors.fechaNacimiento = 'Debes tener al menos 18 años.';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSuccess('');
         setError('');
-        
-        // Validación del formulario
-        if (!email || !password || !nombreApellido || !telefono || !fechaNacimiento || !ubicacion || !ciudad || !codigoPostal || !aceptoTerminos) {
-            setError('Por favor, complete todos los campos y acepte los términos.');
-            return;
-        }
-        if (password.length < 6) {
-            setError('La contraseña debe tener al menos 6 caracteres.');
-            return;
-        }
-        if (!validateEmail(email)) {
-            setEmailValid(false);
-            setError('Por favor, introduce un correo electrónico válido.');
-            return;
-        } else {
-            setEmailValid(true);
-        }
-        const userExists = await userIfExit(email);
 
-        if (userExists) {
-            setError("Correo ya existe");
-        } else {
-            const hashedPassword = await bcrypt.hash(password, 10);
-            registriApi(nombreApellido, email, telefono, fechaNacimiento, ubicacion, ciudad, codigoPostal, hashedPassword);
+        if (validateFields()) {
+            const userExists = await userIfExit(email);
+            if (userExists) {
+                setError("Correo ya existe");
+            } else {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                registriApi(nombreApellido, email, telefono, fechaNacimiento, ubicacion, ciudad, codigoPostal, hashedPassword);
+            }
         }
-
-        console.log("Email:", email);
-        console.log("Contraseña:", password);
-        console.log("Nombre y Apellido:", nombreApellido);
-        console.log("Teléfono:", telefono);
-        console.log("Fecha de Nacimiento:", fechaNacimiento);
-        console.log("Ubicación:", ubicacion);
-        console.log("Ciudad:", ciudad);
-        console.log("Código Postal:", codigoPostal);
-        console.log("Acepto Términos:", aceptoTerminos);
-    }
+    };
 
     return (
         <>
@@ -131,7 +137,7 @@ const Registrarse = () => {
                 <p className="RegistrarseTitulo1">MI CUENTA</p>
                 <hr />
                 <form className="RegistrarseFormulario" onSubmit={handleSubmit}>
-                    <p className="RegistrarseTexto1">Al crear una cuenta, acepta los Términos y Condiciones Generales de Uso y da su consentimiento al tratamiento de sus datos, de conformidad con la Política de Confidencialidad de Manos Creadoras. </p>
+                    <p className="RegistrarseTexto1">Al crear una cuenta, acepta los Términos y Condiciones Generales de Uso y da su consentimiento al tratamiento de sus datos, de conformidad con la Política de Confidencialidad de Manos Creadoras.</p>
                     <div className="ContenidosRegistrarse">
                         <div className="derechaRegistrarse">
                             <label className="RegistrarseTexto1">Email</label>
@@ -142,6 +148,7 @@ const Registrarse = () => {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
+                            {errors.email && <p className="error">{errors.email}</p>}
                             <label className="RegistrarseTexto1">Contraseña</label>
                             <input
                                 type="password"
@@ -150,6 +157,7 @@ const Registrarse = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            {errors.password && <p className="error">{errors.password}</p>}
                             <p className="RegistrarseTexto2">DATOS PERSONALES</p>
                             <label className="RegistrarseTexto1">Nombre y Apellido</label>
                             <input
@@ -159,6 +167,7 @@ const Registrarse = () => {
                                 value={nombreApellido}
                                 onChange={(e) => setNombreApellido(e.target.value)}
                             />
+                            {errors.nombreApellido && <p className="error">{errors.nombreApellido}</p>}
                             <label className="RegistrarseTexto1">Telefono</label>
                             <input
                                 type="text"
@@ -167,6 +176,7 @@ const Registrarse = () => {
                                 value={telefono}
                                 onChange={(e) => setTelefono(e.target.value)}
                             />
+                            {errors.telefono && <p className="error">{errors.telefono}</p>}
                             <label className="RegistrarseTexto1">Fecha de Nacimiento</label>
                             <input
                                 type="date"
@@ -174,6 +184,7 @@ const Registrarse = () => {
                                 value={fechaNacimiento}
                                 onChange={(e) => setFechaNacimiento(e.target.value)}
                             />
+                            {errors.fechaNacimiento && <p className="error">{errors.fechaNacimiento}</p>}
                         </div>
                         <div className="derechaRegistrarse">
                             <p className="RegistrarseTexto2">DATOS DE FACTURACIÓN</p>
@@ -203,7 +214,6 @@ const Registrarse = () => {
                             />
                         </div>
                     </div>
-
                     <label className="checkboxRegistrarseTrajeta">
                         <input
                             type="checkbox"
@@ -211,7 +221,8 @@ const Registrarse = () => {
                             onChange={(e) => setAceptoTerminos(e.target.checked)}
                         />
                         Acepto los Condiciones Generales de Venta y doy mi consentimiento al tratamiento de mis datos, de conformidad con la Política de Confidencialidad de Manos Creadoras.
-                    </label>  
+                    </label>
+                    {errors.general && <div className='MiCuentaError'>{errors.general}</div>}
                     {error && <div className='MiCuentaError'>{error}</div>}
                     {success && <div className='MiCuentaError' style={{ color: 'green' }}>{success}</div>}
                     <button className="submitRegistrarseParte1" type="submit">Entrar</button>

@@ -844,6 +844,7 @@ export interface ApiPedidoPedido extends Schema.CollectionType {
     ProductosComprados: Attribute.Text;
     estado: Attribute.Boolean;
     formaPago: Attribute.Integer;
+    fecha_envi: Attribute.Date;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

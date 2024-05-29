@@ -4,9 +4,11 @@ import "./CSS/perfilUser.css";
 import Header from "./header";
 import Footer from "./footer";
 import bcrypt from 'bcryptjs';
+import openPassword from '../Icon/passwordOpen.svg'; // Asegúrate de ajustar la ruta de la imagen
+import closePassword from '../Icon/passwordClose.svg'; // Asegúrate de ajustar la ruta de la imagen
 
 const PerfilArtesanos = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isTrue, setIsTrue] = useState(true);
   const [EmpresaName, setEmpresaName] = useState(localStorage.getItem('username') || '');
   const [idempresa] = useState(localStorage.getItem('user_id') || '');
@@ -18,9 +20,13 @@ const PerfilArtesanos = () => {
   const [titulo, setTitulo] = useState(localStorage.getItem('username'));
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
+  const [repetirPassword, setRepetirPassword] = useState('');
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false);
 
   const artesanoData = async () => {
-    console.log("id de usuario",idempresa)
+    console.log("id de usuario", idempresa);
     try {
       const response = await fetch(`http://localhost:1337/api/usuariomanos/${idempresa}`, {
         method: 'GET'
@@ -77,7 +83,7 @@ const PerfilArtesanos = () => {
       newErrors.nombreApellido = "El nombre solo puede contener letras.";
     }
   
-    // Validar que el teléfono contenga exactamente 6 dígitos y no esté vacío
+    // Validar que el teléfono contenga exactamente 9 dígitos y no esté vacío
     if (!userData.telefono) {
       newErrors.telefono = "El teléfono no puede estar vacío.";
     } else if (!/^\d{9}$/.test(userData.telefono)) {
@@ -97,7 +103,6 @@ const PerfilArtesanos = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
 
   const handleSave = async () => {
     if (validateFields()) {
@@ -135,9 +140,12 @@ const PerfilArtesanos = () => {
   };
 
   const handleChangePassword = async () => {
-    setErrors({ oldPassword: '' });
-    setErrors({ newPassword: '' });
+    setErrors({});
     setSuccessMessage("");
+    if(passwords.newPassword !== repetirPassword) {
+      setErrors({newPassword: 'La contraseña no coincide con la nueva contraseña'});
+      return;
+    }
     const hashedPassword = await bcrypt.hash(passwords.newPassword, 10);
     try {
       // Verificar la contraseña antigua
@@ -161,6 +169,7 @@ const PerfilArtesanos = () => {
           if (response.ok) {
             setSuccessMessage("Contraseña actualizada con éxito.");
             setPasswords({ oldPassword: "", newPassword: "" });
+            setRepetirPassword("");
           } else {
             console.log("Error al actualizar la contraseña.");
           }
@@ -296,26 +305,51 @@ const PerfilArtesanos = () => {
               </p>
               <div className="nombrePerfilUser2">
                 <label className="perfilUserTexto4">Contraseña Antigua:</label>
-                <input
-                  className="perfilUserInput"
-                  type="password"
-                  name="oldPassword"
-                  value={passwords.oldPassword}
-                  onChange={handlePasswordChange}
-                />
-               
-              </div> {errors.oldPassword && <p className="error">{errors.oldPassword}</p>}
+                <div className="password-container">
+                  <input
+                    className="perfilUserInput"
+                    type={showOldPassword ? "text" : "password"}
+                    name="oldPassword"
+                    value={passwords.oldPassword}
+                    onChange={handlePasswordChange}
+                  ></input>
+                  <button type="button" onClick={() => setShowOldPassword(!showOldPassword)}>
+                    <img src={showOldPassword ? closePassword : openPassword} alt="toggle visibility" />
+                  </button>
+                </div>
+              </div>
+              {errors.oldPassword && <p className="error">{errors.oldPassword}</p>}
               <div className="nombrePerfilUser2">
                 <label className="perfilUserTexto4">Contraseña Nueva:</label>
-                <input
-                  className="perfilUserInput"
-                  type="password"
-                  name="newPassword"
-                  value={passwords.newPassword}
-                  onChange={handlePasswordChange}
-                />
-               
-              </div> {errors.newPassword && <p className="error">{errors.newPassword}</p>}
+                <div className="password-container">
+                  <input
+                    className="perfilUserInput"
+                    type={showNewPassword ? "text" : "password"}
+                    name="newPassword"
+                    value={passwords.newPassword}
+                    onChange={handlePasswordChange}
+                  />
+                  <button type="button" onClick={() => setShowNewPassword(!showNewPassword)}>
+                    <img src={showNewPassword ? closePassword : openPassword} alt="toggle visibility" />
+                  </button>
+                </div>
+              </div>
+              <div className="nombrePerfilUser2">
+                <label className="perfilUserTexto4">Repetir la contraseña:</label>
+                <div className="password-container">
+                  <input
+                    className="perfilUserInput"
+                    type={showRepeatPassword ? "text" : "password"}
+                    name="repetirPassword"
+                    value={repetirPassword}
+                    onChange={(e) => setRepetirPassword(e.target.value)}
+                  />
+                  <button type="button" onClick={() => setShowRepeatPassword(!showRepeatPassword)}>
+                    <img src={showRepeatPassword ? closePassword : openPassword} alt="toggle visibility" />
+                  </button>
+                </div>
+              </div>
+              {errors.newPassword && <p className="error">{errors.newPassword}</p>}
               {successMessage && <p className="success" style={{color:'green'}}>{successMessage}</p>}
               <button className="submitPerfilUsuario" onClick={handleChangePassword}>
                 Cambiar Contraseña
@@ -324,7 +358,7 @@ const PerfilArtesanos = () => {
           </div>
         )}
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };
