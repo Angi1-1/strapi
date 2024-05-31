@@ -21,6 +21,7 @@ function ProductDetails() {
   const [fullWishlist, setFullWishlist] = useState({});
   const [cartItemCount, setCartItemCount] = useState(0);
   const [listProductos, setListProductos] = useState([]);
+  
 
   useEffect(() => {
     fetchProduct();
@@ -89,10 +90,29 @@ function ProductDetails() {
     }
   };
 
+  console.log("producto", product);
+
   const addToCart = (product) => {
-    setCart([...cart, product]);
-    setCartItemCount((prevCount) => prevCount + 1);
+    const productId = parseInt(id);
+    const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const productInCartIndex = currentCart.findIndex((item) => item.id === productId);
+    if (productInCartIndex !== -1) {
+      const updatedCart = [...currentCart];
+      updatedCart[productInCartIndex].quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    } else {
+      const updatedCart = [...currentCart, { ...product, id: productId, quantity: 1 }];
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCart(updatedCart);
+    }
+    const itemCount = currentCart.reduce((acc, item) => acc + item.quantity, 0) + 1;
+    setCartItemCount(itemCount);
+
+
+    window.dispatchEvent(new Event('cartUpdated'));
   };
+
 
   const toggleDetails = () => {
     setDetailsVisible(!detailsVisible);
@@ -258,11 +278,13 @@ function ProductDetails() {
     navigate(`/artesanoInfo/${idArtesano}`);
   };
 
+  
+
   const isInWishlist = wishlist.length > 0;
 
   return (
     <div className="containerProductos">
-      <Header cartItemCount={cartItemCount} setCartItemCount={setCartItemCount} />
+      <Header cartItemCount={cartItemCount} cart={cart} />
       <div className="breadcrumb">
         <p>
           <Link to="/home" className="link">Home</Link> /
@@ -285,7 +307,7 @@ function ProductDetails() {
           <label className="tinosGrafiaJoyeria" style={{ fontSize: '32px' }}>{product.nombre}</label>
           <div className="tinosGrafiaJoyeria" style={{ fontSize: '22px', cursor: 'pointer' }} onClick={() => ShowDataArtesanoInf(product.idArtesano)}>{product.nombreArtesano}</div>
           <div className="tinosGrafiaJoyeria" style={{ fontSize: '18px' }}>{product.subtitulo}</div>
-          <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '32px' }}>{product.precio}</p>
+          <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '32px' }}>{product.precio}€</p>
           <div className="GideonRomanGrafiaJoyeria" style={{ fontSize: '16px' }}>incl. IVA, excl. gastos de envío</div>
           <div className="product-actions">
             <div className="CarritoAñadir">
@@ -367,3 +389,4 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
+
