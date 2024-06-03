@@ -238,107 +238,6 @@ function Pago() {
     setMostrarBloque(false);
   };
 
-  const handleMetodoPagoChange = (e) => {
-    setMetodoPago(e.target.value);
-  };
-
-    const handleDireccionChange = (e) => {
-      const direccionCompleta = e.target.value;
-      setDireccionEntrega(direccionCompleta);
-    };
-
-  const handleDireccionFacturacionChange = (e) => {
-    const direccionCompleta = e.target.value;
-    setDireccionFacturacion(direccionCompleta);
-  };
-
-  
-  const calcularTotal = () => {
-    let costoEntrega = 0;
-    if (metodoEntrega === "fedex") {
-      costoEntrega = 0;
-    } else if (metodoEntrega === "correos") {
-      costoEntrega = 5;
-    }
-    return totalCarritoP + costoEntrega;
-  };
-
-  const toggleMostrarEditar = () => {
-    setMostrarEditar(!mostrarEditar);
-  };
-
-  const handleContinuarClick = (e) => {
-    e.preventDefault();
-    setMostrarBloque(true);
-  };
-
-  const handleGuardarDireccion = (e) => {
-    e.preventDefault(); // Evitar recargar la página al hacer clic en el botón
-  toggleMostrarEditar();
-  
-    const nuevaDireccionCalle = document.getElementById("calle_entrega").value;
-    setDireccionEntrega(nuevaDireccionCalle);
-  };
-
-  const handleGuardarDireccionFacturacion = (e) => {
-    e.preventDefault();
-    toggleMostrarEditarDireccion();
-  
-    const nuevaDireccionFacturacion = document.getElementById("direccion_facturacion").value;
-  setDireccionFacturacion(nuevaDireccionFacturacion);
-};
-
-
-  const handleCheckboxChange = (e) => {
-    setAceptoCondiciones(e.target.checked);
-  };
-
-  const handlePagarClick = (e) => {
-    e.preventDefault();
-   
-    if (!metodoEntrega) {
-      setMensajeErrorMetodoEntrega("Debe seleccionar un método de entrega.");
-      return;
-    }
-    if (!metodoPago) {
-      setMensajeErrorMetodoPago("Debe seleccionar un método de pago.");
-      return;
-    }
-    if (!aceptoCondiciones) {
-      setMensajeError("Por favor, acepta las condiciones generales.");
-      return;
-    }
-
-   
-    
-   
-    const idUsuario = obtenerIdUsuario(); // función para obtener el ID de usuario
-    const productos = obtenerProductosCarrito(); // función para obtener los productos del carrito
-    const idArtesano = obtenerIdArtesano(productos); // pasamos la lista de productos a obtenerIdArtesano
-    const pedido = {
-      idUsuario: idUsuario,
-      idArtesano: idArtesano,
-      productos: productos,
-      domicilio: direccionEntrega,
-      direcciónFacturacion:direccionFacturacion,
-      precioTotal: calcularTotal(),
-    };
-    console.log("Pedido:", pedido);
-    setMensajePago("¡Pago completado!");
-  };
-
-  const obtenerIdUsuario = () => {
-    // devuelve el ID de usuario almacenado en localStorage
-    return localStorage.getItem("user_id");
-  };
-
-  const obtenerProductosCarrito = () => {
-    // obtiene los productos del carrito del almacenamiento local
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    return storedCart;
-  };
-
-
   return (
     <div>
       <Header />
@@ -363,232 +262,300 @@ function Pago() {
         </div>
         <div className="row">
           <div className="col-md-6 izquierdaPago">
-            <form action="">
+            <form onSubmit={handleGuardarDireccion}>
               <div className="group">
-                <h2>Opciones de entrega</h2>
-                <hr />
-                <div className="row">
-                  <div className="col">
-                    <p>
-                      <label htmlFor="calle_entrega">Calle de entrega</label>
-                    </p>
-                  </div>
-                  <div className="col-auto">
-                    <img
-                      src={lapiz}
-                      alt="Lápiz"
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        cursor: "pointer",
-                      }}
-                      onClick={toggleMostrarEditar}
-                    />
-                  </div>
-                </div>
-                <div
-                  id="editar_direccion"
-                  style={{ display: mostrarEditar ? "flex" : "none" }}
-                  className="direccionPago"
-                >
-                  <input
-                    type="text"
-                    className="direccionInput"
-                    id="calle_entrega"
-                    name="calle_entrega"
-                  />
-                  <button type="submit" className="btnPago">
-                    Guardar
-                  </button>
-                </div>
-                <hr />
-                <div className="row">
-                  <div className="col-auto">
-                    <img
-                      src={plus}
-                      alt="Más"
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        cursor: "pointer",
-                      }}
-                      onClick={toggleMostrarNueva}
-                    />
-                  </div>
-                  <div className="col">
-                    <p>
-                      <label htmlFor="otra_direccion">
-                        Añadir una dirección
-                      </label>
-                    </p>
-                  </div>
-                </div>
-                <div
-                  id="nueva_direccion"
-                  style={{ display: mostrarNueva ? "block" : "none" }}
-                >
-                  <form>
-                    <div className="groupPago">
-                      <input
-                        type="text"
-                        className="formPago"
-                        id="calle"
-                        name="calle"
-                        placeholder="Calle"
-                      />
+                <p className="textoletra1" style={{ fontSize: '32px' }} onClick={showOpcionesDeEntrega}>Opciones De Entrega</p>
+
+                {!mostrarBloque ? (
+                  <>
+                    <hr />
+                    <div className="rowDerecha">
+                      {!mostrarEditar ? (
+                        <>
+                          <div className="col">
+                            <img src={mapaIcon} alt="Mapa" />
+                            <div className="datosUsuarios">
+                              <p className="textoletra" style={{ fontSize: '18px' }}>{nombreApellido}</p>
+                              <p className="textoletra" style={{ fontSize: '18px' }}>{direccionEntrega}</p>
+                              <p className="textoletra" style={{ fontSize: '18px' }}>{telefono}</p>
+                            </div>
+                          </div>
+                          <div className="col-auto">
+                            <img
+                              src={lapiz}
+                              alt="Lápiz"
+                              style={{
+                                width: "20px",
+                                height: "20px",
+                                cursor: "pointer",
+                              }}
+                              onClick={toggleMostrarEditar}
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="col">
+                            <img src={mapaIcon} alt="Mapa" />
+                            <div className="datosUsuarios">
+                              <input className="textoletra" style={{ fontSize: '18px' }} value={nombreApellido} onChange={handleNombreChange} />
+                              <input className="textoletra" style={{ fontSize: '18px' }} value={direccionEntrega} onChange={handleDireccionChange} />
+                              <input className="textoletra" style={{ fontSize: '18px' }} value={telefono} onChange={handleTelefonoChange} />
+                            </div>
+                          </div>
+                          <div className="col-auto">
+                            <button
+                              type="submit"
+                              className="btnPago textoletra1" style={{ fontSize: '18px' }}
+                            >
+                              Guardar
+                            </button>
+                            {mensajeErrorDireccion && (
+                              <p className="error">{mensajeErrorDireccion}</p>
+                            )}
+                          </div>
+                        </>
+                      )}
                     </div>
-                    <div className="groupPago">
-                      <input
-                        type="text"
-                        className="formPago"
-                        id="piso"
-                        name="piso"
-                        placeholder="Piso"
-                      />
+                    <hr />
+                    <div className="group1">
+                      <p>
+                        <label htmlFor="metodo_entrega" className="textoletra1" style={{ fontSize: '22px' }}>Método de entrega</label>
+                      </p>
+                      <div className="custom-control textoletra" style={{ fontSize: '18px' }}>
+                        <div className="custom-radio">
+                          <input
+                            type="radio"
+                            id="fedex"
+                            name="entrega"
+                            value="fedex"
+                            className="custom-control-input"
+                            checked={metodoEntrega === "fedex"}
+                            onChange={handleMetodoEntregaChange}
+                          />
+                          <label className="custom-control-label" htmlFor="fedex">
+                            <span style={{ display: "inline-block", width: "100%" }}>
+                              FedEx - Standard
+                              <span
+                                style={{
+                                  display: "inline-block",
+                                  textAlign: "right",
+                                  width: "10%",
+                                }}
+                              >
+                              </span>
+                              <br />
+                              Entre 1 a 3 días hábiles
+                            </span>
+                          </label>
+                        </div>
+                        <strong>0,00€</strong>
+                      </div>
+                      <div className="custom-control textoletra" style={{ fontSize: '18px' }}>
+                        <div className="custom-radio">
+                          <input
+                            type="radio"
+                            id="correos"
+                            name="entrega"
+                            value="correos"
+                            className="custom-control-input"
+                            checked={metodoEntrega === "correos"}
+                            onChange={handleMetodoEntregaChange}
+                          />
+                          <label className="custom-control-label" htmlFor="correos">
+                            <span style={{ display: "inline-block", width: "100%" }}>
+                              Correo - España
+                              <span
+                                style={{
+                                  display: "inline-block",
+                                  textAlign: "right",
+                                  width: "10%",
+                                }}
+                              >
+                              </span>
+                              <br />
+                              Entre 7 a 14 días hábiles
+                            </span>
+                          </label>
+                        </div>
+                        <strong>5,00€</strong>
+                      </div>
                     </div>
-                    <div className="groupPago">
-                      <input
-                        type="text"
-                        className="formPago"
-                        id="portal"
-                        name="portal"
-                        placeholder="Portal"
-                      />
+                    {mensajeErrorMetodoEntrega && (
+                      <p className="error">{mensajeErrorMetodoEntrega}</p>
+                    )}
+                    <hr />
+                    <div className="group1">
+                      <p>
+                        <label htmlFor="requisitos" className="textoletra1" style={{ fontSize: '18px' }}>
+                          ¿Tiene este pedido algún requisito especial?
+                        </label>
+                      </p>
+                      <textarea
+                        className="form-control textoletra1"
+                        id="requisitos"
+                        name="requisitos"
+                        rows="2"
+                        placeholder="Escribe los requisitos"
+                        style={{ color: "white", opacity: 1 }}
+                      ></textarea>
                     </div>
-                    <div className="groupPago">
-                      <input
-                        type="text"
-                        className="formPago"
-                        id="provincia"
-                        name="provincia"
-                        placeholder="Provincia"
-                      />
-                    </div>
-                    <div className="groupPago">
-                      <input
-                        type="text"
-                        className="formPago"
-                        id="comunidad_autonoma"
-                        name="comunidad_autonoma"
-                        placeholder="Comunidad Autónoma"
-                      />
-                    </div>
-                    <div className="groupPago">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="codigo_postal"
-                        name="codigo_postal"
-                        placeholder="Código Postal"
-                      />
-                    </div>
-                    <button type="submit" className="btnPago">
-                      Guardar
+                    <button
+                      className="btn textoletra" style={{ fontSize: '22px' }}
+                      onClick={handleContinuarClick}
+                    >
+                      CONTINUAR
                     </button>
-                  </form>
-                </div>
-                <hr />
-                <div className="group1">
-                  <p>
-                    <label htmlFor="metodo_entrega">Método de entrega</label>
-                  </p>
-                  <div className="custom-control custom-radio">
-                    <input
-                      type="radio"
-                      id="fedex"
-                      name="entrega"
-                      value="fedex"
-                      className="custom-control-input"
-                      checked={metodoEntrega === "fedex"}
-                      onChange={handleMetodoEntregaChange}
-                    />
-                    <label className="custom-control-label" htmlFor="fedex">
-                      <span style={{ display: "inline-block", width: "100%" }}>
-                        FedEx - Standard{" "}
-                        <span
-                          style={{
-                            display: "inline-block",
-                            textAlign: "right",
-                            width: "10%",
-                          }}
-                        >
-                          <strong>0,00€</strong>
-                        </span>
-                        <br />
-                        Entre 1 a 3 días hábiles
-                      </span>
-                    </label>
-                  </div>
-                  <div className="custom-control custom-radio">
-                    <input
-                      type="radio"
-                      id="correos"
-                      name="entrega"
-                      value="correos"
-                      className="custom-control-input"
-                      checked={metodoEntrega === "correos"}
-                      onChange={handleMetodoEntregaChange}
-                    />
-                    <label className="custom-control-label" htmlFor="correos">
-                      <span style={{ display: "inline-block", width: "100%" }}>
-                        Correos - España{" "}
-                        <span
-                          style={{
-                            display: "inline-block",
-                            textAlign: "right",
-                            width: "10%",
-                          }}
-                        >
-                          <strong>0,00€</strong>
-                        </span>
-                        <br />
-                        Entre 7 a 14 días hábiles
-                      </span>
-                    </label>
-                  </div>
-                </div>
-                <hr />
-                <div className="group1">
-                  <p>
-                    <label htmlFor="requisitos">
-                    ¿Tiene este pedido algún requisito especial?
-                    </label>
-                  </p>
-                  <textarea
-                    className="form-control"
-                    id="requisitos"
-                    name="requisitos"
-                    rows="2"
-                    placeholder="Escribe los requisitos"
-                    style={{ color: "white", opacity: 1 }}
-                  ></textarea>
-                </div>
-                <button className="btn btn-primary">Continuar</button>
+                  </>
+                ) : null}
               </div>
             </form>
           </div>
           <div className="col-md-6">
             <div className="resumen">
-              <h2>Resumen</h2>
-              <p>Subtotal</p>
-              <p>122,00€</p>
+              <p className="textoletra" style={{ fontSize: '32px' }}>Resumen</p>
+              <div className="carritoPago"><p className="textoletra" style={{ fontSize: '22px' }}>Subtotal</p>
+                <p className="textoletra" style={{ fontSize: '22px' }}>{totalCarritoP.toFixed(2)}€</p>
+              </div>
               <hr />
-              <p>Envío</p>
-              <p>
-                {metodoEntrega === "fedex" ? "FedEx - Standard" : "Correos - España"}
-              </p>
-              <p>
-                {metodoEntrega === "fedex"
-                  ? "Entre 1 a 3 días hábiles"
-                  : "Entre 7 a 14 días hábiles"}
-              </p>
-              <p>0,00€</p>
+              <div className="carritoPago">
+                <p className="textoletra" style={{ fontSize: '22px' }}>Envío</p>
+                <p className="textoletra" style={{ fontSize: '22px' }}>{metodoEntrega === "fedex" ? "0€" : "5.00€"}</p>
+              </div>
               <hr />
-              <p>Total</p>
-              <p>122.00€</p>
+              <div className="carritoPago">
+                <p className="textoletra" style={{ fontSize: '32px' }}>Total</p>
+                <p className="textoletra" style={{ fontSize: '32px' }}>{calcularTotal().toFixed(2)}€</p></div>
             </div>
           </div>
         </div>
+        {mostrarBloque && (
+          <div className="row">
+            <form className="col-md-6 izquierdaPago">
+              <div className="group">
+                <p className="textoletra1" style={{ fontSize: '32px' }}>Pago</p>
+                <hr />
+                <div className="rowDerecha">
+                  {!mostrarEditar1 ? (
+                    <>
+                      <div className="col">
+                        <p htmlFor="direccion_facturacion" style={{ fontSize: '22px' }}>Dirección de facturación</p>
+                        <p className="textoletra" style={{ fontSize: '18px' }}>{direccionFacturacion}</p>
+                      </div>
+                      <div className="col-auto">
+                        <img
+                          src={lapiz}
+                          alt="Lápiz"
+                          style={{
+                            width: "20px",
+                            height: "20px",
+                            cursor: "pointer",
+                          }}
+                          onClick={toggleMostrarEditar1}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="colFactura">
+                      
+                      <p htmlFor="direccion_facturacion" style={{ fontSize: '22px' }}>Dirección de facturación</p>
+                        <input
+                          type="text"
+                          className="direccionInput textoletra1"
+                          style={{height:'30px', fontSize: '18px'}}
+                          id="direccion_facturacion"
+                          name="direccion_facturacion"
+                          value={direccionFacturacionTemporal}
+                          onChange={handleDireccionFacturacionChange}
+                        />
+                        <button
+                          type="submit"
+                          className="btnPago textoletra1"  style={{ fontSize: '18px' }}
+                          onClick={handleGuardarDireccionFacturacion}
+                        >
+                          Guardar
+                        </button>
+                        {mensajeErrorDireccion && (
+                          <p className="error">{mensajeErrorDireccion}</p>
+                        )}
+                      </div>
+                    </>
+                  )}
+                </div>
+                <hr />
+                <div className="group1">
+                  <p>
+                    <label htmlFor="metodo_pago" className="textoletra1" style={{ fontSize: '22px' }}>Método de Pago</label>
+                  </p>
+                  <div className="custom-radio textoletra" style={{ fontSize: '18px' }}>
+                    <input
+                      type="radio"
+                      id="credito"
+                      name="pago"
+                      value="credito"
+                      className="custom-control-input"
+                      checked={metodoPago === "credito"}
+                      onChange={handleMetodoPagoChange}
+                    />
+                    <label className="custom-control-label textoletra" htmlFor="credito">
+                      <span style={{ display: "inline-block", width: "100%" }}>
+                        Tarjeta de Crédito
+                      </span>
+                    </label>
+                  </div>
+                  <div className="custom-radio textoletra" style={{ fontSize: '18px' }}>
+                    <input
+                      type="radio"
+                      id="paypal"
+                      name="pago"
+                      value="paypal"
+                      className="custom-control-input"
+                      checked={metodoPago === "paypal"}
+                      onChange={handleMetodoPagoChange}
+                    />
+                    <label className="custom-control-label" htmlFor="paypal">
+                      <span style={{ display: "inline-block", width: "100%" }}>
+                        PayPal
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                {mensajeErrorMetodoPago && (
+                  <p className="error">{mensajeErrorMetodoPago}</p>
+                )}
+                <hr />
+                <div className="group1">
+                  <p>
+                    <label htmlFor="acepto_condiciones" className="textoletra" style={{fontSize:'18px'}}>
+                      Acepte las condiciones generales
+                    </label>
+                  </p>
+                  <div className="columanAcepto textoletra"> <input
+                    type="checkbox"
+                    id="acepto_condiciones"
+                    checked={aceptoCondiciones}
+                    onChange={handleCheckboxChange}
+                  />
+                  <p>
+                    Acepto las Condiciones Generales de Venta y doy mi
+                    consentimiento al tratamiento de mis datos, de conformidad
+                    con la Política de Confidencialidad de Manos Creadoras.
+                  </p></div>
+                  {mensajeError && <p className="error">{mensajeError}</p>}
+                </div>
+                <button className="btn textoletra1" style={{ fontSize: '22px' }}onClick={handlePagarClick}>
+                  PAGAR
+                </button>
+                {mensajePago && (
+                  <div className="mensaje-pago">
+                    <p>{mensajePago}</p>
+                  </div>
+                )}
+              </div>
+            </form>
+          </div>
+        )}
       </main>
       <Footer />
     </div>
