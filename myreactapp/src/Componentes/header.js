@@ -4,7 +4,8 @@ import './CSS/header.css'; // Importa tus estilos CSS
 import Logo from '../Icon/logo_sinfondo.png';
 import HamburgerIcon from '../Icon/hamburger.png'; // Importa el icono de hamburguesa
 
-const Header = ({ cartItemCount, setCartItemCount }) => {
+const Header = ({cart, CartItemCount}) => {
+    const [cartItemCount, setCartItemCount] = useState(0);
     const [searchValue, setSearchValue] = useState('');
     const [showMobileMenu, setShowMobileMenu] = useState(false); // Estado para controlar la visibilidad del menú en dispositivos móviles
     const [showProductsMenu, setShowProductsMenu] = useState(false); // Estado para controlar la visibilidad del menú desplegable de productos
@@ -43,6 +44,27 @@ const Header = ({ cartItemCount, setCartItemCount }) => {
         }
 
     }, []);
+
+    useEffect(() => {
+        const updateCartItemCount = () => {
+            const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemCount = currentCart.reduce((acc, item) => acc + item.quantity, 0);
+            setCartItemCount(itemCount);
+        };
+    
+        // Llama a la función para actualizar el contador cada vez que haya un cambio en el carrito
+        updateCartItemCount();
+    
+        // Agrega un event listener para escuchar el evento 'cartUpdated' y actualizar el contador
+        window.addEventListener('cartUpdated', updateCartItemCount);
+    
+        // Limpia el event listener al desmontar el componente
+        return () => {
+            window.removeEventListener('cartUpdated', updateCartItemCount);
+        };
+    }, []); // Deja la matriz de dependencias vacía para que el useEffect se ejecute solo una vez al montar el componente
+    
+
 
     return (
         <header className="header">

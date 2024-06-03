@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useEffect, useState } from 'react';
 import MiCuenta from './Componentes/miCuenta';
 import Registrarse from './Componentes/registrarse';
 import PerfilUser from './Componentes/perfilUser';
@@ -26,6 +27,24 @@ import GustarProvedor from "./Componentes/gustarProvedor"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Importar BrowserRouter desde 'react-router-dom'
 
 function App() {
+
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
+  }, []);
+
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+
+  useEffect(() => {
+    console.log('cart ', cart);
+  }, [cart]);
+
+  
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -42,14 +61,14 @@ function App() {
         <Route path="/cosmetico/" element={<CosmeticosCatalogo />}/>
         <Route path="/hogar" element={<HogarCatalogo />}/>
         <Route path="/joyeria/" element={<JoyeriaCatalogo />}/>
-        <Route path="/producto/:id" element={<ProductDetails />}/> {/* Ruta corregida */}
+        <Route path="/producto/:id" element={<ProductDetails addToCart={addToCart}  />}/> 
         <Route path="/contacto" element={<Contacto />}/>
         <Route path="/envio" element={<Envio />}/>
         <Route path="/faqs" element={<Faqs />}/>
         <Route path="/legal" element={<Legal />}/>
-        <Route path="/pago" element={<Pago />}/>
+        <Route path="/pago" element={<Pago  />}/>
         <Route path="/sobreNosotros" element={<Nosotros />}/>
-        <Route path="/carrito" element={<Carrito />}/>
+        <Route path="/carrito" element={<Carrito cart={cart} setCart={setCart} />}/>
         <Route path="/artesano" element={<Artesano />}/>
         <Route path="/home" element={<Home />}/>
         <Route path="/artesanoInfo/:id" element={<GustarProvedor />}/>

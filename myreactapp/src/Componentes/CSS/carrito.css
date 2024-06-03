@@ -129,6 +129,11 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.pago-btn a{
+  text-decoration: none;
+  color: black;
+}
+
 .pago-btn:hover {
   background-color: #005f6b; /* Color de fondo al pasar el ratón */
 }
@@ -140,6 +145,10 @@ body {
   margin: 20px 0;
 }
 
+.cantidadCarrito{
+  width: 50px;
+}
+
 /* Animaciones */
 [data-aos] {
   opacity: 1;
@@ -149,3 +158,6 @@ body {
 [data-aos].aos-animate {
   opacity: 0;
 }
+
+
+
