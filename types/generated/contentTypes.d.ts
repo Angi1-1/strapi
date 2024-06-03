@@ -788,6 +788,36 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiImagenImagen extends Schema.CollectionType {
+  collectionName: 'imagens';
+  info: {
+    singularName: 'imagen';
+    pluralName: 'imagens';
+    displayName: 'imagen';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    url: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::imagen.imagen',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::imagen.imagen',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMiwishlistMiwishlist extends Schema.CollectionType {
   collectionName: 'miwishlists';
   info: {
@@ -961,6 +991,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::imagen.imagen': ApiImagenImagen;
       'api::miwishlist.miwishlist': ApiMiwishlistMiwishlist;
       'api::pedido.pedido': ApiPedidoPedido;
       'api::producto.producto': ApiProductoProducto;

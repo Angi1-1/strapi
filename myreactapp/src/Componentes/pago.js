@@ -1,35 +1,75 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./header";
 import Footer from "./footer";
-import plus from "./img/plus.svg";
-import lapiz from "./img/pencil.svg";
+import mapaIcon from "./img/mapaIcon.svg";
+import lapiz from "./img/pencilPago.svg";
 import "../Componentes/CSS/pago.css";
 
-function App() {
+function Pago() {
   const [mostrarEditar, setMostrarEditar] = useState(false);
   const [metodoEntrega, setMetodoEntrega] = useState("");
   const [metodoPago, setMetodoPago] = useState("");
   const [mostrarBloque, setMostrarBloque] = useState(false);
   const [direccionEntrega, setDireccionEntrega] = useState("");
-  
   const [direccionFacturacion, setDireccionFacturacion] = useState("");
-  
-  const [mostrarEditarDireccion, setMostrarEditarDireccion] = useState(false);
-  const [totalCarrito, setTotalCarrito] = useState(0);
+  const [mostrarEditar1, setMostrarEditar1] = useState(false); // New state for billing address edit
+  const navigate = useNavigate()
   const [mensajePago, setMensajePago] = useState("");
   const [idArtesano, setIdArtesano] = useState("");
   const [mensajeErrorDireccion, setMensajeErrorDireccion] = useState("");
-  const [mensajeErrorMetodoEntrega, setMensajeErrorMetodoEntrega] =
-    useState("");
+  const [mensajeErrorMetodoEntrega, setMensajeErrorMetodoEntrega] = useState("");
   const [mensajeErrorMetodoPago, setMensajeErrorMetodoPago] = useState("");
   const [aceptoCondiciones, setAceptoCondiciones] = useState(false);
-  const [mensajeError, setMensajeError] = useState(""); // Nuevo estado
+  const [mensajeError, setMensajeError] = useState("");
   const [cart, setCart] = useState([]);
+  const [direccionEntregaTemporal, setDireccionEntregaTemporal] = useState("");
+  const [direccionFacturacionTemporal, setDireccionFacturacionTemporal] = useState("");
+
+  const idUsuario = localStorage.getItem('user_id');
+  const [userData, setUserData] = useState({});
+  const [nombreApellido, setNombreApellido] = useState(localStorage.getItem('username') || '');
+  const [telefono, setTelefono] = useState('');
+
+  // Función para consultar datos del usuario
+  const userDataConsult = async () => {
+    console.log("Username:", localStorage.getItem('username'));
+    console.log("ID de usuario:", idUsuario);
+
+    try {
+      const response = await fetch(`http://localhost:1337/api/usuariomanos/${idUsuario}`, {
+        method: 'GET'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos de usuario:", data.data.attributes);
+        setUserData(data.data.attributes);
+        setDireccionEntrega(data.data.attributes.domicilio);
+        setNombreApellido(data.data.attributes.nombreApellido);
+        setTelefono(data.data.attributes.telefono);
+      } else {
+        console.log("Error al obtener los datos del usuario");
+      }
+    } catch (error) {
+      console.error('Error en la petición:', error);
+    }
+  }
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const idArtesano = obtenerIdArtesano(storedCart);
+    setIdArtesano(idArtesano);
+    setDireccionEntregaTemporal(direccionEntrega); // Inicializa el estado temporal
+    setDireccionFacturacionTemporal(direccionFacturacion); // Inicializa el estado temporal
+    userDataConsult();
+    console.log("Datos de usuario", userData);
+  }, []);
 
 
-  const toggleMostrarEditarDireccion = () => {
-    setMostrarEditarDireccion(!mostrarEditarDireccion);
+
+  const toggleMostrarEditar1 = () => { // New function to toggle billing address edit
+    setMostrarEditar1(!mostrarEditar1);
   };
 
   useEffect(() => {
@@ -42,8 +82,6 @@ function App() {
     0
   );
 
-
-  // Recuperar el contenido del carrito del almacenamiento local al cargar el componente
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const idArtesano = obtenerIdArtesano(storedCart);
@@ -51,13 +89,10 @@ function App() {
   }, []);
 
   const obtenerIdArtesano = (productos) => {
-    const idsArtesanos = new Set(); // Usamos un conjunto para evitar IDs duplicados
+    const idsArtesanos = new Set();
 
-    // Iteramos sobre cada producto en el carrito
     productos.forEach((producto) => {
-      // Verificamos si el producto tiene un campo 'idArtesano'
       if (producto.hasOwnProperty("idArtesano")) {
-        // Agregamos el ID del artesano al conjunto
         idsArtesanos.add(producto.idArtesano);
       }
     });
@@ -66,6 +101,141 @@ function App() {
 
   const handleMetodoEntregaChange = (e) => {
     setMetodoEntrega(e.target.value);
+    setMensajeErrorMetodoEntrega(""); // Clear error message when a method is selected
+  };
+
+  const handleMetodoPagoChange = (e) => {
+    setMetodoPago(e.target.value);
+  };
+
+  const handleDireccionChange = (e) => {
+    setDireccionEntrega(e.target.value);
+  };
+
+  const handleDireccionFacturacionChange = (e) => {
+    setDireccionFacturacionTemporal(e.target.value);
+  };
+
+  const handleNombreChange = (e) => {
+    setNombreApellido(e.target.value);
+  };
+
+  const handleTelefonoChange = (e) => {
+    setTelefono(e.target.value);
+  };
+
+  const calcularTotal = () => {
+    let costoEntrega = 0;
+    if (metodoEntrega === "fedex") {
+      costoEntrega = 0;
+    } else if (metodoEntrega === "correos") {
+      costoEntrega = 5;
+    }
+    return totalCarritoP + costoEntrega;
+  };
+
+  const toggleMostrarEditar = () => {
+    setMostrarEditar(!mostrarEditar);
+  };
+
+  const handleContinuarClick = (e) => {
+    e.preventDefault();
+
+    if (!metodoEntrega) {
+      setMensajeErrorMetodoEntrega("Debe seleccionar un método de entrega.");
+      return;
+    }
+
+    setMostrarBloque(true);
+  };
+
+  const handleGuardarDireccion = async (e) => {
+    setMensajeErrorMetodoEntrega('')
+    setMensajeErrorDireccion('')
+    e.preventDefault();
+
+    toggleMostrarEditar();
+  };
+
+  const handleGuardarDireccionFacturacion = (e) => {
+    e.preventDefault();
+    setDireccionFacturacion(direccionFacturacionTemporal);
+    toggleMostrarEditar1();
+  };
+
+  const handleCheckboxChange = (e) => {
+    setAceptoCondiciones(e.target.checked);
+  };
+
+  const handlePagarClick = async(e) => {
+    e.preventDefault();
+    setMensajeErrorMetodoEntrega('');
+    setMensajeErrorMetodoPago('');
+    setMensajeError('');
+  
+    if (!metodoEntrega) {
+      setMensajeErrorMetodoEntrega("Debe seleccionar un método de entrega.");
+      return;
+    }
+    if (!metodoPago) {
+      setMensajeErrorMetodoPago("Debe seleccionar un método de pago.");
+      return;
+    }
+    if (!aceptoCondiciones) {
+      setMensajeError("Por favor, acepta las condiciones generales.");
+      return;
+    }
+  
+    const productos = obtenerProductosCarrito();
+    const fecha = new Date().toISOString().slice(0, 10).replace(/-/g, '-');
+    const precioTotal = calcularTotal();
+    const formaPago = metodoPago === "credito" ? 1 : 2;
+    const idUsuarioNumber = parseInt(idUsuario, 10);
+
+    for (const producto of productos) {
+      const idArtesano = producto.idArtesano || null;
+      const productosNombres = producto.nombre;
+
+      try {
+        const response = await fetch(`http://localhost:1337/api/pedidos`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: {
+              fechaPedidos: fecha,
+              idUsuario: idUsuarioNumber,
+              idArtesano: idArtesano,
+              domicilio: direccionEntrega,
+              gasto: precioTotal,
+              ProductosComprados: productosNombres,
+              formaPago: formaPago
+            },
+          }),
+        });
+  
+        if (response.ok) {
+          const responseData = await response.json();
+          console.log("Compra:", responseData);
+        } else {
+          console.log("Error al actualizar los datos del usuario");
+        }
+      } catch (error) {
+        console.error('Error en la petición:', error);
+      }
+    }
+    localStorage.removeItem("cart");
+    navigate("/perdidosUser")
+  };
+  
+  const obtenerProductosCarrito = () => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    return storedCart;
+  };
+
+  const showOpcionesDeEntrega = () => {
+    setMostrarBloque(false);
   };
 
   const handleMetodoPagoChange = (e) => {
@@ -185,15 +355,15 @@ function App() {
       </div>
       <main className="containerPago">
         <div className="row">
-          <h1 className="col-md-6">Dirección de entrega</h1>
+          <p className="col-md-6 textoletra" style={{ fontSize: '64px' }}>Dirección De Envio</p>
         </div>
         <div className="form-group">
-          <h2>Mi cuenta</h2>
-          <p>Correo Electrónico</p>
+          <p className="textoletra" style={{ fontSize: '32px' }}>Mi cuenta</p>
+          <p className="textoletra" style={{ fontSize: '22px' }}>{userData.email}</p>
         </div>
         <div className="row">
           <div className="col-md-6 izquierdaPago">
-            <form>
+            <form action="">
               <div className="group">
                 <h2>Opciones de entrega</h2>
                 <hr />
@@ -201,10 +371,6 @@ function App() {
                   <div className="col">
                     <p>
                       <label htmlFor="calle_entrega">Calle de entrega</label>
-                    </p>
-                    <p>
-                      Dirección de entrega:{direccionEntrega}
-                      
                     </p>
                   </div>
                   <div className="col-auto">
@@ -230,19 +396,96 @@ function App() {
                     className="direccionInput"
                     id="calle_entrega"
                     name="calle_entrega"
-                    value={direccionEntrega} 
-                    onChange={handleDireccionChange}
                   />
-                  <button
-                    type="submit"
-                    className="btnPago"
-                    onClick={handleGuardarDireccion}
-                  >
+                  <button type="submit" className="btnPago">
                     Guardar
                   </button>
-                  {mensajeErrorDireccion && (
-                    <p className="error">{mensajeErrorDireccion}</p>
-                  )}
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-auto">
+                    <img
+                      src={plus}
+                      alt="Más"
+                      style={{
+                        width: "20px",
+                        height: "20px",
+                        cursor: "pointer",
+                      }}
+                      onClick={toggleMostrarNueva}
+                    />
+                  </div>
+                  <div className="col">
+                    <p>
+                      <label htmlFor="otra_direccion">
+                        Añadir una dirección
+                      </label>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="nueva_direccion"
+                  style={{ display: mostrarNueva ? "block" : "none" }}
+                >
+                  <form>
+                    <div className="groupPago">
+                      <input
+                        type="text"
+                        className="formPago"
+                        id="calle"
+                        name="calle"
+                        placeholder="Calle"
+                      />
+                    </div>
+                    <div className="groupPago">
+                      <input
+                        type="text"
+                        className="formPago"
+                        id="piso"
+                        name="piso"
+                        placeholder="Piso"
+                      />
+                    </div>
+                    <div className="groupPago">
+                      <input
+                        type="text"
+                        className="formPago"
+                        id="portal"
+                        name="portal"
+                        placeholder="Portal"
+                      />
+                    </div>
+                    <div className="groupPago">
+                      <input
+                        type="text"
+                        className="formPago"
+                        id="provincia"
+                        name="provincia"
+                        placeholder="Provincia"
+                      />
+                    </div>
+                    <div className="groupPago">
+                      <input
+                        type="text"
+                        className="formPago"
+                        id="comunidad_autonoma"
+                        name="comunidad_autonoma"
+                        placeholder="Comunidad Autónoma"
+                      />
+                    </div>
+                    <div className="groupPago">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="codigo_postal"
+                        name="codigo_postal"
+                        placeholder="Código Postal"
+                      />
+                    </div>
+                    <button type="submit" className="btnPago">
+                      Guardar
+                    </button>
+                  </form>
                 </div>
                 <hr />
                 <div className="group1">
@@ -296,7 +539,7 @@ function App() {
                             width: "10%",
                           }}
                         >
-                          <strong>5,00€</strong>
+                          <strong>0,00€</strong>
                         </span>
                         <br />
                         Entre 7 a 14 días hábiles
@@ -304,14 +547,11 @@ function App() {
                     </label>
                   </div>
                 </div>
-                {mensajeErrorMetodoEntrega && (
-                  <p className="error">{mensajeErrorMetodoEntrega}</p>
-                )}
                 <hr />
                 <div className="group1">
                   <p>
                     <label htmlFor="requisitos">
-                      ¿Tiene este pedido algún requisito especial?
+                    ¿Tiene este pedido algún requisito especial?
                     </label>
                   </p>
                   <textarea
@@ -323,12 +563,7 @@ function App() {
                     style={{ color: "white", opacity: 1 }}
                   ></textarea>
                 </div>
-                <button
-                  className="btn btn-primary"
-                  onClick={handleContinuarClick}
-                >
-                  Continuar
-                </button>
+                <button className="btn btn-primary">Continuar</button>
               </div>
             </form>
           </div>
@@ -336,158 +571,28 @@ function App() {
             <div className="resumen">
               <h2>Resumen</h2>
               <p>Subtotal</p>
-              <p>{totalCarritoP.toFixed(2)}€</p>
+              <p>122,00€</p>
               <hr />
               <p>Envío</p>
               <p>
-                {metodoEntrega === "fedex"
-                  ? "FedEx - Standard"
-                  : "Correos - España"}
+                {metodoEntrega === "fedex" ? "FedEx - Standard" : "Correos - España"}
               </p>
               <p>
                 {metodoEntrega === "fedex"
                   ? "Entre 1 a 3 días hábiles"
                   : "Entre 7 a 14 días hábiles"}
               </p>
-              <p>{metodoEntrega === "fedex" ? "0,00€" : "5,00€"}</p>
+              <p>0,00€</p>
               <hr />
               <p>Total</p>
-              <p>{calcularTotal().toFixed(2)}€</p>
+              <p>122.00€</p>
             </div>
           </div>
         </div>
-        {mostrarBloque && (
-          <div className="nuevoBloque">
-            <form>
-              <div className="group">
-                <h2>Pago</h2>
-                <hr />
-                <div className="row">
-                  <div className="col">
-                    <p>
-                      <label htmlFor="direccion_facturacion">
-                        Dirección de facturación
-                      </label>
-                    </p>
-                    <p>
-                      Dirección de facturación:{direccionFacturacion}
-                      
-                    </p>
-                  </div>
-                  <div className="col-auto">
-                    <img
-                      src={lapiz}
-                      alt="Lápiz"
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        cursor: "pointer",
-                      }}
-                      onClick={toggleMostrarEditarDireccion}
-                    />
-                  </div>
-                </div>
-                <div
-                  id="editar_direccion"
-                  style={{ display: mostrarEditarDireccion ? "flex" : "none" }}
-                  className="direccionPago"
-                >
-                  <input
-                    type="text"
-                    className="direccionInput"
-                    id="direccion_facturacion"
-                    name="direccion_facturacion"
-                    value={direccionFacturacion}
-                    onChange={handleDireccionFacturacionChange}
-                  />
-                  <button
-                    type="submit"
-                    className="btnPago"
-                    onClick={handleGuardarDireccionFacturacion}
-                  >
-                    Guardar
-                  </button>
-                </div>
-                {mensajeErrorDireccion && (
-                  <p className="error">{mensajeErrorDireccion}</p>
-                )}
-                <hr />
-                <div className="group1">
-                  <p>
-                    <label htmlFor="metodo_pago">Método de Pago</label>
-                  </p>
-                  <div className="custom-control custom-radio">
-                    <input
-                      type="radio"
-                      id="credito"
-                      name="pago"
-                      value="credito"
-                      className="custom-control-input"
-                      checked={metodoPago === "credito"}
-                      onChange={handleMetodoPagoChange}
-                    />
-                    <label className="custom-control-label" htmlFor="credito">
-                      <span style={{ display: "inline-block", width: "100%" }}>
-                        Tarjeta de Crédito
-                      </span>
-                    </label>
-                  </div>
-                  <div className="custom-control custom-radio">
-                    <input
-                      type="radio"
-                      id="paypal"
-                      name="pago"
-                      value="paypal"
-                      className="custom-control-input"
-                      checked={metodoPago === "paypal"}
-                      onChange={handleMetodoPagoChange}
-                    />
-                    <label className="custom-control-label" htmlFor="paypal">
-                      <span style={{ display: "inline-block", width: "100%" }}>
-                        PayPal
-                      </span>
-                    </label>
-                  </div>
-                </div>
-                {mensajeErrorMetodoPago && (
-                  <p className="error">{mensajeErrorMetodoPago}</p>
-                )}
-                <hr />
-                <div className="group1">
-                  <p>
-                    <label htmlFor="acepto_condiciones">
-                      Acepte las condiciones generales
-                    </label>
-                  </p>
-                  <input
-                    type="checkbox"
-                    id="acepto_condiciones"
-                    checked={aceptoCondiciones}
-                    onChange={handleCheckboxChange}
-                  />
-                  <p>
-                    Acepto las Condiciones Generales de Venta y doy mi
-                    consentimiento al tratamiento de mis datos, de conformidad
-                    con la Política de Confidencialidad de Manos Creadoras.
-                  </p>
-                  {mensajeError && <p className="error">{mensajeError}</p>}
-                </div>
-                <button className="btn btn-primary" onClick={handlePagarClick}>
-                  Pagar
-                </button>
-                {mensajePago && (
-                  <div className="mensaje-pago">
-                    <p>{mensajePago}</p>
-                  </div>
-                )}
-              </div>
-            </form>
-          </div>
-        )}
       </main>
       <Footer />
     </div>
   );
 }
 
-export default App;
+export default Pago;
