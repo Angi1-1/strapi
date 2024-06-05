@@ -1,70 +1,68 @@
-    .container-footer {
-        margin: 0 auto;
-        padding: 35px;
-    }
-    
-    footer {
-        background-color: #333;
-        color: #fff;
-    }
-    
-    .footer-content {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .footer-column {
-        flex: 1 1 100%;
-        max-width: 300px;
-        margin-bottom: 20px;
-    }
-    
-    .footer-column h3 {
-        color: #fff;
-    }
-    
-    .footer-column ul {
-        list-style: none;
-        padding: 0;
-    }
-    
-    .footer-column ul li {
-        margin-bottom: 10px;
-    }
-    
-    .footer-column ul li a {
-        color: #fff;
-        text-decoration: none;
-    }
-    
-    .footer-bottom {
-        text-align: center;
-    }
-    .link3 {
-        color: white; /* Hereda el color del texto del padre */
-        text-decoration: none; /* Quita la decoración del texto */
-    }
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
 
-    .footer-column-1 {
-        max-width: 403px;
-        margin-bottom: 20px;
-    }
-    
-    .footer-column-1 h3 {
-        color: #fff;
-    }
-    
-    .footer-column-1 ul {
-        list-style: none;
-        padding: 0;
-    }
-    
-    .footer-column-1 ul li {
-        margin-bottom: 10px;
-    }
-    
-    .footer-column-1 ul li a {
-        color: #fff;
-        text-decoration: none;
-    }
+body > div {
+    flex: 1; /* Asegura que el contenido principal ocupe el espacio disponible */
+    display: flex;
+    flex-direction: column;
+}
+
+.container-footer {
+    margin: 0 auto;
+    padding: 35px 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 35px 20px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-column, .footer-column-1 {
+    flex: 1 1 100%;
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.footer-column h3, .footer-column-1 h3 {
+    color: #fff;
+}
+
+.footer-column ul, .footer-column-1 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li, .footer-column-1 ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a, .footer-column-1 ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.link3 {
+    color: white; /* Hereda el color del texto del padre */
+    text-decoration: none; /* Quita la decoración del texto */
+}
+
+.link3:hover {
+    color: #85b38b; /* Cambia el color del texto al pasar el cursor */
+    text-decoration: underline; /* Añade subrayado al texto al pasar el cursor */
+}

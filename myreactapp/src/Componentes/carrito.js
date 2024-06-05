@@ -5,30 +5,27 @@ import Footer from "./footer";
 import "./CSS/carrito.css";
 
 function Carrito({ cart, setCart }) {
-
-
-  // useEffect para recuperar el carrito del almacenamiento local al montar el componente
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
   }, []);
 
-  // Función para eliminar un producto del carrito y actualizar el estado y el almacenamiento local
   const removeFromCart = (index) => {
     const updatedCart = [...cart];
     updatedCart.splice(index, 1);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Actualizar el almacenamiento local
-    window.dispatchEvent(new Event('cartUpdated'));
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // Función para actualizar la cantidad de un producto en el carrito
   const updateQuantity = (index, newQuantity) => {
     const updatedCart = [...cart];
-    updatedCart[index].quantity = newQuantity || 1; // Si newQuantity es falsy, se establece en 1
-    setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Actualizar el almacenamiento local
-    window.dispatchEvent(new Event('cartUpdated'));
+    if (newQuantity > 0) {
+      updatedCart[index].quantity = newQuantity;
+      setCart(updatedCart);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      window.dispatchEvent(new Event("cartUpdated"));
+    }
   };
 
   const totalCarrito = cart.reduce(
@@ -36,15 +33,19 @@ function Carrito({ cart, setCart }) {
     0
   );
 
-  
-
   if (cart.length === 0) {
     return (
       <div>
         <Header />
         <div className="breadcrumb">
           <p>
-            <Link to="/home" className="link">Home</Link> / <Link to="/carrito" className="link">Carrito</Link>
+            <Link to="/home" className="link">
+              Home
+            </Link>{" "}
+            /{" "}
+            <Link to="/carrito" className="link">
+              Carrito
+            </Link>
           </p>
         </div>
         <div className="carrito-container">
@@ -58,12 +59,13 @@ function Carrito({ cart, setCart }) {
 
   return (
     <>
-      <Header cart={cart} />
-      <div className="breadcrumb">
-        <p>
-          <Link to="/home" className="link">Home</Link> / <Link to="/carrito" className="link">Carrito</Link>
-        </p>
-      </div>
+    <Header cart={cart} />
+    <div className="breadcrumb">
+      <p>
+        <Link to="/home" className="link">Home</Link> / <Link to="/carrito" className="link">Carrito</Link>
+      </p>
+    </div>
+    <div className="main-container">
       <div className="carrito-container">
         <main>
           <h1 className="carrito-title">Tu Carrito de Compras</h1>
@@ -71,55 +73,40 @@ function Carrito({ cart, setCart }) {
             <div key={index} className="carrito-item" data-aos="fade-right">
               <div className="carrito-item-left">
                 <img src={product.ruta} alt={product.nombre} />
-                <div className="carrito-item-details">
+                <div className="carrito-text-container">
                   <p className="carrito-texto1">{product.nombre}</p>
-                  <p className="carrito-texto2">{product.descripcion}</p>
-                  <p className="carrito-texto2">Nº de artículo: {product.id}</p>
-                  <p className="carrito-texto2">Talla: {product.talla || "Única"}</p>
+                  <p className="carrito-texto2">Perla natural</p>
+                  <p className="carrito-texto2">N° de artículo: {product.numeroArticulo}</p>
+                  <p className="carrito-texto2">Talla: {product.talla}</p>
                 </div>
               </div>
               <div className="carrito-item-right">
-                <div>
-                  <p className="carrito-texto1">{product.precio}€</p>
+                <p className="carrito-texto1">{product.precio}€</p>
+                <div className="cantidad-control">
+                  <button className="cantidad-btn" onClick={() => updateQuantity(index, (product.quantity || 1) - 1)}>-</button>
+                  <span className="cantidad-texto">{product.quantity || 1}</span>
+                  <button className="cantidad-btn" onClick={() => updateQuantity(index, (product.quantity || 1) + 1)}>+</button>
                 </div>
-                <div>
-                  <input className="cantidadCarrito"
-                    type="number"
-                    min="1"
-                    value={product.quantity || 1}
-                    onChange={(e) => updateQuantity(index, parseInt(e.target.value))}
-                  />
-                  <button className="eliminar-btn" onClick={() => removeFromCart(index)}>Eliminar</button>
-                </div>
+                <button className="eliminar-btn" onClick={() => removeFromCart(index)}>Eliminar</button>
               </div>
             </div>
           ))}
-          <div className="carrito-summary" data-aos="fade-left">
-            <div className="carrito-summary-right">
-              <div className="parte1">
-                <p className="carrito-texto1">Subtotal</p>
-                <p className="carrito-texto1">{totalCarrito}€</p>
-              </div>
-              <div className="parte2">
-                <p className="carrito-texto1">Envío gratuito</p>
-                <p className="carrito-texto1">0€</p>
-              </div>
-              <hr className="carrito-separator" />
-              <div className="parte3">
-                <p className="carrito-texto1">Total</p>
-                <p className="carrito-texto1">{totalCarrito}€</p>
-              </div>
-              <p className="carrito-texto4">Incl. IVA; Incl. gastos de envío</p>
-            </div>
-          </div>
-          <button className="pago-btn" data-aos="zoom-in"><Link to={{
-    pathname: "/pago", // Ruta de la página de pago
-    state: { totalCarrito: totalCarrito } // Pasa el valor total como parte del estado de la ubicación
-  }}>Continuar con el Pago</Link></button>
         </main>
       </div>
-      <Footer />
-    </>
+      <div className="carrito-summary">
+        <div className="carrito-summary-right">
+          <p className="carrito-texto1">Subtotal: {totalCarrito} €</p>
+          <p className="carrito-texto2">Envío gratuito: 0 €</p>
+          <p className="carrito-texto1">Total: {totalCarrito} €</p>
+          <button className="pago-btn">
+            <Link to="/checkout">Continuar con el Pago</Link>
+          </button>
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </>
+  
   );
 }
 
