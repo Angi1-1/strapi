@@ -59,13 +59,18 @@ function Carrito({ cart, setCart }) {
 
   return (
     <>
-    <Header cart={cart} />
-    <div className="breadcrumb">
-      <p>
-        <Link to="/home" className="link">Home</Link> / <Link to="/carrito" className="link">Carrito</Link>
-      </p>
-    </div>
-    <div className="main-container">
+      <Header cart={cart} />
+      <div className="breadcrumb">
+        <p>
+          <Link to="/home" className="link">
+            Home
+          </Link>{" "}
+          /{" "}
+          <Link to="/carrito" className="link">
+            Carrito
+          </Link>
+        </p>
+      </div>
       <div className="carrito-container">
         <main>
           <h1 className="carrito-title">Tu Carrito de Compras</h1>
@@ -76,37 +81,61 @@ function Carrito({ cart, setCart }) {
                 <div className="carrito-text-container">
                   <p className="carrito-texto1">{product.nombre}</p>
                   <p className="carrito-texto2">Perla natural</p>
-                  <p className="carrito-texto2">N° de artículo: {product.numeroArticulo}</p>
+                  <p className="carrito-texto2">
+                    N° de artículo: {product.numeroArticulo}
+                  </p>
                   <p className="carrito-texto2">Talla: {product.talla}</p>
                 </div>
               </div>
+
               <div className="carrito-item-right">
                 <p className="carrito-texto1">{product.precio}€</p>
                 <div className="cantidad-control">
-                  <button className="cantidad-btn" onClick={() => updateQuantity(index, (product.quantity || 1) - 1)}>-</button>
-                  <span className="cantidad-texto">{product.quantity || 1}</span>
-                  <button className="cantidad-btn" onClick={() => updateQuantity(index, (product.quantity || 1) + 1)}>+</button>
+                  <button
+                    className="cantidad-btn"
+                    onClick={() =>
+                      updateQuantity(index, (product.quantity || 1) - 1)
+                    }
+                  >
+                    -
+                  </button>
+                  <span className="cantidad-texto">
+                    {product.quantity || 1}
+                  </span>
+                  <button
+                    className="cantidad-btn"
+                    onClick={() =>
+                      updateQuantity(index, (product.quantity || 1) + 1)
+                    }
+                  >
+                    +
+                  </button>
                 </div>
-                <button className="eliminar-btn" onClick={() => removeFromCart(index)}>Eliminar</button>
+                <button
+                  className="eliminar-btn"
+                  onClick={() => removeFromCart(index)}
+                >
+                  Eliminar
+                </button>
               </div>
             </div>
           ))}
         </main>
-      </div>
-      <div className="carrito-summary">
-        <div className="carrito-summary-right">
-          <p className="carrito-texto1">Subtotal: {totalCarrito} €</p>
-          <p className="carrito-texto2">Envío gratuito: 0 €</p>
-          <p className="carrito-texto1">Total: {totalCarrito} €</p>
-          <button className="pago-btn">
-            <Link to="/checkout">Continuar con el Pago</Link>
-          </button>
+        <div className="carrito-summary">
+          <div className="carrito-summary-left">
+            <p className="carrito-texto1">Subtotal: {totalCarrito} €</p>
+            <p className="carrito-texto2">Envío gratuito: 0 €</p>
+          </div>
+          <div className="carrito-summary-right">
+            <p className="carrito-texto1">Total: {totalCarrito} €</p>
+            <button className="pago-btn">
+              <Link to="/checkout">Continuar con el Pago</Link>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <Footer />
-  </>
-  
+      <Footer />
+    </>
   );
 }
 

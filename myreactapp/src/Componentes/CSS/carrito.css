@@ -26,13 +26,14 @@ body {
 }
 
 /* Ítems del carrito */
-/* .carrito-item {
+.carrito-item {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Alinear los elementos hacia los extremos */
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
-} */
+}
 
 .carrito-item img {
   width: 150px;
@@ -56,12 +57,15 @@ body {
   color: #666;
 }
 
-/* .carrito-item-right {
+.carrito-item-right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-} */
+  flex: 1; /* Hace que este contenedor ocupe todo el espacio disponible */
+  margin-left: auto; /* Empuja el contenedor hacia la derecha */
+  padding-left: 20px; /* Añade un espacio entre el contenedor y el borde del carrito */
+}
 
 .cantidad-control {
   display: flex;
@@ -99,25 +103,7 @@ body {
 }
 
 /* Resumen del carrito */
-/* .carrito-summary {
-  margin-top: 40px;
-  border-top: 2px solid #ccc;
-  padding-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-} */
-.main-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.carrito-container {
-  max-width: 70%; /* Ajusta el ancho del contenedor del carrito según tus necesidades */
-}
-
-.carrito-summary {
+.carrito-summary-derecha {
   width: 25%; /* Ajusta el ancho del resumen del pago según tus necesidades */
   position: fixed; /* Fija la posición del resumen del pago */
   top: 20px; /* Ajusta la distancia desde la parte superior */
@@ -129,7 +115,6 @@ body {
   border: none; /* Elimina el borde */
 }
 
-/* Estilos adicionales según sea necesario */
 
 .carrito-summary-right {
   display: flex;
@@ -185,30 +170,6 @@ body {
   border: none;
   border-top: 1px solid #ccc;
   margin: 20px 0;
-}
-.carrito-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Alinear los elementos hacia los extremos */
-  margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 10px;
-}
-
-.carrito-item-left {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
-
-.carrito-item-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex: 1; /* Hace que este contenedor ocupe todo el espacio disponible */
-  margin-left: auto; /* Empuja el contenedor hacia la derecha */
-  padding-left: 20px; /* Añade un espacio entre el contenedor y el borde del carrito */
 }
 
 /* Animaciones */
