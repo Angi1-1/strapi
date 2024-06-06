@@ -5,8 +5,6 @@ import Footer from './footer';
 import "./CSS/joyeria.css";
 import headRojo from "./img/corazonRojo.svg";
 import head from "./img/heartProducto.svg";
-import imagen from "./img/MadridArt.png";
-import imagenLogo from "./img/logoMadridArte.png";
 
 function CatalogoDeJoyeria() {
   const { id } = useParams();
@@ -33,7 +31,7 @@ function CatalogoDeJoyeria() {
         setInfoData(data.data);
         console.log(data.data);
       } else {
-        console.log("Error al obtener los datos de productos");
+        console.log("Error al obtener los datos del artesano");
       }
     } catch (error) {
       console.error('Error en la petición:', error);
@@ -168,15 +166,15 @@ function CatalogoDeJoyeria() {
       <div className="artesanoInfo" style={{backgroundColor:'white'}}>
         <div className='infoDrecha' >
           {infoData && (
-            <img src={`/artesano/${infoData.attributes.logo}`} alt='Logo' />
+           <img src={infoData.attributes.logo.length > 100 ? infoData.attributes.logo : `/artesano/${infoData.attributes.logo}`} style={{width:'250px', height:'180px'}} alt='Logo' />
           )}
           {infoData && (
-            <label className='tipografiaArteInfo'>{infoData.attributes.descripcion}</label>
+            <label className='tipografiaArteInfo' style={{fontSize:'20px'}}>{infoData.attributes.descripcion}</label>
           )}
         </div>
         <div className='infoIzquierda' >
           {infoData && (
-            <img src={`/artesano/${infoData.attributes.imagen}`} style={{width:'100%', height:'100%'}} alt='imagen' />
+            <img src={infoData.attributes.imagen.length > 100 ? infoData.attributes.imagen : `/artesano/${infoData.attributes.imagen}`} style={{width:'100%', height:'100%'}} alt='imagen' />
           )}
         </div>
       </div>

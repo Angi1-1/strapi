@@ -21,7 +21,6 @@ function ProductDetails() {
   const [fullWishlist, setFullWishlist] = useState({});
   const [cartItemCount, setCartItemCount] = useState(0);
   const [listProductos, setListProductos] = useState([]);
-  
 
   useEffect(() => {
     fetchProduct();
@@ -90,8 +89,6 @@ function ProductDetails() {
     }
   };
 
-  console.log("producto", product);
-
   const addToCart = (product) => {
     const productId = parseInt(id);
     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -109,10 +106,8 @@ function ProductDetails() {
     const itemCount = currentCart.reduce((acc, item) => acc + item.quantity, 0) + 1;
     setCartItemCount(itemCount);
 
-
     window.dispatchEvent(new Event('cartUpdated'));
   };
-
 
   const toggleDetails = () => {
     setDetailsVisible(!detailsVisible);
@@ -278,8 +273,6 @@ function ProductDetails() {
     navigate(`/artesanoInfo/${idArtesano}`);
   };
 
-  
-
   const isInWishlist = wishlist.length > 0;
 
   return (
@@ -302,7 +295,7 @@ function ProductDetails() {
         </p>
       </div>
       <div className="productos" id={product.id}>
-        <img src={obtenerRutaImagen(product.tipo, product.ruta)} alt={product.nombre} className="imagenProductDetails" />
+        <img src={product.subir ? product.subir : obtenerRutaImagen(product.tipo, product.ruta)} alt={product.nombre} className="imagenProductDetails" />
         <div className="product-info">
           <label className="tinosGrafiaJoyeria" style={{ fontSize: '32px' }}>{product.nombre}</label>
           <div className="tinosGrafiaJoyeria" style={{ fontSize: '22px', cursor: 'pointer' }} onClick={() => ShowDataArtesanoInf(product.idArtesano)}>{product.nombreArtesano}</div>
@@ -327,19 +320,19 @@ function ProductDetails() {
                 <span className="tinosGrafiaJoyeria" style={{ fontSize: '22px' }}>Detalles del Producto</span> {detailsVisible ? "▲" : "▼"}
               </button>
               <div className={`product-details general-details ${detailsVisible ? "active" : ""}`}>
-                <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '16px' }}>{product.detalles}</p>
+                <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '20px' }}>{product.detalles}</p>
               </div>
               <button className="toggle-talla-ajuste" onClick={toggleSizeAdjustment}>
                 <span className="tinosGrafiaJoyeria" style={{ fontSize: '22px' }}>Talla y Ajuste</span> {sizeAdjustmentVisible ? "▲" : "▼"}
               </button>
               <div className={`talla-ajuste-details product-details ${sizeAdjustmentVisible ? "active" : ""}`}>
-                <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '16px' }}>{product.tallas}</p>
+                <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '20px' }}>{product.tallas}</p>
               </div>
               <button className="toggle-entrega-devolucion" onClick={toggleDeliveryReturn}>
                 <span className="tinosGrafiaJoyeria" style={{ fontSize: '22px' }}>Entrega y Devolución</span> {deliveryReturnVisible ? "▲" : "▼"}
               </button>
               <div className={`entrega-devolucion-details product-details ${deliveryReturnVisible ? "active" : ""}`}>
-                <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '16px' }}>Envío estándar gratuito. Política de devolución de 30 días.</p>
+                <p className="GideonRomanGrafiaJoyeria" style={{ fontSize: '20px' }}>Envío estándar gratuito. Política de devolución de 30 días.</p>
               </div>
             </div>
           </div>
@@ -358,7 +351,7 @@ function ProductDetails() {
               )}
             </button>
             <div className='nombrePreciJoyeria' onClick={() => showProductDetails(producto.id)}>
-              <img src={obtenerRutaImagen(producto.attributes.tipo, producto.attributes.ruta)} alt={producto.attributes.nombre} style={{ width: '100%', height: '250px' }} />
+              <img src={producto.attributes.subir ? producto.attributes.subir : obtenerRutaImagen(producto.attributes.tipo, producto.attributes.ruta)} alt={producto.attributes.nombre} style={{ width: '100%', height: '250px' }} />
               <label className='letraCardJoyeria'>{producto.attributes.nombre}</label>
               <p className='precioCardJoyeria'>Precio: €{producto.attributes.precio}</p>
             </div>
@@ -389,4 +382,3 @@ function ProductDetails() {
 }
 
 export default ProductDetails;
-

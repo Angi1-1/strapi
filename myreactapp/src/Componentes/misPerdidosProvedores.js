@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import deleteIcon from "../Icon/delete.svg";
-import enviar from "../Icon/enviar.svg";
+import enviar from "./img/pencilPago.svg";
 import Header from "./header";
 import Footer from "./footer";
 import EditarProducto from "./editProduct";
 import Delete from "./deleteProducto";
 import AddProducto from "./AddProductos";
-import imagenCollar from "../Icon/collarPerla.png";
-import imagenCollar2 from "../Icon/collarPerlar2.png";
 
 const PerdidosProvedores = () => {
   const [showEnviar, setShowEnviar] = useState(false);
@@ -80,9 +78,9 @@ const PerdidosProvedores = () => {
       case 1:
         return `/joyeria/${ruta}`;
       case 2:
-        return `/hogar/${ruta}`;
-      case 3:
         return `/comestico/${ruta}`;
+      case 3:
+        return `/hogar/${ruta}`;
       default:
         return ruta; // Por si el tipo no es reconocido
     }
@@ -123,7 +121,7 @@ const PerdidosProvedores = () => {
           <div className="product-container">
             {listMiProducto.map((producto, index) => (
               <div className="product-itemProducto" key={index}>
-                <img src={obtenerRutaCompleta(producto.attributes.ruta, producto.attributes.tipo)} style={{width:'250px', height:'200px'}} alt="Producto" />
+                <img src={producto.attributes.subir ? producto.attributes.subir : obtenerRutaCompleta(producto.attributes.ruta, producto.attributes.tipo)} style={{width:'250px', height:'200px'}} alt="Producto" />
                 <div className="product-item-details">
                   <label>{producto.attributes.nombre}</label>
                   <label>Stock: {producto.attributes.stock}</label>
@@ -151,6 +149,7 @@ const PerdidosProvedores = () => {
           </button>
         </div>
       </div>
+      <Footer />
       {showEnviar && (
         <EditarProducto
           onCancel={() => setShowEnviar(false)}
@@ -162,7 +161,7 @@ const PerdidosProvedores = () => {
       {showAddNewArtesano && (
         <AddProducto onCancel={() => setShowAddNewArtesano(false)} onload={handleOnload}/>
       )}
-      <Footer />
+      
     </>
   );
 };

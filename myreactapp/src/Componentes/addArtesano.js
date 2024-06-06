@@ -12,16 +12,41 @@ const EditarArtesano = ({ onCancel, onload }) => {
   const [imagen, setImagen] = useState(null);
   const [errors, setErrors] = useState({});
   const [descripcion, setDescripcion] = useState('');
+  const [logo, setlogo] = useState('');
 
   const handleFileChange = (e) => {
-    setImagen(e.target.files[0]);
+    //subir imagen y convertir en base64
+    const file = e.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagen(reader.result)
+        
+      }
+      reader.readAsDataURL(file)
+    }
   };
+  const handleFileChangeLogo = (e) => {
+    //subir imagen y convertir en base64
+    const file = e.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setlogo(reader.result)
+        
+      }
+      reader.readAsDataURL(file)
+    }
+  };
+
+
+
 
   const validateForm = () => {
     const newErrors = {};
     const nombreApellidoRegex = /^[A-Za-z\s]+$/;
     const telefonoRegex = /^[0-9]+$/;
-
+    console.log("imagen",imagen)
     if (!nombreApellido) {
       newErrors.nombreApellido = "El nombre no puede estar vacío";
     } else if (!nombreApellidoRegex.test(nombreApellido)) {
@@ -46,6 +71,10 @@ const EditarArtesano = ({ onCancel, onload }) => {
 
     if (!descripcion) {
       newErrors.descripcion = "La descripción no puede estar vacía";
+    } else if (descripcion.length < 250) {
+      newErrors.descripcion = "La descripción debe tener más de 250 caracteres";
+    }else if (descripcion.length > 500) {
+      newErrors.descripcion = "La descripción no puede superar los 500 caracteres";
     }
 
     if (password && password.length < 6) {
@@ -68,8 +97,12 @@ const EditarArtesano = ({ onCancel, onload }) => {
         descripcion,
         passwordUser: hashedPassword,
         acesso: 2,
+        imagen,
+        logo
       },
     };
+    
+
     console.log(body);
 
     try {
@@ -173,9 +206,14 @@ const EditarArtesano = ({ onCancel, onload }) => {
               {errors.descripcion && <p className="error">{errors.descripcion}</p>}
             </div>
             <div className="addImagenProyecto">
+              <label className="texto1EditProyecto">Añadir Logo</label>
+              <input type="file" onChange={handleFileChangeLogo} />
+            </div>
+            <div className="addImagenProyecto">
               <label className="texto1EditProyecto">Añadir Imagen</label>
               <input type="file" onChange={handleFileChange} />
             </div>
+            
             <div className="divBtnEditProduct">
               <button className="btnSubmitEditProyecto" type="submit">Guardar</button>
               <button className="btnCancelarEditProyecto" type="button" onClick={onCancel}>Cancelar</button>

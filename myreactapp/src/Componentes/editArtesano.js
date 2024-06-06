@@ -12,15 +12,35 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
   const [imagen, setImagen] = useState(null);
   const [errors, setErrors] = useState({});
   const [descripcion, setDescripcion] = useState(artesano.descripcion || '');
+  const [logo, setLogo] = useState('');
+
   const handleFileChange = (e) => {
-    setImagen(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagen(reader.result);
+      }
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleFileChangeLogo = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setLogo(reader.result);
+      }
+      reader.readAsDataURL(file);
+    }
   };
 
   const validaCampos = () => {
     const newErrors = {};
     const nombreApellidoRegex = /^[A-Za-z\s]+$/;
     const telefonoRegex = /^[0-9]+$/;
-
+    
     if (!nombreApellido) {
       newErrors.nombreApellido = "El nombre no puede estar vacío";
     } else if (!nombreApellidoRegex.test(nombreApellido)) {
@@ -45,6 +65,8 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
 
     if (!descripcion) {
       newErrors.descripcion = "La descripción no puede estar vacía";
+    } else if (descripcion.length < 250) {
+      newErrors.descripcion = "La descripción debe tener más de 250 caracteres";
     }
 
     if (password && password.length < 6) {
@@ -67,11 +89,10 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
         descripcion,
         passwordUser: hashedPassword,
         acesso: 2,
+        imagen,
+        logo
       },
     };
-
-    console.log(artesanoId);
-    console.log(body);
 
     try {
       const response = await fetch(`http://localhost:1337/api/usuariomanos/${artesanoId}`, {
@@ -104,7 +125,7 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
 
   return (
     <>
-       <BackDrop>
+      <BackDrop>
         <div className="addNewUser">
           <p className="tituloEditProyecto">Editar Artesano</p>
           <form className="formularioEditrProyecto" onSubmit={handleSubmit}>
@@ -171,7 +192,11 @@ const EditarArtesano = ({ artesano, artesanoId, onCancel, onload }) => {
                 value={descripcion}
                 onChange={(e) => setDescripcion(e.target.value)}
               ></textarea>
-              {errors.domicilio && <p className="error">{errors.domicilio}</p>}
+              {errors.descripcion && <p className="error">{errors.descripcion}</p>}
+            </div>
+            <div className="addImagenProyecto">
+              <label className="texto1EditProyecto">Añadir Logo</label>
+              <input type="file" onChange={handleFileChangeLogo} />
             </div>
             <div className="addImagenProyecto">
               <label className="texto1EditProyecto">Añadir Imagen</label>

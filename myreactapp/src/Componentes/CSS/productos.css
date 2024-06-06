@@ -11,11 +11,7 @@ body {
     font-weight: 400;
     line-height: normal;
 }
-.tinosGrafiaJoyeria:hover{
-    font-family: var(--font-family);
-    color: white;
-  
-}
+
 .GideonRomanGrafiaJoyeria{
     font-family: var(--font-family1);
     color: #000;
@@ -227,6 +223,9 @@ background: #000;
 
 .button-container button:hover {
     background-color: black;
+ 
+}
+.button-container button:hover>span{
     color: white;
 }
 

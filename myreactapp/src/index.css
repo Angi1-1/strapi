@@ -13,3 +13,9 @@
 body {
     background-color: var(--color-backgroundColor);
 }
+
+
+a {
+    text-decoration: none;
+    color: black;
+}

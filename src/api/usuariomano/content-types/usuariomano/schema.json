@@ -34,13 +34,13 @@
       "type": "string"
     },
     "descripcion": {
-      "type": "string"
+      "type": "text"
     },
     "logo": {
-      "type": "string"
+      "type": "text"
     },
     "imagen": {
-      "type": "string"
+      "type": "text"
     }
   }
 }
