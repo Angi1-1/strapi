@@ -915,6 +915,7 @@ export interface ApiProductoProducto extends Schema.CollectionType {
     stock: Attribute.String;
     precio: Attribute.Decimal;
     tipo: Attribute.Integer;
+    subir: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -952,9 +953,9 @@ export interface ApiUsuariomanoUsuariomano extends Schema.CollectionType {
     domicilio: Attribute.Text;
     acesso: Attribute.Integer;
     passwordUser: Attribute.String;
-    descripcion: Attribute.String;
-    logo: Attribute.String;
-    imagen: Attribute.String;
+    descripcion: Attribute.Text;
+    logo: Attribute.Text;
+    imagen: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

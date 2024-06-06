@@ -41,6 +41,9 @@
     },
     "tipo": {
       "type": "integer"
+    },
+    "subir": {
+      "type": "text"
     }
   }
 }

@@ -144,7 +144,7 @@ const añadirWishList = async (producto) => {
               )}
             </button>
             <div className='nombrePreciJoyeria' onClick={() => ShowDataProduct(producto.id)}> 
-            <img src={producto.attributes.ruta} alt={producto.attributes.nombre} style={{width:'100%', height:'250px'}} />
+            <img src={producto.attributes.subir ? producto.attributes.subir : producto.attributes.ruta} alt={producto.attributes.nombre} style={{width:'100%', height:'250px'}} />
             <label className='letraCardJoyeria'>{producto.attributes.nombre}</label>
             <p className='precioCardJoyeria'>Precio: €{producto.attributes.precio}</p></div>
           </div>

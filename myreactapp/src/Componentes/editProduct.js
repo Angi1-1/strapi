@@ -11,24 +11,57 @@ const EditProduct = ({ product, onCancel, onload }) => {
   const [subtitulo, setSubtitulo] = useState(product.attributes.subtitulo);
   const [detalles, setDetalles] = useState(product.attributes.detalles);
   const [tallas, setTallas] = useState(product.attributes.tallas);
+  const [subir, setsubir] = useState('');
+  const [error, setError] = useState('');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!nombre || !tipo || !precio || !stock || !subtitulo || !detalles || !tallas ) {
+      setError('Por favor, complete todos los campos.');
+      return;
+    }
+    if (isNaN(precio) || isNaN(stock)) {
+      setError('El precio y el stock deben ser números.');
+      return;
+    }
+    if (Number(precio) <= 0 || Number(stock) <= 0) {
+      setError('El precio y el stock deben ser mayores que 0.');
+      return;
+    }
     await enviaApis();
   };
 
+  const handleFileChange = (e) => {
+    //subir imagen y convertir en base64
+    const file = e.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setsubir(reader.result)
+        
+      }
+      reader.readAsDataURL(file)
+    }
+  };
+
   const enviaApis = async () => {
-    const body = {
+
+ const body = {
       data: {
         nombre,
         subtitulo,
         precio,
         detalles,
         tallas,
-        tipo
+        tipo,
       },
     };
 
+    // Solo agregar 'subir' si tiene un valor
+    if (subir) {
+      body.data.subir = subir;
+    }
     try {
       const response = await fetch(`http://localhost:1337/api/productos/${product.id}`, {
         method: 'PUT',
@@ -76,8 +109,8 @@ const EditProduct = ({ product, onCancel, onload }) => {
                 >
                   <option value={0}>Selecciona la categoría</option>
                   <option value={1}>Joyería</option>
-                  <option value={2}>Hogar</option>
-                  <option value={3}>Comestico</option>
+                  <option value={3}>Hogar</option>
+                  <option value={2}>Comestico</option>
                 </select>
               </div>
             </div>
@@ -134,8 +167,9 @@ const EditProduct = ({ product, onCancel, onload }) => {
             </div>
             <div className="addImagenProyecto">
               <label className="texto1EditProyecto">Añadir Imagen</label>
-              <button className="btnAddImg">Añadir</button>
+              <input type="file" onChange={handleFileChange} />
             </div>
+            {error && <p className="error">{error}</p>}
             <div className="divBtnEditProduct">
               <button className="btnSubmitEditProyecto" type="submit">
                 Guardar

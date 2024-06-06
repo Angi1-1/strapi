@@ -11,21 +11,39 @@ const AddProduct = ({ onCancel, onload }) => {
   const [subtitulo, setSubtitulo] = useState('');
   const [detalles, setDetalles] = useState('');
   const [tallas, setTallas] = useState('');
-  const [imagen, setImagen] = useState(null);
+  const [subir, setsubir] = useState(null);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!nombre || !tipo || !precio || !stock || !subtitulo || !detalles || !tallas) {
+    if (!nombre || !tipo || !precio || !stock || !subtitulo || !detalles || !tallas || !subir) {
       setError('Por favor, complete todos los campos.');
+      return;
+    }
+    if (isNaN(precio) || isNaN(stock)) {
+      setError('El precio y el stock deben ser números.');
+      return;
+    }
+    if (Number(precio) <= 0 || Number(stock) <= 0) {
+      setError('El precio y el stock deben ser mayores que 0.');
       return;
     }
     await enviaApis();
   };
 
-  const handleImageChange = (e) => {
-    setImagen(e.target.files[0]);
+  const handleFileChange = (e) => {
+    //subir imagen y convertir en base64
+    const file = e.target.files[0];
+    if(file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setsubir(reader.result)
+        
+      }
+      reader.readAsDataURL(file)
+    }
   };
+
 
   const enviaApis = async () => {
     const formData = new FormData();
@@ -39,10 +57,9 @@ const AddProduct = ({ onCancel, onload }) => {
       tallas,
       stock,
       tipo,
+      subir,
     }));
-    if (imagen) {
-      formData.append('files.imagen', imagen);
-    }
+   
 
     try {
       const response = await fetch(`http://localhost:1337/api/productos/`, {
@@ -69,7 +86,7 @@ const AddProduct = ({ onCancel, onload }) => {
         <div className="addNewUser">
           <p className="tituloEditProyecto">Añadir Producto</p>
           <form className="formularioEditrProyecto" onSubmit={handleSubmit}>
-            {error && <p className="error">{error}</p>}
+        
             <div className="name">
               <div className="Nombre">
                 <label className="texto1EditProyecto">Nombre de Producto</label>
@@ -149,9 +166,10 @@ const AddProduct = ({ onCancel, onload }) => {
               <label className="texto1EditProyecto">Añadir Imagen</label>
               <input
                 type="file"
-                onChange={handleImageChange}
+                onChange={handleFileChange}
               />
             </div>
+            {error && <p className="error">{error}</p>}
             <div className="divBtnEditProduct">
               <button className="btnSubmitEditProyecto" type="submit">
                 Guardar
