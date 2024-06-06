@@ -4,9 +4,15 @@ import Header from "./header";
 import Footer from "./footer";
 import "./CSS/home.css";
 
+<<<<<<< HEAD
 import imagen4 from "../Icon/handmade.jpg";
 import imagen3 from "../Icon/colaborar.jpg";
 import imagen2 from "../Icon/entregarapida.jpg";
+=======
+import imagen4 from "./img/image4.png";
+import imagen3 from "./img/image3.png";
+import imagen2 from "./img/image2.png";
+>>>>>>> b8231cd7d1fd7f114ccb92f7983337458e8225d7
 import imagen5 from "./img/Rectangle 13.png";
 import imagen6 from "./img/rectangle14.png";
 import imagen7 from "./img/Rectangle 15.png";

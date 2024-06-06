@@ -35,6 +35,9 @@
     },
     "formaPago": {
       "type": "integer"
+    },
+    "fecha_envi": {
+      "type": "date"
     }
   }
 }

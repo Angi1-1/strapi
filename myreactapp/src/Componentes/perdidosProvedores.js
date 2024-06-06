@@ -65,9 +65,11 @@ const PerdidosProvedores = () => {
   };
 
   const confirmPedido = async () => {
+    const fecha = new Date()
     const body = JSON.stringify({
       data: {
-        estado: true
+        estado: true,
+        fecha_envi:fecha
       }
     });
 
@@ -149,7 +151,11 @@ const PerdidosProvedores = () => {
           <Link to="/misPerdidosProvedores" className="perfilUserTexto2 link2">
             Mi Producto
           </Link>
-          <button onClick={handleLogout} className="perfilUserTexto2 link2" style={{marginLeft:'-5px'}}>
+          <button
+            onClick={handleLogout}
+            className="perfilUserTexto2 link2"
+            style={{ marginLeft: "-5px" }}
+          >
             Cerrar Sesión
           </button>
         </div>
@@ -172,45 +178,89 @@ const PerdidosProvedores = () => {
                     <span className="card-label">Gastos:</span>
                     <span>{pedido.attributes.gasto} €</span>
                   </div>
-                  <button className="card-item" onClick={() => toggleDetails(pedido.id)}>
-                    <span className="card-label ">Detalles del Producto</span> {detailsVisible[pedido.id] ? "▲" : "▼"}
+                  <button
+                    className="card-item"
+                    onClick={() => toggleDetails(pedido.id)}
+                  >
+                    <span className="card-label ">Detalles del Producto</span>{" "}
+                    {detailsVisible[pedido.id] ? "▲" : "▼"}
                   </button>
-                  <div className={`product-details general-details ${detailsVisible[pedido.id] ? "active" : ""}`}>
-                    <p className="GideonRomanGrafiaJoyeria" style={{fontSize:'16px'}}>{pedido.attributes.ProductosComprados}</p>
+                  <div
+                    className={`product-details general-details ${
+                      detailsVisible[pedido.id] ? "active" : ""
+                    }`}
+                  >
+                    <p
+                      className="GideonRomanGrafiaJoyeria"
+                      style={{ fontSize: "16px" }}
+                    >
+                      {pedido.attributes.ProductosComprados}
+                    </p>
                   </div>
                   <div className="card-item">
                     <span className="card-label">Estado:</span>
-                    <span className={pedido.attributes.estado ? "true" : "false"}>
-                      {pedido.attributes.estado ? "Enviado" : "Cancelado"}
+                    <span
+                      className={pedido.attributes.estado ? "true" : "false"}
+                    >
+                      {pedido.attributes.estado ? pedido.attributes.fecha_envi : "Cancelado"}
                     </span>
                   </div>
 
                   <div className="botonesPedidosArtesano">
-                    <button
-                      className="ButtonPerdidosProvedores"
-                      onClick={() => handleSend(pedido)}
-                    >
-                      <img className="img1" src={enviar} alt="Enviar"/>
-                    </button>
-                    <button
-                      className="ButtonPerdidosProvedores"
-                      onClick={() => handleDelete(pedido)}
-                    >
-                      <img className="img2" src={deleteIcon} alt="Eliminar"/>
-                    </button>
+                    {pedido.attributes.estado ? (
+                      <button
+                        className="ButtonPerdidosProvedores"
+                        onClick={() => handleDelete(pedido)}
+                      >
+                        <img className="img2" src={deleteIcon} alt="Eliminar" />
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          className="ButtonPerdidosProvedores"
+                          onClick={() => handleSend(pedido)}
+                        >
+                          <img className="img1" src={enviar} alt="Enviar" />
+                        </button>
+                        <button
+                          className="ButtonPerdidosProvedores"
+                          onClick={() => handleDelete(pedido)}
+                        >
+                          <img
+                            className="img2"
+                            src={deleteIcon}
+                            alt="Eliminar"
+                          />
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
-          </div> 
-          <button className="help-button" style={{width:'none'}}>
-            <Link className="link" style={{color:'white'}} to={'/contacto'}>Ayuda</Link>
-           
+          </div>
+          <button className="help-button" style={{ width: "none" }}>
+            <Link className="link" style={{ color: "white" }} to={"/contacto"}>
+              Ayuda
+            </Link>
           </button>
         </div>
       </div>
-      {showEnviar && <Send onCancel={() => setShowEnviar(false)} pedido={pedido} onConfirm={confirmPedido} />}
-      {showDelete && <Delete onCancel={() => setShowDelete(false)} pedido={pedido} onDeleteConfirm={cancelPedidos} messager={"Pedido"} />}
+      {showEnviar && (
+        <Send
+          onCancel={() => setShowEnviar(false)}
+          pedido={pedido}
+          onConfirm={confirmPedido}
+        />
+      )}
+      {showDelete && (
+        <Delete
+          onCancel={() => setShowDelete(false)}
+          pedido={pedido}
+          onDeleteConfirm={cancelPedidos}
+          messager={"Pedido"}
+        />
+      )}
       <Footer />
     </>
   );

@@ -156,6 +156,11 @@ body {
   text-align: center;
 }
 
+.pago-btn a{
+  text-decoration: none;
+  color: black;
+}
+
 .pago-btn:hover {
   background-color: #005f6b;
 }
@@ -170,6 +175,10 @@ body {
   border: none;
   border-top: 1px solid #ccc;
   margin: 20px 0;
+}
+
+.cantidadCarrito{
+  width: 50px;
 }
 
 /* Animaciones */

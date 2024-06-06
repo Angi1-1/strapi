@@ -12,21 +12,56 @@
     background-color: #ffffff;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    display: flex;
+    flex-direction: column;
     margin-bottom: 20px;
     transition: all 0.3s ease;
+    gap: 12px;
 }
 
+.group1{
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.custom-control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-radio {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.textoletra1{
+       font-family: var(--font-family);
+       font-weight: 400;
+       color: rgba(0, 0, 0, 1);
+   
+}
+
+.col{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.datosUsuarios {
+    display: flex;
+    flex-direction: column;
+}
 .group:hover {
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
 }
 
-.group h1 {
-    color: #6c757d;
-    margin-bottom: 20px;
-}
 
 .group textarea {
-    width: 97%;
+    width: 100%;
+    font-size: 18px;
     border: 1px solid #ced4da;
     padding: 10px;
     background-color: #756969;
@@ -46,13 +81,12 @@
     transition: all 0.3s ease;
 }
 
-.group button:hover {
-    background: linear-gradient(to right, #333536, #000);
-}
+
+
+
 
 .group p{
     margin-bottom: 5px;
-    padding: 2px;
 }
 
 /* Estilos para la sección de resumen */
@@ -97,17 +131,35 @@
 .row {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
-.row > * {
-    flex: 1;
+.carritoPago{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.rowDerecha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.textoletra {
+font-family: var(--font-family1);
+font-weight: 400;
+color: rgba(0, 0, 0, 1);
 }
 
 .form-group {
+
     max-width: 670px;
+    width: 899px;
     background-color: white;
     padding: 20px;
+    align-items: center;
     margin-bottom: 20px;
+    justify-content: space-between;
+    display: flex;
     transition: all 0.3s ease;
 }
 
@@ -172,18 +224,35 @@
     transition: all 0.3s ease;
 }
 
+.columanAcepto{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
 .direccionInput:focus {
     border-color: #333536;
 }
 
 .btnPago{
-    width: 10%;
     margin-bottom: 10px;
     transition: all 0.3s ease;
 }
 
 .btnPago:hover {
     width: 15%;
+}
+
+.datosUsuariosFactura {
+    display: flex;
+    flex-direction: row;
+}
+.colFactura{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+    justify-content: space-between;
 }
 
 /* Para tablet */
@@ -193,8 +262,19 @@
         max-width: none;
     }
 
+    .form-group {
+        width: 100%;
+    }
+
     .row {
         flex-direction: column;
+    }
+
+    .resumen {
+        margin-top: 0px;
+    }
+    .rowDerecha {
+        flex-direction: row;
     }
 
     .groupPago input, .direccionInput {
@@ -217,7 +297,10 @@
         max-width: none;
         margin-top: 20px;
     }
-
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
     .row {
         flex-direction: column;
     }
