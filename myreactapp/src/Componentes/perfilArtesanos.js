@@ -4,8 +4,8 @@ import "./CSS/perfilUser.css";
 import Header from "./header";
 import Footer from "./footer";
 import bcrypt from 'bcryptjs';
-import openPassword from '../Icon/passwordOpen.svg'; // Asegúrate de ajustar la ruta de la imagen
-import closePassword from '../Icon/passwordClose.svg'; // Asegúrate de ajustar la ruta de la imagen
+import openPassword from '../Icon/passwordOpen.png'; 
+import closePassword from '../Icon/passwordClose.png'; 
 
 const PerfilArtesanos = () => {
   const navigate = useNavigate();

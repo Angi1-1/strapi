@@ -14,18 +14,17 @@ function Carrito({ cart, setCart }) {
     const updatedCart = [...cart];
     updatedCart.splice(index, 1);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    window.dispatchEvent(new Event("cartUpdated"));
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Actualizar el almacenamiento local
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
+  // Función para actualizar la cantidad de un producto en el carrito
   const updateQuantity = (index, newQuantity) => {
     const updatedCart = [...cart];
-    if (newQuantity > 0) {
-      updatedCart[index].quantity = newQuantity;
-      setCart(updatedCart);
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      window.dispatchEvent(new Event("cartUpdated"));
-    }
+    updatedCart[index].quantity = newQuantity || 1; // Si newQuantity es falsy, se establece en 1
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Actualizar el almacenamiento local
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const totalCarrito = cart.reduce(
@@ -78,13 +77,11 @@ function Carrito({ cart, setCart }) {
             <div key={index} className="carrito-item" data-aos="fade-right">
               <div className="carrito-item-left">
                 <img src={product.ruta} alt={product.nombre} />
-                <div className="carrito-text-container">
+                <div className="carrito-item-details">
                   <p className="carrito-texto1">{product.nombre}</p>
-                  <p className="carrito-texto2">Perla natural</p>
-                  <p className="carrito-texto2">
-                    N° de artículo: {product.numeroArticulo}
-                  </p>
-                  <p className="carrito-texto2">Talla: {product.talla}</p>
+                  <p className="carrito-texto2">{product.descripcion}</p>
+                  <p className="carrito-texto2">Nº de artículo: {product.id}</p>
+                  <p className="carrito-texto2">Talla: {product.talla || "Única"}</p>
                 </div>
               </div>
 
