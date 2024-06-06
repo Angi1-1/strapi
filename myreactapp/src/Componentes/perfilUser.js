@@ -298,7 +298,7 @@ const PerfilUser = () => {
                     onChange={handlePasswordChange}
                   />
                   <button type="button" onClick={() => setShowOldPassword(!showOldPassword)}>
-                    <img src={showOldPassword ? closePassword : openPassword} alt="toggle visibility" />
+                    <img className='ojos' src={showOldPassword ? closePassword : openPassword} alt="toggle visibility" />
                   </button>
                 </div>
               </div>
@@ -314,7 +314,7 @@ const PerfilUser = () => {
                     onChange={handlePasswordChange}
                   />
                   <button type="button" onClick={() => setShowNewPassword(!showNewPassword)}>
-                    <img src={showNewPassword ? closePassword : openPassword} alt="toggle visibility" />
+                    <img className='ojos' src={showNewPassword ? closePassword : openPassword} alt="toggle visibility" />
                   </button>
                 </div>
               </div>
@@ -329,7 +329,7 @@ const PerfilUser = () => {
                     onChange={(e) => setRepetirPassword(e.target.value)}
                   />
                   <button type="button" onClick={() => setShowRepeatPassword(!showRepeatPassword)}>
-                    <img src={showRepeatPassword ? closePassword : openPassword} alt="toggle visibility" />
+                    <img className='ojos' src={showRepeatPassword ? closePassword : openPassword} alt="toggle visibility" />
                   </button>
                 </div>
               </div>

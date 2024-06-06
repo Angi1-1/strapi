@@ -314,7 +314,7 @@ const PerfilArtesanos = () => {
                     onChange={handlePasswordChange}
                   ></input>
                   <button type="button" onClick={() => setShowOldPassword(!showOldPassword)}>
-                    <img src={showOldPassword ? closePassword : openPassword} alt="toggle visibility" />
+                    <img className="ojos" src={showOldPassword ? closePassword : openPassword} alt="toggle visibility" />
                   </button>
                 </div>
               </div>
@@ -330,25 +330,28 @@ const PerfilArtesanos = () => {
                     onChange={handlePasswordChange}
                   />
                   <button type="button" onClick={() => setShowNewPassword(!showNewPassword)}>
-                    <img src={showNewPassword ? closePassword : openPassword} alt="toggle visibility" />
+                    <img className="ojos" src={showNewPassword ? closePassword : openPassword} alt="toggle visibility" />
                   </button>
                 </div>
               </div>
               <div className="nombrePerfilUser2">
-                <label className="perfilUserTexto4">Repetir la contraseña:</label>
-                <div className="password-container">
-                  <input
-                    className="perfilUserInput"
-                    type={showRepeatPassword ? "text" : "password"}
-                    name="repetirPassword"
-                    value={repetirPassword}
-                    onChange={(e) => setRepetirPassword(e.target.value)}
-                  />
-                  <button type="button" onClick={() => setShowRepeatPassword(!showRepeatPassword)}>
-                    <img src={showRepeatPassword ? closePassword : openPassword} alt="toggle visibility" />
-                  </button>
-                </div>
-              </div>
+  <label className="perfilUserTexto4">
+    Repetir la contraseña:
+  </label>
+  <div className="password-container">
+    <input
+      className="perfilUserInput"
+      type={showRepeatPassword ? "text" : "password"}
+      name="repetirPassword"
+      value={repetirPassword}
+      onChange={(e) => setRepetirPassword(e.target.value)}
+    />
+    <button type="button" onClick={() => setShowRepeatPassword(!showRepeatPassword)}>
+      <img className="ojos" src={showRepeatPassword ? closePassword : openPassword} alt="toggle visibility" />
+    </button>
+  </div>
+</div>
+
               {errors.newPassword && <p className="error">{errors.newPassword}</p>}
               {successMessage && <p className="success" style={{color:'green'}}>{successMessage}</p>}
               <button className="submitPerfilUsuario" onClick={handleChangePassword}>

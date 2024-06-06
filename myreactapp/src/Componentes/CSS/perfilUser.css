@@ -151,6 +151,31 @@ body {
     font-weight: 400;
 }
 
+
+  
+  .password-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .perfilUserInput {
+    flex: 1;
+  }
+  
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 8px; /* Ajusta el margen según sea necesario */
+    cursor: pointer;
+  }
+  
+  .ojos {
+    width: 24px; /* Ajusta el tamaño según sea necesario */
+    height: 24px;
+  }
+  
+
 /* Responsive Styles */
 @media (max-width: 1024px) {
     .perfilUserParte1 {
