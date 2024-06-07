@@ -280,7 +280,7 @@ function ProductDetails() {
       <Header cartItemCount={cartItemCount} cart={cart} />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">Home</Link> /
+          <Link to='/home' className="link">Home</Link> /
           <Link to={
             product.tipo === 1 ? "/joyeria/" :
               product.tipo === 3 ? "/hogar/" :

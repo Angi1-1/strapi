@@ -167,7 +167,7 @@ function CatalogoDeJoyeria() {
         <p className="lower-textJoyeria">MANOS CREADORAS COLECCIÓN 2024</p>
       </div>
       <div className="breadcrumb">
-        <p><Link to="/home" className="link">Home</Link> / <Link to="/hogar/" className="link">Hogar</Link> </p>
+        <p><Link to='/home' className="link">Home</Link> / <Link to='/hogar/' className="link">Hogar</Link> </p>
       </div>
 
 

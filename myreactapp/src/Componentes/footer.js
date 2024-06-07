@@ -25,13 +25,13 @@ function Footer() {
                         <h3>COLECCIONES</h3>
                         <ul>
                             <li>
-                                <Link to="/hogar"><p className="link3">Hogar</p></Link>
+                                <Link to='/hogar'><p className="link3">Hogar</p></Link>
                             </li>
                             <li>
-                                <Link to="/cosmetico"><p className="link3">Cosméticos</p></Link>
+                                <Link to='/cosmetico'><p className="link3">Cosméticos</p></Link>
                             </li>
                             <li>
-                                <Link to="/joyeria"><p className="link3">Joyería</p></Link>
+                                <Link to='/joyeria'><p className="link3">Joyería</p></Link>
                             </li>
                         </ul>
                     </div>
@@ -39,16 +39,16 @@ function Footer() {
                         <h3>SERVICIOS</h3>
                         <ul>
                             <li>
-                                <Link to="/sobreNosotros"><p className="link3">Sobre Nosotros</p></Link>
+                                <Link to='/sobreNosotros'><p className="link3">Sobre Nosotros</p></Link>
                             </li>
                             <li>
-                                <Link to="/contacto"><p className="link3">Contáctanos</p></Link>
+                                <Link to='/contacto'><p className="link3">Contáctanos</p></Link>
                             </li>
                             <li>
-                                <Link to="/legal"><p className="link3">Aviso Legal</p></Link>
+                                <Link to='/legal'><p className="link3">Aviso Legal</p></Link>
                             </li>
                             <li>
-                                <Link to="/faqs"><p className="link3">Preguntas Frecuentes</p></Link>
+                                <Link to='/faqs'><p className="link3">Preguntas Frecuentes</p></Link>
                             </li>
                         </ul>
                     </div>

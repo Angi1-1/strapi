@@ -51,11 +51,11 @@ function Carrito({ cart, setCart }) {
         <Header />
         <div className="breadcrumb">
           <p>
-            <Link to="/" className="link">
+            <Link to='/' className="link">
               Home
             </Link>{" "}
             /{" "}
-            <Link to="/carrito" className="link">
+            <Link to='/carrito' className="link">
               Carrito
             </Link>
           </p>
@@ -74,11 +74,11 @@ function Carrito({ cart, setCart }) {
       <Header cart={cart} />
       <div className="breadcrumb">
         <p>
-          <Link to="/" className="link">
+          <Link to='/' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/carrito" className="link">
+          <Link to='/carrito' className="link">
             Carrito
           </Link>
         </p>
@@ -138,7 +138,7 @@ function Carrito({ cart, setCart }) {
           <div className="carrito-summary-right">
             <p className="carrito-texto1">Total: {totalCarrito} €</p>
             <button className="pago-btn">
-              <Link to="/pago">Continuar con el Pago</Link>
+              <Link to='/pago'>Continuar con el Pago</Link>
             </button>
           </div>
         </div>

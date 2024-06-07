@@ -48,24 +48,24 @@ const PerdidosUser = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/perdidosUser" className="link">
+          <Link to='/perdidosUser' className="link">
             Mis Pedidos
           </Link>{" "}
         </p>
       </div>
       <div className="perfilPedidosParte1">
         <div className="izquierdaPerfilUser">
-          <Link to="/perfilUser" className="perfilUserTexto2 link2">
+          <Link to='/perfilUser' className="perfilUserTexto2 link2">
             Mi Cuenta
           </Link>
-          <Link to="/perdidosUser" className="perfilUserTexto1 link2">
+          <Link to='/perdidosUser' className="perfilUserTexto1 link2">
             Pedidos
           </Link>
-          <Link to="/miWishlist" className="perfilUserTexto2 link2">
+          <Link to='/miWishlist' className="perfilUserTexto2 link2">
             Mi Wishlist
           </Link>
           <button onClick={handleLogout} className="perfilUserTexto2 link2" style={{marginLeft:'-5px'}}>

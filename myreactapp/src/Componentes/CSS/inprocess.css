@@ -1,0 +1,18 @@
+/* inprocess.css */
+
+.inprocess-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .inprocess-container h1 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .inprocess-container p {
+    font-size: 1.2em;
+    color: #666;
+    margin-top: 10px;
+  }
+  

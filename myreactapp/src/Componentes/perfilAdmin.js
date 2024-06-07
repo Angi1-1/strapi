@@ -17,21 +17,21 @@ const PerfilAdmin = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/perfilAdmin" className="link">
+          <Link to='/perfilAdmin' className="link">
             Perfil del admin
           </Link>
         </p>
       </div>
       <div className="perfilUserParte1" style={{ height: '60vh' }}>
         <div className="izquierdaPerfilUser">
-          <Link to="/perfilAdmin" className="perfilUserTexto1 link2">
+          <Link to='/perfilAdmin' className="perfilUserTexto1 link2">
             Mi Cuenta
           </Link>
-          <Link to="/addnewArtesano" className="perfilUserTexto2 link2">
+          <Link to='/addnewArtesano' className="perfilUserTexto2 link2">
             Artesano
           </Link>
           <label onClick={handleLogout} className="perfilUserTexto2 link2">

@@ -9,7 +9,7 @@ import Footer from "./footer";
         <div className="container">
         <Header />
         <div className="breadcrumb">
-            <p><Link to="/home" className="link">Home</Link> / <Link to="/artesano" className="link">Artesano</Link> </p>
+            <p><Link to='/home' className="link">Home</Link> / <Link to='/artesano' className="link">Artesano</Link> </p>
         </div>
         <div className="content">
             <div className="left-section">

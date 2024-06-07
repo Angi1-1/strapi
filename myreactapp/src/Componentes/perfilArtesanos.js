@@ -194,24 +194,24 @@ const PerfilArtesanos = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/perfilAdmin" className="link">
+          <Link to='/perfilAdmin' className="link">
             Perfil del admin
           </Link>
         </p>
       </div>
       <div className="perfilArtesanoParte1" >
         <div className="izquierdaPerfilArtesano">
-          <Link to="/perfilAdmin" className="perfilUserTexto1 link2">
+          <Link to='/perfilAdmin' className="perfilUserTexto1 link2">
             Mi Cuenta
           </Link>
-          <Link to="/perdidosProvedores" className="perfilUserTexto2 link2">
+          <Link to='/perdidosProvedores' className="perfilUserTexto2 link2">
             Pedidos
           </Link>
-          <Link to="/misPerdidosProvedores" className="perfilUserTexto2 link2">
+          <Link to='/misPerdidosProvedores' className="perfilUserTexto2 link2">
             Mis Productos
           </Link>
           <label onClick={handleLogout} className="perfilUserTexto2 link2">

@@ -134,7 +134,7 @@ function CatalogoDeJoyeria() {
         <p className="lower-textJoyeria">AMOR CON NATURALEZA</p>
       </div>
       <div className="breadcrumb">
-        <p><Link to="/home" className="link">Home</Link> / <Link to="/cosmetico/" className="link">Cosmético</Link> </p>
+        <p><Link to='/home' className="link">Home</Link> / <Link to='/cosmetico/' className="link">Cosmético</Link> </p>
       </div>
       <div className="catalogJoyeria">
         {listProduct.map((producto, index) => (

@@ -205,11 +205,11 @@ const PerfilUser = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/perfilUser" className="link">
+          <Link to='/perfilUser' className="link">
             Perfil del usuario
           </Link>
         </p>

@@ -167,7 +167,7 @@ body {
     background: none;
     border: none;
     padding: 0;
-    margin-left: 8px; /* Ajusta el margen según sea necesario */
+    /* margin-left: 8px;  */
     cursor: pointer;
   }
   

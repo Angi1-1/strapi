@@ -23,11 +23,11 @@ const Contacto = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/legal" className="link">
+          <Link to='/legal' className="link">
             Legal
           </Link>
         </p>

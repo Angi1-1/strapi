@@ -67,9 +67,9 @@ const Header = ({cart, CartItemCount}) => {
 
     return (
         <header className="header">
-            <div className="logo">
+            <Link to='/home'><div className="logo">
                 <img src={Logo} alt="Logo" />
-            </div>
+            </div></Link>
             {/* Botones para pantallas grandes */}
             <div className={`buttons ${!showMobileMenu ? 'visible' : ''}`}>
                 <button className="button" onClick={toggleProductsMenu}>

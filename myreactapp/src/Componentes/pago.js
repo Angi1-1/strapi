@@ -243,11 +243,11 @@ function Pago() {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/pago" className="link">
+          <Link to='/pago' className="link">
             Pago
           </Link>
         </p>

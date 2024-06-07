@@ -141,24 +141,24 @@ const PerdidosProvedores = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/perdidosProvedores/" className="link">
+          <Link to='/perdidosProvedores/' className="link">
             Mis Pedidos
           </Link>
         </p>
       </div>
       <div className="perfilPedidosParte1">
         <div className="izquierdaPerfilUser">
-          <Link to="/perfilArtesanos" className="perfilUserTexto2 link2">
+          <Link to='/perfilArtesanos' className="perfilUserTexto2 link2">
             Mi Cuenta
           </Link>
-          <Link to="/perdidosProvedores" className="perfilUserTexto1 link2">
+          <Link to='/perdidosProvedores' className="perfilUserTexto1 link2">
             Pedidos
           </Link>
-          <Link to="/misPerdidosProvedores" className="perfilUserTexto2 link2">
+          <Link to='/misPerdidosProvedores' className="perfilUserTexto2 link2">
             Mi Producto
           </Link>
           <button

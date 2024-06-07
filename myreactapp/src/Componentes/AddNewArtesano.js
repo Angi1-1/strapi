@@ -84,24 +84,24 @@ const AddNewArtesano = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to='/home' className="link">
             Home
           </Link>{" "}
           /{" "}
-          <Link to="/perfilArtesanos" className="link">
+          <Link to='/perfilArtesanos' className="link">
             Perfil del artesano
           </Link>{" "}
         </p>
       </div>
       <div className="perfilUserParte1">
         <div className="izquierdaPerfilUser">
-          <Link to="/perfilAdmin" className="perfilUserTexto2 link2">
+          <Link to='/perfilAdmin' className="perfilUserTexto2 link2">
             Mi Cuenta
           </Link>
-          <Link to="/addnewArtesano" className="perfilUserTexto1 link2">
+          <Link to='/addnewArtesano' className="perfilUserTexto1 link2">
             Artesano
           </Link>
-          <Link to="/" className="perfilUserTexto2 link2">
+          <Link to='/' className="perfilUserTexto2 link2">
             Cerrar Sesión
           </Link>
         </div>

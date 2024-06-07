@@ -24,6 +24,8 @@ import Carrito from './Componentes/carrito';
 import Artesano from './Componentes/artesano';
 import Home from "./Componentes/home";
 import GustarProvedor from "./Componentes/gustarProvedor"
+import enProceso from "./Componentes/process"
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Importar BrowserRouter desde 'react-router-dom'
 
 function App() {
@@ -72,6 +74,8 @@ function App() {
         <Route path="/carrito" element={<Carrito cart={cart} setCart={setCart} />}/>
         <Route path="/artesano" element={<Artesano />}/>
         <Route path="/artesanoInfo/:id" element={<GustarProvedor />}/>
+        <Route path="/process" element={<enProceso />}/>
+
       </Routes>
     </BrowserRouter>
   );
