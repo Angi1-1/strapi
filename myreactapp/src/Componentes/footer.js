@@ -25,13 +25,13 @@ function Footer() {
                         <h3>COLECCIONES</h3>
                         <ul>
                             <li>
-                                <Link to='/hogar'><p className="link3">Hogar</p></Link>
+                                <Link to='/hogar/'><p className="link3">Hogar</p></Link>
                             </li>
                             <li>
-                                <Link to='/cosmetico'><p className="link3">Cosméticos</p></Link>
+                                <Link to='/cosmetico/'><p className="link3">Cosméticos</p></Link>
                             </li>
                             <li>
-                                <Link to='/joyeria'><p className="link3">Joyería</p></Link>
+                                <Link to='/joyeria/'><p className="link3">Joyería</p></Link>
                             </li>
                         </ul>
                     </div>

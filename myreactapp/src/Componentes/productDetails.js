@@ -9,6 +9,7 @@ import "./CSS/productos.css";
 import head from './img/heartProducto.svg';
 import headRojo from "./img/corazonRojo.svg";
 
+
 function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,7 +22,9 @@ function ProductDetails() {
   const [fullWishlist, setFullWishlist] = useState({});
   const [cartItemCount, setCartItemCount] = useState(0);
   const [listProductos, setListProductos] = useState([]);
-  const [vacio, setvacio] = useState(false)
+  const [vacio, setVacio] = useState(false);
+  const idUsuario = localStorage.getItem('user_id');
+
   useEffect(() => {
     fetchProduct();
     listRecommendedProducts();
@@ -90,12 +93,17 @@ function ProductDetails() {
   };
 
   const addToCart = (product) => {
+    if (!idUsuario) {
+      navigate('/Micuenta');
+      return;
+    }
+
     const productId = parseInt(id);
     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
     const productInCartIndex = currentCart.findIndex((item) => item.id === productId);
     if (productInCartIndex !== -1) {
       if (currentCart[productInCartIndex].quantity >= product.stock) {
-        setvacio(true)
+        setVacio(true);
         return;
       }
       const updatedCart = [...currentCart];
@@ -104,7 +112,7 @@ function ProductDetails() {
       setCart(updatedCart);
     } else {
       if (product.stock <= 0) {
-        setvacio(true)
+        setVacio(true);
         return;
       }
       const updatedCart = [...currentCart, { ...product, id: productId, quantity: 1 }];
@@ -116,7 +124,6 @@ function ProductDetails() {
   
     window.dispatchEvent(new Event('cartUpdated'));
   };
-  
 
   const toggleDetails = () => {
     setDetailsVisible(!detailsVisible);
@@ -148,9 +155,8 @@ function ProductDetails() {
   };
 
   const addOrRemoveWishlist = async (product) => {
-    const userId = localStorage.getItem('user_id');
-    if (!userId) {
-      console.log("No hay usuario logueado");
+    if (!idUsuario) {
+      navigate('/Micuenta');
       return;
     }
 
@@ -175,7 +181,7 @@ function ProductDetails() {
           },
           body: JSON.stringify({
             data: {
-              idUsuario: userId,
+              idUsuario: idUsuario,
               idProducto: id,
               nombreProduct: product.nombre,
               precioProducto: product.precio,
@@ -200,8 +206,7 @@ function ProductDetails() {
 
   const loadFullWishlist = async () => {
     try {
-      const userId = localStorage.getItem('user_id');
-      const response = await fetch(`http://localhost:1337/api/miwishlists?filters[id_usuario]=${userId}`, {
+      const response = await fetch(`http://localhost:1337/api/miwishlists?filters[id_usuario]=${idUsuario}`, {
         method: 'GET'
       });
 
@@ -221,7 +226,6 @@ function ProductDetails() {
   };
 
   const addOrRemoveFromFullWishlist = async (producto) => {
-    const userId = parseInt(localStorage.getItem('user_id'), 10);
     const productId = producto.id;
     const wishlistItemId = fullWishlist[productId];
 
@@ -245,7 +249,7 @@ function ProductDetails() {
           data: {
             "nombreProducto": producto.attributes.nombre,
             "precioProducto": producto.attributes.precio,
-            "idUsuario": userId,
+            "idUsuario": idUsuario,
             "idProducto": productId,
             "ruta": producto.attributes.ruta,
             "tipo": producto.attributes.tipo
@@ -289,7 +293,7 @@ function ProductDetails() {
       <Header cartItemCount={cartItemCount} cart={cart} />
       <div className="breadcrumb">
         <p>
-          <Link to='/home' className="link">Home</Link> /
+          <Link to='/' className="link">Home</Link> /
           <Link to={
             product.tipo === 1 ? "/joyeria/" :
               product.tipo === 3 ? "/hogar/" :

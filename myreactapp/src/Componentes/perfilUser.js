@@ -14,7 +14,7 @@ const PerfilUser = () => {
     oldPassword: '',
     newPassword: ''
   });
-  const [idUser] = useState(localStorage.getItem('user_id'));
+  const idUser = localStorage.getItem('user_id');
   const [titulo, setTitulo] = useState(localStorage.getItem('username'));
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState("");
@@ -94,7 +94,7 @@ const PerfilUser = () => {
     // Validar que la fecha de nacimiento represente una edad mayor de 18 años
     const today = new Date();
     const birthDate = new Date(userData.fecha_nac);
-    const age = today.getFullYear() - birthDate.getFullYear();
+    let age = today.getFullYear() - birthDate.getFullYear();
     const monthDifference = today.getMonth() - birthDate.getMonth();
     if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
       age--;

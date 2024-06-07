@@ -214,6 +214,7 @@ const PerfilArtesanos = () => {
           <Link to='/misPerdidosProvedores' className="perfilUserTexto2 link2">
             Mis Productos
           </Link>
+         
           <label onClick={handleLogout} className="perfilUserTexto2 link2">
             Cerrar Sesión
           </label>

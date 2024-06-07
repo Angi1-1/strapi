@@ -10,6 +10,7 @@ function CatalogoDeJoyeria() {
   const [listProduct, setListProduct] = useState([]);
   const navigate = useNavigate();
   const [wishlist, setWishlist] = useState({});
+  const idUsuario =localStorage.getItem('user_id');
   useEffect(() => {
     listProductosJoyeria();
     loadWishlist();
@@ -68,7 +69,10 @@ const añadirWishList = async (producto) => {
     const userId = parseInt(localStorage.getItem('user_id'), 10);
     const productId = producto.id;
     const wishlistItemId = wishlist[productId];
-
+    if (!userId) {
+      navigate('/Micuenta')
+      return;
+    }
     try {
       if (wishlistItemId) {
         // Eliminar de la wishlist
@@ -137,7 +141,7 @@ const añadirWishList = async (producto) => {
         {listProduct.map((producto, index) => (
           <div key={index} className="productJoyeria" style={{ display: (mostrarTodos || index < 12) ? 'block' : 'none' }}>
            <button className='corazonJoyeria' onClick={() => añadirWishList(producto)}>
-              {wishlist[producto.id] ? (
+              {wishlist[producto.id] && idUsuario ? (
                 <img src={headRojo} style={{ width: '35px', height: '35px' }} alt="heart icon" />
               ) : (
                 <img src={head} style={{ width: '35px', height: '35px' }} alt="heart icon" />

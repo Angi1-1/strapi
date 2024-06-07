@@ -105,7 +105,7 @@ const MiWishlist = () => {
                   <img className="corazonMiWishlist" src={corazon} alt="Favorito" />
                 </button>
                 <div onClick={() => ShowDataProduct(lista.attributes.idProducto)}>
-                <img className="imagenMiWishlist" src={obtenerRutaCompleta(lista.attributes.ruta, lista.attributes.tipo)} style={{width:'250px', height:'200px'}} alt={lista.attributes.nombreProducto} />
+                <img className="imagenMiWishlist" src={lista.attributes.subir ? lista.attributes.subir: obtenerRutaCompleta(lista.attributes.ruta, lista.attributes.tipo)} style={{width:'250px', height:'200px'}} alt={lista.attributes.nombreProducto} />
                 <p className="MiWishlistTexto1">{lista.attributes.nombreProducto}</p>
                 <p className="MiWishlistTexto2Precio">{lista.attributes.precioProducto} €</p>
               </div></div>

@@ -241,7 +241,7 @@ function Pago() {
       }
     }
     localStorage.removeItem("cart");
-    navigate("/perdidosUser")
+    navigate("/")
   };
   
   const obtenerProductosCarrito = () => {
