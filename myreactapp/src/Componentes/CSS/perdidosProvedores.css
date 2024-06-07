@@ -1,18 +1,182 @@
+/* Estilos generales */
 .ButtonPerdidosProvedores {
    border: none;
    background-color: transparent;
-}
-
-
- .ButtonPerdidosProvedores .img1:hover{
-    filter: invert(52%) sepia(31%) saturate(748%) hue-rotate(71deg) brightness(95%) contrast(94%);
+   transition: transform 0.3s ease;
  }
-
- .ButtonPerdidosProvedores .img2:hover{
+ 
+ .ButtonPerdidosProvedores .img1:hover {
+   filter: invert(52%) sepia(31%) saturate(748%) hue-rotate(71deg) brightness(95%) contrast(94%);
+   transform: scale(1.1); /* Animación de escala */
+ }
+ 
+ .ButtonPerdidosProvedores .img2:hover {
    filter: invert(30%) sepia(24%) saturate(5360%) hue-rotate(334deg) brightness(73%) contrast(95%);
-}
-
-
-p {
+   transform: scale(1.1); /* Animación de escala */
+ }
+ 
+ p {
    margin: 0px;
-}
+ }
+ 
+ /* Estilos para el contenedor principal */
+ .derechaPerdidosUser {
+   display: flex;
+   flex-direction: column;
+   gap: 22px;
+   width: 100%;
+   padding: 20px;
+ }
+ 
+ .botonesAddNewArtesano {
+   display: flex;
+   gap: 10px;
+ }
+ 
+ .perfilPedidosParte1 {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: flex-start;
+   padding: 0px 20px 32px 96px;
+   gap: 60px;
+   height: 100%;
+ }
+ 
+ .botonesPedidosArtesano {
+   display: flex;
+   justify-content: flex-end;
+   gap: 10px;
+ }
+ 
+ /* Estilos para el contenedor de productos */
+ .product-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+   justify-content: center;
+ }
+ 
+ /* Estilos para los elementos individuales de producto */
+ .product-item,
+ .product-itemProducto {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 10px;
+   border: 1px solid #ccc;
+   width: 100%;
+   max-width: 300px;
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+   animation: fadeIn 0.5s ease;
+ }
+ 
+ .product-item:hover,
+ .product-itemProducto:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ }
+ 
+ .cardPerdidosUser {
+   background-color: #fff;
+   border: 1px solid black;
+   border-radius: 8px;
+   padding: 16px;
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+   font-family: var(--font-family);
+   width: calc(100% - 32px);
+   box-sizing: border-box;
+ }
+ 
+ /* Estilos para la imagen del producto */
+ .product-item img {
+   max-width: 100%;
+   height: auto;
+   object-fit: cover; /* Asegura que la imagen mantenga su proporción dentro del contenedor */
+ }
+ 
+ /* Estilos para los detalles del producto */
+ .product-item-details {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+ }
+ 
+ .product-item-details label {
+   color: #000;
+   font-family: var(--font-family1);
+   font-size: 22px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: normal;
+ }
+ 
+ /* Estilos para los botones de acción */
+ .product-item-actions {
+   display: flex;
+   gap: 10px;
+   width: 100%;
+   justify-content: center;
+ }
+ 
+ /* Estilos para el botón de ayuda */
+ .help-button {
+   background-color: #000;
+   color: #fff;
+   padding: 10px;
+   border: none;
+   cursor: pointer;
+   width: 100%; /* Ajusta el ancho al contenedor */
+   text-align: center;
+   font-family: var(--font-family);
+   font-size: 22px;
+   font-weight: 400;
+   line-height: normal;
+   margin: 0px auto; /* Centrado */
+   max-width: 350px; /* Ancho máximo del botón */
+ }
+ 
+ .table-containerPerdidosUser {
+   width: 100%;
+ }
+ 
+/* Media Query para tablets */
+@media screen and (max-width: 1024px) {
+   .perfilPedidosParte1 {
+     flex-direction: column;
+     padding: 0px 10px;
+     gap: 10px;
+   }
+ 
+   .derechaPerdidosUser {
+     padding: 10px;
+   }
+ }
+ 
+ /* Media Query para smartphones */
+ @media screen and (max-width: 768px) {
+   .perfilPedidosParte1 {
+     padding: 0px;
+   }
+ 
+   .cardPerdidosUser {
+     width: 100%;
+   }
+ }
+ 
+ 
+ /* Animación al agregar nuevo producto */
+ @keyframes fadeIn {
+   from {
+     opacity: 0;
+     transform: translateY(-20px);
+   }
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+ 

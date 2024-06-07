@@ -3,7 +3,7 @@ import "./CSS/perdidosUser.css";
 import "./CSS/perfilUser.css";
 import "./CSS/perdidosProvedores.css";
 import deleteIcon from "../Icon/delete.svg";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import enviar from "../Icon/enviar.svg";
 import Send from "./send";
 import Delete from "./delete";
@@ -23,15 +23,19 @@ const PerdidosProvedores = () => {
     localStorage.clear();
     navigate("/");
   };
+
   useEffect(() => {
     pedidoList();
   }, []);
 
   const pedidoList = async () => {
     try {
-      const response = await fetch(`http://localhost:1337/api/pedidos/?filters[idArtesano]=${localStorage.getItem('user_id')}`, {
-        method: 'GET'
-      });
+      const response = await fetch(
+        `http://localhost:1337/api/pedidos/?filters[idArtesano]=${localStorage.getItem('user_id')}`,
+        {
+          method: 'GET'
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -65,22 +69,25 @@ const PerdidosProvedores = () => {
   };
 
   const confirmPedido = async () => {
-    const fecha = new Date()
+    const fecha = new Date();
     const body = JSON.stringify({
       data: {
         estado: true,
-        fecha_envi:fecha
+        fecha_envi: fecha
       }
     });
 
     try {
-      const response = await fetch(`http://localhost:1337/api/pedidos/${pedidoId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: body
-      });
+      const response = await fetch(
+        `http://localhost:1337/api/pedidos/${pedidoId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: body
+        }
+      );
 
       if (response.ok) {
         console.log("Pedido Confirmado");
@@ -102,13 +109,16 @@ const PerdidosProvedores = () => {
     });
 
     try {
-      const response = await fetch(`http://localhost:1337/api/pedidos/${pedidoId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: body
-      });
+      const response = await fetch(
+        `http://localhost:1337/api/pedidos/${pedidoId}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: body
+        }
+      );
 
       if (response.ok) {
         console.log("Pedido Cancelado");
