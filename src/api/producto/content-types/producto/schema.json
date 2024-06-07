@@ -33,9 +33,6 @@
     "ruta": {
       "type": "string"
     },
-    "stock": {
-      "type": "string"
-    },
     "precio": {
       "type": "decimal"
     },
@@ -44,6 +41,9 @@
     },
     "subir": {
       "type": "text"
+    },
+    "stock": {
+      "type": "integer"
     }
   }
 }

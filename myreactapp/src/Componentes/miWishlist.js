@@ -85,7 +85,7 @@ const MiWishlist = () => {
     <>
       <Header />
       <div className="breadcrumb">
-        <p><Link to="/home" className="link">Home</Link> / <Link to="/miWishlist" className="link">Mi Wishlist</Link></p>
+        <p><Link to="/" className="link">Home</Link> / <Link to="/miWishlist" className="link">Mi Wishlist</Link></p>
       </div>
 
       <div className="perfilUserParte1">

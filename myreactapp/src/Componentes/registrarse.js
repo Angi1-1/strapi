@@ -131,7 +131,7 @@ const Registrarse = () => {
         <>
             <Header />
             <div className="breadcrumb">
-                <p><Link to="/home" className="link">Home</Link> / <Link to="/registrarse" className="link">Registrarse</Link> </p>
+                <p><Link to="/" className="link">Home</Link> / <Link to="/registrarse" className="link">Registrarse</Link> </p>
             </div>
             <div className='RegistrarseParte1'>
                 <p className="RegistrarseTitulo1">MI CUENTA</p>

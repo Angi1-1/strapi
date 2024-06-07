@@ -7,6 +7,12 @@ body {
   color: #333;
 }
 
+.mensajeDeError {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
 /* Contenedor del carrito */
 .carrito-container {
   max-width: 1200px;
@@ -17,7 +23,15 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.carrito-summary-left{
+  padding: 20px;
+}
 
+.carrito-item-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 /* Títulos */
 .carrito-title {
   font-size: 32px;

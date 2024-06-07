@@ -84,6 +84,7 @@ function Pago() {
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log('datos de producto', storedCart)
     const idArtesano = obtenerIdArtesano(storedCart);
     setIdArtesano(idArtesano);
   }, []);
@@ -195,7 +196,7 @@ function Pago() {
     for (const producto of productos) {
       const idArtesano = producto.idArtesano || null;
       const productosNombres = producto.nombre;
-
+      const stockQuequeda = producto.stock - producto.quantity
       try {
         const response = await fetch(`http://localhost:1337/api/pedidos`, {
           method: 'POST',
@@ -214,9 +215,23 @@ function Pago() {
             },
           }),
         });
+
+        const response1 = await fetch(`http://localhost:1337/api/productos/${producto.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            data: {
+              stock:stockQuequeda
+            },
+          }),
+        });
   
         if (response.ok) {
           const responseData = await response.json();
+          const responseStock = await response1.json();
+          console.log("Stock queda", responseStock)
           console.log("Compra:", responseData);
         } else {
           console.log("Error al actualizar los datos del usuario");
@@ -231,6 +246,7 @@ function Pago() {
   
   const obtenerProductosCarrito = () => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log("Datos de productos", storedCart)
     return storedCart;
   };
 
@@ -238,12 +254,14 @@ function Pago() {
     setMostrarBloque(false);
   };
 
+  
+
   return (
     <div>
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to="/" className="link">
             Home
           </Link>{" "}
           /{" "}
@@ -420,7 +438,7 @@ function Pago() {
               <hr />
               <div className="carritoPago">
                 <p className="textoletra" style={{ fontSize: '22px' }}>Envío</p>
-                <p className="textoletra" style={{ fontSize: '22px' }}>{metodoEntrega === "fedex" ? "0€" : "5.00€"}</p>
+                <p className="textoletra" style={{ fontSize: '22px' }}>{metodoEntrega === "correos" ? "5.00€" : "0.00€"}</p>
               </div>
               <hr />
               <div className="carritoPago">

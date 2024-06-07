@@ -179,7 +179,7 @@ function CatalogoDeJoyeria() {
         </div>
       </div>
       <div className="breadcrumb">
-        <p><Link to="/home" className="link">Home</Link> /</p>
+        <p><Link to="/" className="link">Home</Link> /</p>
       </div>
       <div className="catalogJoyeria">
         {listProduct.map((producto, index) => (

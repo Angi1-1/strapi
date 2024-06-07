@@ -21,7 +21,7 @@ function ProductDetails() {
   const [fullWishlist, setFullWishlist] = useState({});
   const [cartItemCount, setCartItemCount] = useState(0);
   const [listProductos, setListProductos] = useState([]);
-
+  const [vacio, setvacio] = useState(false)
   useEffect(() => {
     fetchProduct();
     listRecommendedProducts();
@@ -94,20 +94,29 @@ function ProductDetails() {
     const currentCart = JSON.parse(localStorage.getItem('cart')) || [];
     const productInCartIndex = currentCart.findIndex((item) => item.id === productId);
     if (productInCartIndex !== -1) {
+      if (currentCart[productInCartIndex].quantity >= product.stock) {
+        setvacio(true)
+        return;
+      }
       const updatedCart = [...currentCart];
       updatedCart[productInCartIndex].quantity += 1;
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       setCart(updatedCart);
     } else {
+      if (product.stock <= 0) {
+        setvacio(true)
+        return;
+      }
       const updatedCart = [...currentCart, { ...product, id: productId, quantity: 1 }];
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       setCart(updatedCart);
     }
     const itemCount = currentCart.reduce((acc, item) => acc + item.quantity, 0) + 1;
     setCartItemCount(itemCount);
-
+  
     window.dispatchEvent(new Event('cartUpdated'));
   };
+  
 
   const toggleDetails = () => {
     setDetailsVisible(!detailsVisible);
@@ -304,9 +313,11 @@ function ProductDetails() {
           <div className="GideonRomanGrafiaJoyeria" style={{ fontSize: '16px' }}>incl. IVA, excl. gastos de envío</div>
           <div className="product-actions">
             <div className="CarritoAñadir">
-              <button className="add-to-cart" style={{ width: '90%', padding: '20px 0' }} onClick={() => addToCart(product)}>
+              {vacio ? (<button className="add-to-cart" style={{ width: '90%', padding: '20px 0' }}>
+                <p className="tinosGrafiaJoyeria" style={{ fontSize: '22px', color: 'white' }}>Sin Stock</p>
+              </button>) : (<button className="add-to-cart" style={{ width: '90%', padding: '20px 0' }} onClick={() => addToCart(product)}>
                 <p className="tinosGrafiaJoyeria" style={{ fontSize: '22px', color: 'white' }}>Añadir al Carrito</p>
-              </button>
+              </button>) }
               <button className="especialBoton" onClick={() => addOrRemoveWishlist(product)} >
                 {isInWishlist ? (
                   <img src={headRojo} style={{ width: '55px', height: '55px' }} alt="Añadir a la lista de deseos" />

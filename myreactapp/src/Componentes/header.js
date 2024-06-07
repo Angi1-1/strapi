@@ -28,7 +28,7 @@ const Header = ({cart, CartItemCount}) => {
     useEffect(() => {
         if (localStorage.getItem('username') === null || localStorage.getItem('username') === '') {
             setRegistrado('Log In');
-            setLink('/')
+            setLink('/Micuenta')
         } else {
             console.log("Nombre de usuario",localStorage.getItem('username') )
             setRegistrado(localStorage.getItem('username'));
@@ -69,7 +69,7 @@ const Header = ({cart, CartItemCount}) => {
     return (
         <header className="header">
             <div className="logo">
-                <Link to='/home'><img src={Logo} alt="Logo" /></Link>
+                <Link to='/'><img src={Logo} alt="Logo" /></Link>
             </div>
             {/* Botones para pantallas grandes */}
             <div className={`buttons ${!showMobileMenu ? 'visible' : ''}`}>

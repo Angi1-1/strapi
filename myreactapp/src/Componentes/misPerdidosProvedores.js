@@ -91,7 +91,7 @@ const PerdidosProvedores = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to="/" className="link">
             Home
           </Link>{" "}
           /{" "}
@@ -124,7 +124,9 @@ const PerdidosProvedores = () => {
                 <img src={producto.attributes.subir ? producto.attributes.subir : obtenerRutaCompleta(producto.attributes.ruta, producto.attributes.tipo)} style={{width:'250px', height:'200px'}} alt="Producto" />
                 <div className="product-item-details">
                   <label>{producto.attributes.nombre}</label>
-                  <label>Stock: {producto.attributes.stock}</label>
+                  <label style={{ color: producto.attributes.stock === 0 ? 'red' : 'black' }}>
+                      Stock: {producto.attributes.stock}
+                  </label>
                   <label>{producto.attributes.precio} €</label>
                 </div>
                 <div className="product-item-actions">

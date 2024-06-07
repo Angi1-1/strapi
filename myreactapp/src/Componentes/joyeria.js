@@ -131,7 +131,7 @@ const añadirWishList = async (producto) => {
         <p className="lower-textJoyeria">MANOS CREADORAS COLECCIÓN 2024</p>
       </div>
       <div className="breadcrumb">
-        <p><Link to="/home" className="link">Home</Link> / <Link to="/joyeria/" className="link">Joyería</Link> </p>
+        <p><Link to="/" className="link">Home</Link> / <Link to="/joyeria/" className="link">Joyería</Link> </p>
       </div>
       <div className="catalogJoyeria">
         {listProduct.map((producto, index) => (

@@ -55,6 +55,7 @@ const EditProduct = ({ product, onCancel, onload }) => {
         detalles,
         tallas,
         tipo,
+        stock,
       },
     };
 

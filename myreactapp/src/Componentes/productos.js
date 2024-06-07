@@ -69,7 +69,7 @@ function ProductDetails() {
       <Header cartItemCount={cartItemCount} setCartItemCount={setCartItemCount} />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">Home</Link> / <Link to="/productos" className="link">Productos</Link>
+          <Link to="/" className="link">Home</Link> / <Link to="/productos" className="link">Productos</Link>
         </p>
       </div>
       <div className="productos" id={product.id}>

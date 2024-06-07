@@ -74,7 +74,7 @@ const MiCuenta = () => {
         <>
             <Header />
             <div className="breadcrumb">
-                <p><Link to="/home" className="link">Home</Link> / <Link to="/miCuenta" className="link">Mi cuenta</Link> </p>
+                <p><Link to="/" className="link">Home</Link> / <Link to="/miCuenta" className="link">Mi cuenta</Link> </p>
             </div>
             <div className='MiCuentaParte1'>
                 <p className="MiCuentaTitulo1">MI CUENTA</p>

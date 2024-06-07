@@ -4,8 +4,8 @@ import "./CSS/perfilUser.css";
 import Header from "./header";
 import Footer from "./footer";
 import bcrypt from 'bcryptjs';
-import openPassword from '../Icon/passwordOpen.png'; 
-import closePassword from '../Icon/passwordClose.png'; 
+import openPassword from '../Icon/passwordOpen.svg'; 
+import closePassword from '../Icon/passwordClose.svg'; 
 
 const PerfilArtesanos = () => {
   const navigate = useNavigate();
@@ -194,7 +194,7 @@ const PerfilArtesanos = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to="/" className="link">
             Home
           </Link>{" "}
           /{" "}
