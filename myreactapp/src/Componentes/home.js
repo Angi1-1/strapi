@@ -4,9 +4,9 @@ import Header from "./header";
 import Footer from "./footer";
 import "./CSS/home.css";
 
-import imagen4 from "../Icon/handmade.jpg";
-import imagen3 from "../Icon/colaborar.jpg";
-import imagen2 from "../Icon/entregarapida.jpg";
+import imagen4 from "../Icon/hecho-a-mano.png";
+import imagen3 from "../Icon/colaborar 1.png"
+import imagen2 from "../Icon/entrega-rapida.png";
 import imagen5 from "./img/Rectangle 13.png";
 import imagen6 from "./img/rectangle14.png";
 import imagen7 from "./img/Rectangle 15.png";

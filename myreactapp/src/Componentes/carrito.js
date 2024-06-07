@@ -5,26 +5,38 @@ import Footer from "./footer";
 import "./CSS/carrito.css";
 
 function Carrito({ cart, setCart }) {
+  const [error, setError] = useState('');
+
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
-  }, []);
+  }, [setCart]);
 
   const removeFromCart = (index) => {
     const updatedCart = [...cart];
     updatedCart.splice(index, 1);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Actualizar el almacenamiento local
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Update local storage
     window.dispatchEvent(new Event('cartUpdated'));
   };
 
-  // Función para actualizar la cantidad de un producto en el carrito
-  const updateQuantity = (index, newQuantity) => {
+  const updateQuantity = (index, newQuantity, stock) => {
+    if (newQuantity > stock) {
+      setError("Maximo producto añadido");
+      return;
+    }
+
+    if (newQuantity < 1) {
+      setError("La cantidad no puede ser menor que 1");
+      return;
+    }
+
     const updatedCart = [...cart];
-    updatedCart[index].quantity = newQuantity || 1; // Si newQuantity es falsy, se establece en 1
+    updatedCart[index].quantity = newQuantity || 1; // If newQuantity is falsy, set it to 1
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Actualizar el almacenamiento local
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Update local storage
     window.dispatchEvent(new Event('cartUpdated'));
+    setError(''); // Clear error if any
   };
 
   const totalCarrito = cart.reduce(
@@ -104,7 +116,7 @@ function Carrito({ cart, setCart }) {
                   <button
                     className="cantidad-btn"
                     onClick={() =>
-                      updateQuantity(index, (product.quantity || 1) - 1)
+                      updateQuantity(index, (product.quantity || 1) - 1, product.stock)
                     }
                   >
                     -
@@ -115,7 +127,7 @@ function Carrito({ cart, setCart }) {
                   <button
                     className="cantidad-btn"
                     onClick={() =>
-                      updateQuantity(index, (product.quantity || 1) + 1)
+                      updateQuantity(index, (product.quantity || 1) + 1, product.stock)
                     }
                   >
                     +
@@ -131,6 +143,7 @@ function Carrito({ cart, setCart }) {
             </div>
           ))}
         </main>
+        {error && <p className="error mensajeDeError">{error}</p>}
         <div className="carrito-summary">
           <div className="carrito-summary-left">
             <p className="carrito-texto1">Subtotal: {totalCarrito} €</p>

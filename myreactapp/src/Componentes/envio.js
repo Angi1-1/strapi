@@ -9,7 +9,7 @@ function TiendaDeCosmeticos() {
     <>
     <Header/>
     <div className="breadcrumb">
-            <p><Link to='/home' className="link">Home</Link> / <Link to='/envio' className="link">Envio</Link></p>
+            <p><Link to="/" className="link">Home</Link> / <Link to="/envio" className="link">Envio</Link></p>
         </div>
       <main className="container py-4">
         <div className="productos row">

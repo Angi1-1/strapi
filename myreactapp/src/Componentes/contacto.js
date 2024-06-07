@@ -8,7 +8,7 @@ const Contacto = () => {
   return (<>
     <Header />
     <div className="breadcrumb">
-      <p><Link to='/home' className="link">Home</Link> / <Link to='/contacto'  className="link">Contacto</Link></p>
+      <p><Link to="/" className="link">Home</Link> / <Link to="/contacto"  className="link">Contacto</Link></p>
     </div>
     <div className="legal">
       <div className="banner">

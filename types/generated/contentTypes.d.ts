@@ -912,10 +912,10 @@ export interface ApiProductoProducto extends Schema.CollectionType {
     detalles: Attribute.Text;
     tallas: Attribute.Text;
     ruta: Attribute.String;
-    stock: Attribute.String;
     precio: Attribute.Decimal;
     tipo: Attribute.Integer;
     subir: Attribute.Text;
+    stock: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

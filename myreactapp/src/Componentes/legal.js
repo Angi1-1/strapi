@@ -15,7 +15,7 @@ const PrivacyAndCookies = () => {
     <div className="container">
       <Header />
       <div className="breadcrumb">
-            <p><Link to='/home' className="link">Home</Link> / <Link to='/legal' className="link">Legal</Link></p>
+            <p><Link to="/" className="link">Home</Link> / <Link to="/legal" className="link">Legal</Link></p>
         </div>
       <div className="row">
         <div className="container-faq">

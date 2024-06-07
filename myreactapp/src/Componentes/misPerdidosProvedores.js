@@ -93,7 +93,7 @@ const PerdidosProvedores = () => {
       <Header />
       <div className="breadcrumb">
         <p>
-          <Link to='/home' className="link">
+          <Link to="/" className="link">
             Home
           </Link>{" "}
           /{" "}
@@ -119,32 +119,39 @@ const PerdidosProvedores = () => {
         </div>
 
         <div className="derechaPerdidosUser">
-  <label className="perfilUserTitulo">Mis Productos</label>
-  <div className="product-container">
-    {listMiProducto.map((producto, index) => (
-      <div className="product-itemProducto" key={index}>
-        <img src={producto.attributes.subir ? producto.attributes.subir : obtenerRutaCompleta(producto.attributes.ruta, producto.attributes.tipo)} alt="Producto" />
-        <div className="product-item-details">
-          <label>{producto.attributes.nombre}</label>
-          <label>Stock: {producto.attributes.stock}</label>
-          <label>{producto.attributes.precio} €</label>
-        </div>
-        <div className="product-item-actions">
-          <button className="ButtonPerdidosProvedores" onClick={() => handleSend(producto)}>
-            <img className="img1" src={enviar} alt="Enviar" />
+          <label className="perfilUserTitulo">Mis Productos</label>
+          <div className="product-container">
+            {listMiProducto.map((producto, index) => (
+              <div className="product-itemProducto" key={index}>
+                <img src={producto.attributes.subir ? producto.attributes.subir : obtenerRutaCompleta(producto.attributes.ruta, producto.attributes.tipo)} style={{width:'250px', height:'200px'}} alt="Producto" />
+                <div className="product-item-details">
+                  <label>{producto.attributes.nombre}</label>
+                  <label style={{ color: producto.attributes.stock === 0 ? 'red' : 'black' }}>
+                      Stock: {producto.attributes.stock}
+                  </label>
+                  <label>{producto.attributes.precio} €</label>
+                </div>
+                <div className="product-item-actions">
+                  <button
+                    className="ButtonPerdidosProvedores"
+                    onClick={() => handleSend(producto)}
+                  >
+                    <img className="img1" src={enviar} alt="Enviar" />
+                  </button>
+                  <button
+                    className="ButtonPerdidosProvedores"
+                    onClick={() => handleDelete(producto)}
+                  >
+                    <img className="img2" src={deleteIcon} alt="Eliminar" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <button className="help-button" onClick={handleChange}>
+            Añadir Producto
           </button>
-          <button className="ButtonPerdidosProvedores" onClick={() => handleDelete(producto)}>
-            <img className="img2" src={deleteIcon} alt="Eliminar" />
-          </button>
         </div>
-      </div>
-    ))}
-  </div>
-  <button className="help-button" onClick={handleChange}>
-    Añadir Producto
-  </button>
-</div>
-
       </div>
       <Footer />
       {showEnviar && (
