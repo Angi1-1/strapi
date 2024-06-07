@@ -14,7 +14,8 @@ const PerdidosProvedores = () => {
   const [showAddNewArtesano, setShowAddNewArtesano] = useState(false);
   const [listMiProducto, setMiProducto] = useState([]);
   const [product, setProducto] = useState({});
-  const [productId, setProductId] = useState('')
+  const [productId, setProductId] = useState('');
+
   useEffect(() => {
     productListArtesano();
   }, []);
@@ -55,7 +56,7 @@ const PerdidosProvedores = () => {
     setShowAddNewArtesano(true);
   };
 
-  const deleteProducto = async() =>{
+  const deleteProducto = async () => {
     try {
       const response = await fetch(`http://localhost:1337/api/productos/${productId}`, {
         method: 'DELETE'
@@ -72,6 +73,7 @@ const PerdidosProvedores = () => {
       console.error('Error en la petición:', error);
     }
   }
+
   // Función para obtener la ruta completa de la imagen basada en el tipo
   const obtenerRutaCompleta = (ruta, tipo) => {
     switch (tipo) {
@@ -117,37 +119,32 @@ const PerdidosProvedores = () => {
         </div>
 
         <div className="derechaPerdidosUser">
-          <label className="perfilUserTitulo">Mis Productos</label>
-          <div className="product-container">
-            {listMiProducto.map((producto, index) => (
-              <div className="product-itemProducto" key={index}>
-                <img src={producto.attributes.subir ? producto.attributes.subir : obtenerRutaCompleta(producto.attributes.ruta, producto.attributes.tipo)} style={{width:'250px', height:'200px'}} alt="Producto" />
-                <div className="product-item-details">
-                  <label>{producto.attributes.nombre}</label>
-                  <label>Stock: {producto.attributes.stock}</label>
-                  <label>{producto.attributes.precio} €</label>
-                </div>
-                <div className="product-item-actions">
-                  <button
-                    className="ButtonPerdidosProvedores"
-                    onClick={() => handleSend(producto)}
-                  >
-                    <img className="img1" src={enviar} alt="Enviar" />
-                  </button>
-                  <button
-                    className="ButtonPerdidosProvedores"
-                    onClick={() => handleDelete(producto)}
-                  >
-                    <img className="img2" src={deleteIcon} alt="Eliminar" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button className="help-button" onClick={handleChange}>
-            Añadir Producto
+  <label className="perfilUserTitulo">Mis Productos</label>
+  <div className="product-container">
+    {listMiProducto.map((producto, index) => (
+      <div className="product-itemProducto" key={index}>
+        <img src={producto.attributes.subir ? producto.attributes.subir : obtenerRutaCompleta(producto.attributes.ruta, producto.attributes.tipo)} alt="Producto" />
+        <div className="product-item-details">
+          <label>{producto.attributes.nombre}</label>
+          <label>Stock: {producto.attributes.stock}</label>
+          <label>{producto.attributes.precio} €</label>
+        </div>
+        <div className="product-item-actions">
+          <button className="ButtonPerdidosProvedores" onClick={() => handleSend(producto)}>
+            <img className="img1" src={enviar} alt="Enviar" />
+          </button>
+          <button className="ButtonPerdidosProvedores" onClick={() => handleDelete(producto)}>
+            <img className="img2" src={deleteIcon} alt="Eliminar" />
           </button>
         </div>
+      </div>
+    ))}
+  </div>
+  <button className="help-button" onClick={handleChange}>
+    Añadir Producto
+  </button>
+</div>
+
       </div>
       <Footer />
       {showEnviar && (
@@ -161,10 +158,8 @@ const PerdidosProvedores = () => {
       {showAddNewArtesano && (
         <AddProducto onCancel={() => setShowAddNewArtesano(false)} onload={handleOnload}/>
       )}
-      
     </>
   );
 };
 
 export default PerdidosProvedores;
-

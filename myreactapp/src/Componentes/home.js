@@ -22,7 +22,7 @@ function Home() {
 
   const handleProductClick = (id) => () => {
     console.log("Has seleccionado", id);
-    navigate(`/producto/${id}`);
+    navigate`(/producto/${id})`;
   };
 
   return (
@@ -48,17 +48,17 @@ function Home() {
               el presente
             </p>
             <div className="imagenes">
-              <div>
-                <img src={imagen5} alt="PENDIENTE PERLA" className="img" />
+              <div onClick={handleProductClick(8)}>
+                <img src='joyeria/9.png' style={{width:'350px', height:'310.11px'}} alt="PENDIENTE PERLA" className="img" />
                 <p className="p3">PENDIENTE PERLA</p>
               </div>
-              <div>
-                <img src={imagen6} alt="PLATO HEHUA" className="img"/>
+              <div onClick={handleProductClick(29)}>
+                <img src={imagen6} alt="PLATO HEHUA" className="img" />
                 <p className="p3">PLATO HEHUA</p>
               </div>
-              <div>
+              <div onClick={handleProductClick(47)}>
                 <img src={imagen7} alt="CHAMPU ROSAR"className="img" />
-                <p className="p3">CHAMPU ROSAR</p>
+                <p className="p3">Set de Regalo</p>
               </div>
             </div>
           </div>
@@ -66,17 +66,19 @@ function Home() {
           {/* Tercera sección */}
           <div className="parte3Home">
             <div className="izquierdaHome">
+              <Link to='/PaginaProceso'>
               <p>LA EXCLUSIVA COLECCIÓN DE VERANO</p>
               <p className="p4">KaiKai & Manos Creadoras</p>
-              <img src={imagen8} alt="" className="img"/>
+              <img src={imagen8} alt="" className="img"/></Link>
             </div>
             <div className="derechaHome">
+              
               <p>DESCUBRE ROJO PARA AMAR</p>
               <p className="p4A">Están aquí: colecciones Primavera / Verano Rojo 2024</p>
-              <img src={imagen10} alt="" className="img"/>
+              <Link to='/joyeria/'><img src={imagen10} alt="" className="img"/></Link>
               <p>MUEBLES DESIGUALES</p>
               <p className="p4">Diseños pensados para tí</p>
-              <img src={imagen9} alt="" className="img"/>
+              <Link to='/hogar/'><img src={imagen9} alt="" className="img"/></Link>
             </div>
           </div>
 
@@ -95,12 +97,12 @@ function Home() {
                 <p>COLLAR DE PERLA</p>
                 <p className="precio">€ 70</p>
               </div>
-              <div onClick={handleProductClick(51)}>
+              <div onClick={handleProductClick(46)}>
                 <img src={champu} alt="CHAMPU ANTICAIDA" className="img" />
                 <p>CHAMPU ANTICAIDA</p>
                 <p className="precio">€ 16</p>
               </div>
-              <div onClick={handleProductClick(36)}>
+              <div onClick={handleProductClick(31)}>
                 <img src={plato} alt="PLATO UNIVERSO" className="img" />
                 <p>PLATO DORADO</p>
                 <p className="precio">€ 5</p>

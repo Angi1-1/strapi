@@ -32,13 +32,26 @@ function Carrito({ cart, setCart }) {
     0
   );
 
+  const obtenerRutaImagen = (tipo, ruta) => {
+    switch (tipo) {
+      case 1:
+        return `/joyeria/${ruta}`;
+      case 2:
+        return `/comestico/${ruta}`;
+      case 3:
+        return `/hogar/${ruta}`;
+      default:
+        return `/default/${ruta}`;
+    }
+  };
+
   if (cart.length === 0) {
     return (
       <div>
         <Header />
         <div className="breadcrumb">
           <p>
-            <Link to="/home" className="link">
+            <Link to="/" className="link">
               Home
             </Link>{" "}
             /{" "}
@@ -61,7 +74,7 @@ function Carrito({ cart, setCart }) {
       <Header cart={cart} />
       <div className="breadcrumb">
         <p>
-          <Link to="/home" className="link">
+          <Link to="/" className="link">
             Home
           </Link>{" "}
           /{" "}
@@ -76,7 +89,7 @@ function Carrito({ cart, setCart }) {
           {cart.map((product, index) => (
             <div key={index} className="carrito-item" data-aos="fade-right">
               <div className="carrito-item-left">
-                <img src={product.ruta} alt={product.nombre} />
+                <img src={product.subir ? product.subir : obtenerRutaImagen(product.tipo, product.ruta)} alt={product.nombre} />
                 <div className="carrito-item-details">
                   <p className="carrito-texto1">{product.nombre}</p>
                   <p className="carrito-texto2">{product.descripcion}</p>
@@ -121,12 +134,11 @@ function Carrito({ cart, setCart }) {
         <div className="carrito-summary">
           <div className="carrito-summary-left">
             <p className="carrito-texto1">Subtotal: {totalCarrito} €</p>
-            <p className="carrito-texto2">Envío gratuito: 0 €</p>
           </div>
           <div className="carrito-summary-right">
             <p className="carrito-texto1">Total: {totalCarrito} €</p>
             <button className="pago-btn">
-              <Link to="/checkout">Continuar con el Pago</Link>
+              <Link to="/pago">Continuar con el Pago</Link>
             </button>
           </div>
         </div>

@@ -48,7 +48,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<MiCuenta/>}/>
+        <Route path='/Micuenta' element={<MiCuenta/>}/>
+        <Route path='/' element={<Home/>}/>
         <Route path="/registrarse" element={<Registrarse />}/>
         <Route path="/perfilUser" element={<PerfilUser />}/>
         <Route path='/perfilAdmin' element={<PerfilAdmin />}/>
@@ -70,7 +71,6 @@ function App() {
         <Route path="/sobreNosotros" element={<Nosotros />}/>
         <Route path="/carrito" element={<Carrito cart={cart} setCart={setCart} />}/>
         <Route path="/artesano" element={<Artesano />}/>
-        <Route path="/home" element={<Home />}/>
         <Route path="/artesanoInfo/:id" element={<GustarProvedor />}/>
       </Routes>
     </BrowserRouter>

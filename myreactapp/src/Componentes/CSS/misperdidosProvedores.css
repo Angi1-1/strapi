@@ -6,11 +6,11 @@
   width: 100%;
   padding: 20px;
 }
-.botonesAddNewArtesano{
+.botonesAddNewArtesano {
   display: flex;
   gap: 10px;
 }
-.perfilArtesanoProductoParte1{
+.perfilArtesanoProductoParte1 {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -19,7 +19,7 @@
   gap: 60px;
   height: 100%;
 }
-.botonesPedidosArtesano{
+.botonesPedidosArtesano {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
@@ -29,33 +29,29 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 }
 
 /* Estilos para los elementos individuales de producto */
-.product-item {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  max-width: 300px;
-  transition: transform 0.3s ease; /* Transición suave al hacer hover */
-}
+.product-item,
 .product-itemProducto {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 10px;
   border: 1px solid #ccc;
-  transition: transform 0.3s ease; /* Transición suave al hacer hover */
+  max-width: 300px;
+  width: 100%; /* Para asegurar que los elementos ocupen todo el ancho disponible */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease;
+  box-sizing: border-box; /* Para incluir el padding y el borde en el ancho total */
+}
+.product-item:hover,
+.product-itemProducto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.product-itemProducto:hover {
-  transform: translateY(-5px); 
-}
-.product-item:hover {
-  transform: translateY(-5px); /* Levanta ligeramente el producto al hacer hover */
-}
 .cardPerdidosUser {
   background-color: #fff;
   border: 1px solid black;
@@ -73,6 +69,7 @@
 .product-item img {
   max-width: 100%;
   height: auto;
+  object-fit: cover; /* Asegura que la imagen mantenga su proporción dentro del contenedor */
 }
 
 /* Estilos para los detalles del producto */
@@ -80,17 +77,16 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .product-item-details label {
   color: #000;
-  text-align: center;
   font-family: var(--font-family1);
   font-size: 22px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
 }
 
 /* Estilos para los botones de acción */
@@ -108,48 +104,46 @@
   padding: 10px;
   border: none;
   cursor: pointer;
-  width: 350px;
+  width: 100%; /* Ajusta el ancho al contenedor */
   text-align: center;
   font-family: var(--font-family);
   font-size: 22px;
   font-weight: 400;
   line-height: normal;
-  margin: 0px;
+  margin: 0px auto; /* Centrado */
+  max-width: 350px; /* Ancho máximo del botón */
 }
-.table-containerPerdidosUser{
+.table-containerPerdidosUser {
   width: 100%;
 }
-/* Media Query para pantallas más grandes */
+
+/* Media Query para pantallas más pequeñas */
 @media screen and (max-width: 768px) {
-  /* Ajustes para los contenedores en pantallas más grandes */
-  .derechaPerdidosUser {
-    align-items: flex-start;
+  .perfilArtesanoProductoParte1 {
+    flex-direction: column;
+    padding: 0px 20px 32px 20px;
   }
 
   .product-container {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
-  /* Ajustes para los elementos individuales en pantallas más grandes */
-  .product-item {
-    flex: 0 0 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-  .perfilArtesanoProductoParte1{
-    flex-direction: column;
-  
+  .product-item,
+  .product-itemProducto {
+    flex: 1 0 100%;
+    max-width: 100%;
   }
 }
+
 .perfilUserParte1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding: 0px 20px 32px 96px;
-    gap: 60px;
-    height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px 20px 32px 96px;
+  gap: 60px;
+  height: 100%;
 }
-
 
 .containerPerdidosUser {
   display: flex;
@@ -160,6 +154,7 @@
   font-family: var(--font-family);
   font-size: 18px;
 }
+
 /* Animación al agregar nuevo producto */
 @keyframes fadeIn {
   from {
