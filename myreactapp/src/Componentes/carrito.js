@@ -147,7 +147,6 @@ function Carrito({ cart, setCart }) {
         <div className="carrito-summary">
           <div className="carrito-summary-left">
             <p className="carrito-texto1">Subtotal: {totalCarrito} €</p>
-            <p className="carrito-texto2">Envío gratuito: 0 €</p>
           </div>
           <div className="carrito-summary-right">
             <p className="carrito-texto1">Total: {totalCarrito} €</p>

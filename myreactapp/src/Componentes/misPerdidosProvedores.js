@@ -14,7 +14,8 @@ const PerdidosProvedores = () => {
   const [showAddNewArtesano, setShowAddNewArtesano] = useState(false);
   const [listMiProducto, setMiProducto] = useState([]);
   const [product, setProducto] = useState({});
-  const [productId, setProductId] = useState('')
+  const [productId, setProductId] = useState('');
+
   useEffect(() => {
     productListArtesano();
   }, []);
@@ -55,7 +56,7 @@ const PerdidosProvedores = () => {
     setShowAddNewArtesano(true);
   };
 
-  const deleteProducto = async() =>{
+  const deleteProducto = async () => {
     try {
       const response = await fetch(`http://localhost:1337/api/productos/${productId}`, {
         method: 'DELETE'
@@ -72,6 +73,7 @@ const PerdidosProvedores = () => {
       console.error('Error en la petición:', error);
     }
   }
+
   // Función para obtener la ruta completa de la imagen basada en el tipo
   const obtenerRutaCompleta = (ruta, tipo) => {
     switch (tipo) {
@@ -163,10 +165,8 @@ const PerdidosProvedores = () => {
       {showAddNewArtesano && (
         <AddProducto onCancel={() => setShowAddNewArtesano(false)} onload={handleOnload}/>
       )}
-      
     </>
   );
 };
 
 export default PerdidosProvedores;
-

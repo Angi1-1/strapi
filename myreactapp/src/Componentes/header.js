@@ -69,15 +69,15 @@ const Header = ({cart, CartItemCount}) => {
     return (
         <header className="header">
             <div className="logo">
-                <Link to='/'><img src={Logo} alt="Logo" /></Link>
+                <Link to='/home'><img src={Logo} alt="Logo" /></Link>
             </div>
             {/* Botones para pantallas grandes */}
             <div className={`buttons ${!showMobileMenu ? 'visible' : ''}`}>
-                <button className="button" onMouseEnter={toggleProductsMenu}>
+                <button className="button" onClick={toggleProductsMenu}>
                     Productos
                 </button>
                 {showProductsMenu && (
-                    <div className="dropdown-menu" onMouseLeave={() => setShowProductsMenu(false)}>
+                    <div className="dropdown-menu">
                         <Link to='/joyeria/' className="dropdown-item">Joyería</Link>
                         <Link to='/hogar/' className="dropdown-item">Hogar</Link>
                         <Link to='/cosmetico/' className="dropdown-item">Cosmética</Link>
@@ -95,20 +95,19 @@ const Header = ({cart, CartItemCount}) => {
             </div>
             {/* Menú de navegación para dispositivos móviles */}
             <div className={`mobile-menu ${showMobileMenu ? 'active' : ''}`}>
-                <button className="button"  onMouseEnter={toggleProductsMenu}>
+                <button className="button" onClick={toggleProductsMenu}>
                     Productos
                 </button>
                 {showProductsMenu && (
-                    <div className="dropdown-menu" onMouseLeave={() => setShowProductsMenu(false)}>
+                    <div className="dropdown-menu">
                         <Link to='/productos/joyeria' className="dropdown-item">Joyería</Link>
                         <Link to='/productos/hogar' className="dropdown-item">Hogar</Link>
                         <Link to='/productos/cosmetico' className="dropdown-item">Cosmética</Link>
                     </div>
                 )}
                 <button className="button">
-                    Mi Cesta {cartItemCount > 0 && <span>({cartItemCount})</span>}
+                <Link to='/productos/cosmetico' >Mi Cesta {cartItemCount > 0 && <span>({cartItemCount})</span>}</Link>
                 </button>
-                <button className="button">Creadores</button>
                 <button className="button"><Link to={link}>{registrado}</Link></button>
             </div>
         </header>

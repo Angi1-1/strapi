@@ -22,7 +22,7 @@ function Home() {
 
   const handleProductClick = (id) => () => {
     console.log("Has seleccionado", id);
-    navigate(`/producto/${id}`);
+    navigate`(/producto/${id})`;
   };
 
   return (
